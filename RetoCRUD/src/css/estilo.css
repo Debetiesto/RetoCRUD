@@ -1,0 +1,14 @@
+
+.background {
+    -fx-background-image: url("/img/abstract-watercolor-texture-wallpaper-background-free-vector.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100%;
+}
+
+#btn {
+    -fx-background-color: aquamarine;
+}
+
+#PaneUsuario {
+
+}
