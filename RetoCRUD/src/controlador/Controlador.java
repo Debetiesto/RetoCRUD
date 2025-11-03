@@ -113,6 +113,7 @@ public class Controlador implements Initializable {
     private void login() {
         String email = txtEmail.getText();
         String contra = txtContra.getText();
+        Alert alert;
         boolean esAdmin;
 
         Perfil perf = new Perfil();
@@ -121,11 +122,16 @@ public class Controlador implements Initializable {
 
         Perfil perLog = dao.login(perf);
         esAdmin = dao.esAdministrador(perLog.getCodU());
-        mostrarVentana(perLog, esAdmin);
+        if (perLog == null) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("CAMPOS VACÍOS");
+        } else {
+            mostrarVentana(perLog, esAdmin); 
+        } 
 
         logger.info("Usuario autenticado: " + perLog.getUser());
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Acceso Concedido");
         alert.setHeaderText("Inicio de sesión exitoso");
         alert.setContentText("¡Bienvenido, " + perLog.getUser() + "!");
