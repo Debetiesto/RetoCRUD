@@ -6,6 +6,7 @@
 package controlador;
 
 import static com.mysql.cj.conf.PropertyKey.logger;
+import conexion.Conector;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -42,80 +43,16 @@ public class DaoImplementacionMysql implements Dao {
     final String BUSCARADMIN = "SELECT * FROM ADMINISTRADOR WHERE CODU = ?";
     final String BUSCARCUENTA = "SELECT cuenta_corriente FROM ADMINISTRADOR WHERE CODU = ?";
     final String BUSCARTARJETA = "SELECT num_tarjeta FROM USUARIO WHERE CODU = ?";
-    final String CARGARDATOSTABLA = "SELECT p.CODU, p.EMAIL, p.USERNAME, p.TELEFONO, p.NOMBRE, p.APELLIDOS, " +
-"u.GENERO, u.NUM_TARJETA " +
-"FROM PERFIL p JOIN USUARIO u ON p.CODU = u.CODU";
-
-    DaoImplementacionMysql() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            System.out.println("Esperando...");
-        }
-        this.configFile = ResourceBundle.getBundle("modelo.configClass");
-        this.urlBD = this.configFile.getString("Conn");
-        this.userBD = this.configFile.getString("DBUser");
-        this.passwordBD = this.configFile.getString("DBPass");
-    }
-
-    private void openConnection() {
-        try {
-            con = DriverManager.getConnection(urlBD, this.userBD, this.passwordBD);
-            /*
-			 * con = DriverManager.getConnection(
-			 * "jdbc:mysql://localhost:3306/tienda_brico?serverTimezone=Europe/Madrid&useSSL=false",
-			 * "root", "abcd*1234");
-             */
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al cargar la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void closeConnection() {
-        try {
-            if (stmt != null) {
-                stmt.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void closeResult(ResultSet rs) {
-        if (rs != null) {
-            try {
-                rs.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public boolean probarConexion() {
-        try {
-            openConnection();
-            if (con != null) {
-                System.out.println("¡Conexión exitosa a la base de datos!");
-                return true;
-            } else {
-                System.out.println("No se pudo conectar a la base de datos.");
-                return false;
-            }
-        } finally {
-            closeConnection();
-        }
-    }
+    final String CARGARDATOSTABLA = "SELECT p.CODU, p.EMAIL, p.USERNAME, p.TELEFONO, p.NOMBRE, p.APELLIDOS, "
+            + "u.GENERO, u.NUM_TARJETA "
+            + "FROM PERFIL p JOIN USUARIO u ON p.CODU = u.CODU";
 
     @Override
     public Perfil login(Perfil per) {
         ResultSet rs = null;
-        openConnection();
         Perfil perfil = null;
 
-        try {
+        try (Connection con = Conector.open()) {
             stmt = con.prepareStatement(LOGIN);
             stmt.setString(1, per.getEmail());
             stmt.setString(2, per.getContra());
@@ -171,52 +108,44 @@ public class DaoImplementacionMysql implements Dao {
             }
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "Error SQL durante login: {0}", e.getMessage());
-        } finally {
-            closeResult(rs);
-            closeConnection();
         }
 
         return perfil;
     }
 
- @Override
+    @Override
     public List<Usuario> cargarDatosTabla() {
-         List<Usuario> lista = new ArrayList<>();
-    ResultSet rs = null;
+        List<Usuario> lista = new ArrayList<>();
+        ResultSet rs = null;
 
-    openConnection();
-    try {
-        PreparedStatement st = con.prepareStatement(CARGARDATOSTABLA);
-        rs = st.executeQuery();
+        try (Connection con = Conector.open()) {
+            PreparedStatement st = con.prepareStatement(CARGARDATOSTABLA);
+            rs = st.executeQuery();
 
-        while (rs.next()) {
-            Usuario u = new Usuario();
-            u.setCodU(rs.getInt("CODU"));
-            u.setEmail(rs.getString("EMAIL"));
-            u.setUser(rs.getString("USERNAME"));
-            u.setTelefono(rs.getInt("TELEFONO"));
-            u.setNom(rs.getString("NOMBRE"));
-            u.setApe(rs.getString("APELLIDOS"));
-            u.setGenero(Genero.valueOf(rs.getString("GENERO").toUpperCase()));
-            u.setNumTarjeta(rs.getInt("NUM_TARJETA"));
-            lista.add(u);
+            while (rs.next()) {
+                Usuario u = new Usuario();
+                u.setCodU(rs.getInt("CODU"));
+                u.setEmail(rs.getString("EMAIL"));
+                u.setUser(rs.getString("USERNAME"));
+                u.setTelefono(rs.getInt("TELEFONO"));
+                u.setNom(rs.getString("NOMBRE"));
+                u.setApe(rs.getString("APELLIDOS"));
+                u.setGenero(Genero.valueOf(rs.getString("GENERO").toUpperCase()));
+                u.setNumTarjeta(rs.getInt("NUM_TARJETA"));
+                lista.add(u);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    } finally {
-        closeResult(rs);
-        closeConnection();
+        return lista;
     }
-    return lista;
-    }
-    
+
     @Override
     public boolean esAdministrador(int codU) {
         ResultSet rs = null;
         boolean esAdmin = false;
 
-        try {
-            openConnection();
+        try (Connection con = Conector.open()){
             stmt = con.prepareStatement(BUSCARADMIN);
 
             stmt.setInt(1, codU);
@@ -230,5 +159,4 @@ public class DaoImplementacionMysql implements Dao {
         return esAdmin;
     }
 
-   
 }

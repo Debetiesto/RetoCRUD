@@ -5,6 +5,7 @@
  */
 package main;
 
+import conexion.PoolCon;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,15 +17,20 @@ import javafx.stage.Stage;
  * @author 2dam
  */
 public class RetoCRUD extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/vista/VistaLogin.fxml"));
-        
+
         Scene scene = new Scene(root);
-        
+
         stage.setScene(scene);
         stage.show();
+    }
+
+    @Override
+    public void stop() {
+        PoolCon.closePool();
     }
 
     /**
@@ -33,5 +39,5 @@ public class RetoCRUD extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
