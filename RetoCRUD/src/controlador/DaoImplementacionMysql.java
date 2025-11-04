@@ -36,7 +36,6 @@ public class DaoImplementacionMysql implements Dao {
     private String urlBD, userBD, passwordBD;
 
     // Atributos
-    private Connection con;
     private PreparedStatement stmt;
     // Sentencias SQL
     final String LOGIN = "SELECT * FROM PERFIL WHERE email = ? AND contra = ?";
