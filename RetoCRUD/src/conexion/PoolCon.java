@@ -26,11 +26,13 @@ public class PoolCon {
             String url = conf.getString("Conn");
             String user = conf.getString("DBUser");
             String password = conf.getString("DBPass");
+            String driver = conf.getString("Driver");
 
             dataSource = new BasicDataSource();
             dataSource.setUrl(url);
             dataSource.setUsername(user);
             dataSource.setPassword(password);
+            dataSource.setDriverClassName(driver);
 
             dataSource.setInitialSize(Integer.parseInt(conf.getString("initialSize")));
             dataSource.setMaxTotal(Integer.parseInt(conf.getString("maxTotal")));
