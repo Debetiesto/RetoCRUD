@@ -41,10 +41,14 @@ public class DaoImplementacionMysql implements Dao {
     final String LOGIN = "SELECT * FROM PERFIL WHERE email = ? AND contra = ?";
     final String BUSCARADMIN = "SELECT * FROM ADMINISTRADOR WHERE CODU = ?";
     final String BUSCARCUENTA = "SELECT cuenta_corriente FROM ADMINISTRADOR WHERE CODU = ?";
-    final String BUSCARTARJETA = "SELECT num_tarjeta FROM USUARIO WHERE CODU = ?";
+    final String BUSCARUSUARIO = "SELECT num_tarjeta, genero FROM USUARIO WHERE CODU = ?";
     final String CARGARDATOSTABLA = "SELECT p.CODU, p.EMAIL, p.USERNAME, p.TELEFONO, p.NOMBRE, p.APELLIDOS, "
             + "u.GENERO, u.NUM_TARJETA "
             + "FROM PERFIL p JOIN USUARIO u ON p.CODU = u.CODU";
+    final String MODIFICARDATOSUSUARIO = "UPDATE USUARIO SET EMAIL = ?, NOMBRE = ?, APELLIDO = ?, GENERO = ?, N_TARJETA = ?, TELEFONO = ?, USERNAME = ?";
+    final String LISTARUSUARIOS = "SELECT p.CODU, p.EMAIL, p.USERNAME, p.TELEFONO, p.NOMBRE, p.APELLIDOS, "
+            + "u.GENERO, u.NUM_TARJETA "
+            + "FROM PERFIL p JOIN USUARIO u ON p.CODU = u.CODU WHERE p.CODU = ?";
 
     @Override
     public Perfil login(Perfil per) {
@@ -91,11 +95,12 @@ public class DaoImplementacionMysql implements Dao {
                     usu.setNom(rs.getString("NOMBRE"));
                     usu.setApe(rs.getString("APELLIDOS"));
 
-                    PreparedStatement stmtUsuario = con.prepareStatement(BUSCARTARJETA);
+                    PreparedStatement stmtUsuario = con.prepareStatement(BUSCARUSUARIO);
                     stmtUsuario.setInt(1, codU);
                     ResultSet rsUsuario = stmtUsuario.executeQuery();
-                    if (rsUsuario.next()) {
-                        usu.setNumTarjeta(rsUsuario.getInt("num_tarjeta"));
+                    String gen = rsUsuario.getString("GENERO");
+                    if (gen != null && !gen.isEmpty()) {
+                        usu.setGenero(Genero.valueOf(gen.toUpperCase()));
                     }
                     rsUsuario.close();
                     stmtUsuario.close();
@@ -144,7 +149,7 @@ public class DaoImplementacionMysql implements Dao {
         ResultSet rs = null;
         boolean esAdmin = false;
 
-        try (Connection con = Conector.open()){
+        try (Connection con = Conector.open()) {
             stmt = con.prepareStatement(BUSCARADMIN);
 
             stmt.setInt(1, codU);
@@ -156,6 +161,69 @@ public class DaoImplementacionMysql implements Dao {
             Logger.getLogger(DaoImplementacionMysql.class.getName()).log(Level.SEVERE, null, ex);
         }
         return esAdmin;
+    }
+
+    @Override
+    public boolean updateUsuario(Usuario usu) {
+        boolean actualizado = false;
+
+        try (Connection con = Conector.open()) {
+            stmt = con.prepareStatement(MODIFICARDATOSUSUARIO);
+
+            stmt.setString(1, usu.getNom());
+            stmt.setString(2, usu.getApe());
+            stmt.setString(3, usu.getContra());
+            stmt.setString(4, String.valueOf(usu.getGenero()));
+            stmt.setInt(5, usu.getNumTarjeta());
+            stmt.setString(6, usu.getEmail());
+
+            int filas = stmt.executeUpdate();
+
+            if (filas > 0) {
+                System.out.println("✅ Usuario modificado correctamente: " + usu.getEmail());
+                actualizado = true;
+            } else {
+                System.out.println("⚠️ No se encontró el usuario con correo: " + usu.getEmail());
+                actualizado = false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoImplementacionMysql.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return actualizado;
+    }
+
+    @Override
+    public List<Usuario> listaUsuarios(Usuario usu) {
+        List<Usuario> usuarios = new ArrayList<>();
+        ResultSet rs = null;
+
+        try (Connection con = Conector.open()) {
+            stmt = con.prepareStatement(LISTARUSUARIOS);
+
+            stmt.setInt(1, usu.getCodU());
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                usu.setEmail(rs.getString("EMAIL"));
+                usu.setUser(rs.getString("USERNAME"));
+                usu.setTelefono(rs.getInt("TELEFONO"));
+                usu.setNom(rs.getString("NOMBRE"));
+                usu.setApe(rs.getString("APELLIDOS"));
+                String gen = rs.getString("GENERO");
+                if (gen != null && !gen.isEmpty()) {
+                    usu.setGenero(Genero.valueOf(gen.toUpperCase()));
+                }
+                usu.setNumTarjeta(rs.getInt("NUM_TARJETA"));
+                usuarios.add(usu);
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoImplementacionMysql.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return usuarios;
     }
 
 }

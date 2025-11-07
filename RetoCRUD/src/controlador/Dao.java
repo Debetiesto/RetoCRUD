@@ -19,4 +19,8 @@ public interface Dao {
     public boolean esAdministrador(int codU);
     
     public List<Usuario> cargarDatosTabla();
+    
+    public boolean updateUsuario(Usuario usu);
+    
+    public List<Usuario> listaUsuarios(Usuario usu);
 }
