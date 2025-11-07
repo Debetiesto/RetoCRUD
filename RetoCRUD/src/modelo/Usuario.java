@@ -16,6 +16,7 @@ public class Usuario extends Perfil{
 
     
     public Usuario(int codU){
+      //  super(email, user, telefono, contra, nom, ape);
         this.codU = codU;
     }
 

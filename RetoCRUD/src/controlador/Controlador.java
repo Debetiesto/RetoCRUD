@@ -27,8 +27,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.converter.IntegerStringConverter;
 import main.RetoCRUD;
 import modelo.Administrador;
 import modelo.Perfil;
@@ -202,4 +204,13 @@ public class Controlador implements Initializable {
     private void ventanaRegistro() {
 
     }
+    
+    private void modificarDatosTabla() {
+        colNombre.setCellFactory(TextFieldTableCell.forTableColumn());
+        colApellidos.setCellFactory(TextFieldTableCell.forTableColumn());
+        colTelefono.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        colTarjeta.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        
+    }
+    
 }
