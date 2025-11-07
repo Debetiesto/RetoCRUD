@@ -45,6 +45,7 @@ public class DaoImplementacionMysql implements Dao {
     final String CARGARDATOSTABLA = "SELECT p.CODU, p.EMAIL, p.USERNAME, p.TELEFONO, p.NOMBRE, p.APELLIDOS, "
             + "u.GENERO, u.NUM_TARJETA "
             + "FROM PERFIL p JOIN USUARIO u ON p.CODU = u.CODU";
+    final String MODIFICARDATOSUSUARIO = "UPDATE USUARIO SET EMAIL = ?, NOMBRE = ?, APELLIDO = ?, GENERO = ?, N_TARJETA = ?, TELEFONO = ?, USERNAME = ?";
 
     @Override
     public Perfil login(Perfil per) {
@@ -144,7 +145,7 @@ public class DaoImplementacionMysql implements Dao {
         ResultSet rs = null;
         boolean esAdmin = false;
 
-        try (Connection con = Conector.open()){
+        try (Connection con = Conector.open()) {
             stmt = con.prepareStatement(BUSCARADMIN);
 
             stmt.setInt(1, codU);
@@ -156,6 +157,36 @@ public class DaoImplementacionMysql implements Dao {
             Logger.getLogger(DaoImplementacionMysql.class.getName()).log(Level.SEVERE, null, ex);
         }
         return esAdmin;
+    }
+
+    @Override
+    public boolean updateUsuario(Usuario usu) {
+        boolean actualizado = false;
+
+        try (Connection con = Conector.open()) {
+            stmt = con.prepareStatement(MODIFICARDATOSUSUARIO);
+
+            stmt.setString(1, usu.getNom());
+            stmt.setString(2, usu.getApe());
+            stmt.setString(3, usu.getContra());
+            stmt.setString(4, String.valueOf(usu.getGenero()));
+            stmt.setInt(5, usu.getNumTarjeta());
+            stmt.setString(6, usu.getEmail());
+
+            int filas = stmt.executeUpdate();
+
+            if (filas > 0) {
+                System.out.println("✅ Usuario modificado correctamente: " + usu.getEmail());
+                actualizado = true;
+            } else {
+                System.out.println("⚠️ No se encontró el usuario con correo: " + usu.getEmail());
+                actualizado = false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoImplementacionMysql.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return actualizado;
     }
 
 }
