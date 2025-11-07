@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import hilos.HiloLeer;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -21,6 +22,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -33,6 +35,7 @@ import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import main.RetoCRUD;
 import modelo.Administrador;
+import modelo.Genero;
 import modelo.Perfil;
 import modelo.Usuario;
 
@@ -90,6 +93,8 @@ public class Controlador implements Initializable {
     private TableColumn<Usuario, String> colGenero;
     @FXML
     private TableColumn<Usuario, Integer> colTarjeta;
+    @FXML
+    private ComboBox<Genero> comboGenero;
 
     private Dao dao;
 
@@ -128,8 +133,8 @@ public class Controlador implements Initializable {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("CAMPOS VACÍOS");
         } else {
-            mostrarVentana(perLog, esAdmin); 
-        } 
+            mostrarVentana(perLog, esAdmin);
+        }
 
         logger.info("Usuario autenticado: " + perLog.getUser());
 
@@ -160,39 +165,43 @@ public class Controlador implements Initializable {
     }
 
     private void setDatos(Perfil perLog, boolean esAdmin) {
-        List<Usuario> usuarios = dao.cargarDatosTabla();
-        ObservableList<Usuario> obsList = FXCollections.observableArrayList(usuarios);
-        tablaDatosUsu.setItems(obsList);
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        colUsername.setCellValueFactory(new PropertyValueFactory<>("user"));
+        colTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        colApellidos.setCellValueFactory(new PropertyValueFactory<>("ape"));
+        colGenero.setCellValueFactory(new PropertyValueFactory<>("genero"));
+        colTarjeta.setCellValueFactory(new PropertyValueFactory<>("numTarjeta"));
+        comboGenero.setItems(FXCollections.observableArrayList(Genero.values()));
         if (esAdmin) {
             if (perLog instanceof Administrador) {
-                this.per = perLog;
                 PaneAdmin.setVisible(true);
                 PaneUsuario.setVisible(false);
 
-                txtEmailAdmin.setText(perLog.getEmail());
-                txtNomAdmin.setText(perLog.getNom());
-                txtCuenta.setText(((Administrador) perLog).getCuentaCorriente());
-                colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-                colUsername.setCellValueFactory(new PropertyValueFactory<>("user"));
-                colTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
-                colNombre.setCellValueFactory(new PropertyValueFactory<>("nom"));
-                colApellidos.setCellValueFactory(new PropertyValueFactory<>("ape"));
-                colGenero.setCellValueFactory(new PropertyValueFactory<>("genero"));
-                colTarjeta.setCellValueFactory(new PropertyValueFactory<>("numTarjeta"));
+                Administrador admin = (Administrador) perLog;
+                txtEmailAdmin.setText(admin.getEmail());
+                txtNomAdmin.setText(admin.getNom());
+                txtCuenta.setText(admin.getCuentaCorriente());
+                
+                cargarDatos(null);
             }
         } else {
             if (perLog instanceof Usuario) {
-                this.per = perLog;
                 PaneAdmin.setVisible(false);
                 PaneUsuario.setVisible(true);
 
-                txtEmailUsuario.setText(perLog.getEmail());
-                txtNomUsuario.setText(perLog.getNom());
-                txtUsuario.setText(perLog.getUser());
-                txtApellido.setText(perLog.getApe());
-                txtTel.setText(String.valueOf(perLog.getTelefono()));
-                txtNTarjeta.setText(String.valueOf(((Usuario) perLog).getNumTarjeta()));
+                Usuario usu = (Usuario) perLog;
+                txtEmailUsuario.setText(usu.getEmail());
+                txtNomUsuario.setText(usu.getNom());
+                txtUsuario.setText(usu.getUser());
+                comboGenero.getSelectionModel().select(usu.getGenero());
+                txtApellido.setText(usu.getApe());
+                txtTel.setText(String.valueOf(usu.getTelefono()));
+                txtNTarjeta.setText(String.valueOf(usu.getNumTarjeta()));
+
+                cargarDatos(usu);
             }
+
         }
 
         //txtEmailUsuario.setText(perLog.getEmail());
@@ -201,16 +210,27 @@ public class Controlador implements Initializable {
         //txtUsuario.setText(perLog.getUser());
     }
 
+    private void cargarDatos(Perfil per) {
+        HiloLeer h1 = new HiloLeer(dao, this, (Usuario) per);
+        Thread hilo = new Thread(h1);
+        hilo.start();
+    }
+
+    public void agregarDatosTabla(List<Usuario> usuarios) {
+        ObservableList<Usuario> obsList = FXCollections.observableArrayList(usuarios);
+        tablaDatosUsu.setItems(obsList);
+    }
+
     private void ventanaRegistro() {
 
     }
-    
+
     private void modificarDatosTabla() {
         colNombre.setCellFactory(TextFieldTableCell.forTableColumn());
         colApellidos.setCellFactory(TextFieldTableCell.forTableColumn());
         colTelefono.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         colTarjeta.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-        
+
     }
-    
+
 }
