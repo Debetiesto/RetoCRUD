@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="422.0" prefWidth="554.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="422.0" prefWidth="554.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane id="PaneUsuario" fx:id="PaneUsuario" prefHeight="462.0" prefWidth="554.0" styleClass="background" stylesheets="@../css/estilo.css" visible="false">
          <children>
@@ -19,7 +19,7 @@
             <TextField fx:id="txtNomUsuario" editable="false" layoutX="112.0" layoutY="121.0" promptText="Nombre" />
             <TextField fx:id="txtApellido" editable="false" layoutX="351.0" layoutY="121.0" promptText="Apellido" />
             <TextField fx:id="txtTel" editable="false" layoutX="112.0" layoutY="167.0" promptText="Teléfono" />
-            <ComboBox layoutX="220.0" layoutY="219.0" prefWidth="150.0" promptText="Género" />
+            <ComboBox fx:id="comboGenero" layoutX="220.0" layoutY="219.0" prefWidth="150.0" promptText="Género" />
             <TextField fx:id="txtNTarjeta" editable="false" layoutX="351.0" layoutY="167.0" promptText="Nº Tarjeta" />
             <Button layoutX="104.0" layoutY="292.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="108.0" text="Cerrar Sesión" />
             <Button layoutX="219.0" layoutY="292.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="108.0" text="Borrar Cuenta" />
@@ -34,7 +34,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button layoutX="338.0" layoutY="292.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="126.0" text="Modificar Dato" />
+            <Button fx:id="modificarDatoUsu" layoutX="338.0" layoutY="292.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="126.0" text="Modificar Dato" />
          </children>
       </Pane>
       <Pane id="PaneAdmin" fx:id="PaneAdmin" prefHeight="470.0" prefWidth="554.0" styleClass="background" stylesheets="@../css/estilo.css">
@@ -63,8 +63,8 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button layoutX="218.0" layoutY="176.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="126.0" text="Modificar Datos" />
-            <Button layoutX="290.0" layoutY="425.0" mnemonicParsing="false" text="Modificar Datos Usuario" />
+            <Button fx:id="modDatosAdmin" layoutX="218.0" layoutY="176.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="126.0" text="Modificar Datos" />
+            <Button fx:id="modDatosTabla" layoutX="290.0" layoutY="425.0" mnemonicParsing="false" text="Modificar Datos Usuario" />
          </children>
       </Pane>
    </children>

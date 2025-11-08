@@ -21,4 +21,6 @@ public interface Dao {
     public List<Usuario> cargarDatosTabla();
     
     public boolean updateUsuario(Usuario usu);
+    
+    public List<Usuario> listaUsuarios(Usuario usu);
 }
