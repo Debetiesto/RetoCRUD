@@ -92,19 +92,19 @@ public class DaoImplementacionMysql implements Dao {
                     usu.setUser(rs.getString("USERNAME"));
                     usu.setTelefono(rs.getInt("TELEFONO"));
                     usu.setContra(rs.getString("CONTRA"));
-                    usu.setNom(rs.getString("NOMBRE"));
+                    usu.setNom(rs.getString("NOMBRE"));     
                     usu.setApe(rs.getString("APELLIDOS"));
-
-                    PreparedStatement stmtUsuario = con.prepareStatement(BUSCARUSUARIO);
-                    stmtUsuario.setInt(1, codU);
-                    ResultSet rsUsuario = stmtUsuario.executeQuery();
-                    String gen = rsUsuario.getString("GENERO");
-                    if (gen != null && !gen.isEmpty()) {
-                        usu.setGenero(Genero.valueOf(gen.toUpperCase()));
+                    
+                    PreparedStatement stmtUsu = con.prepareStatement(BUSCARUSUARIO);
+                    stmtUsu.setInt(1, codU);
+                    ResultSet rsUsu = stmtUsu.executeQuery();
+                    if (rsUsu.next()) {
+                        String gen = rsUsu.getString("GENERO");
+                         if (gen != null && !gen.isEmpty()) {
+                            usu.setGenero(Genero.valueOf(gen.toUpperCase()));
+                        }
+                         usu.setNumTarjeta(rsUsu.getInt("NUM_TARJETA"));
                     }
-                    rsUsuario.close();
-                    stmtUsuario.close();
-
                     perfil = usu;
                 }
             } else {
@@ -210,9 +210,15 @@ public class DaoImplementacionMysql implements Dao {
                 usu.setTelefono(rs.getInt("TELEFONO"));
                 usu.setNom(rs.getString("NOMBRE"));
                 usu.setApe(rs.getString("APELLIDOS"));
-                String gen = rs.getString("GENERO");
-                if (gen != null && !gen.isEmpty()) {
-                    usu.setGenero(Genero.valueOf(gen.toUpperCase()));
+
+                PreparedStatement stmtUsuario = con.prepareStatement(BUSCARUSUARIO);
+                stmtUsuario.setInt(1, usu.getCodU());
+                ResultSet rsUsuario = stmtUsuario.executeQuery();
+                if (rsUsuario.next()) {
+                    String gen = rs.getString("GENERO");
+                    if (gen != null && !gen.isEmpty()) {
+                        usu.setGenero(Genero.valueOf(gen.toUpperCase()));
+                    }
                 }
                 usu.setNumTarjeta(rs.getInt("NUM_TARJETA"));
                 usuarios.add(usu);

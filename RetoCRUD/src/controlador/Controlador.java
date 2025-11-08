@@ -225,11 +225,15 @@ public class Controlador implements Initializable {
 
     }
 
-    private void modificarDatosTabla() {
+    private void modificarDatos(boolean esAdmin) {
+        
+        if (esAdmin) {
         colNombre.setCellFactory(TextFieldTableCell.forTableColumn());
         colApellidos.setCellFactory(TextFieldTableCell.forTableColumn());
         colTelefono.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-        colTarjeta.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        colTarjeta.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));  
+        }
+       
 
     }
 
