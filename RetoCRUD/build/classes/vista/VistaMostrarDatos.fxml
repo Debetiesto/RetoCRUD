@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="422.0" prefWidth="554.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="422.0" prefWidth="554.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane id="PaneUsuario" fx:id="PaneUsuario" prefHeight="462.0" prefWidth="554.0" styleClass="background" stylesheets="@../css/estilo.css">
+      <Pane id="PaneUsuario" fx:id="PaneUsuario" prefHeight="462.0" prefWidth="554.0" styleClass="background" stylesheets="@../css/estilo.css" visible="false">
          <children>
             <TextField fx:id="txtEmailUsuario" editable="false" layoutX="109.0" layoutY="70.0" promptText="ejemplo@ejemplo.com" />
             <TextField fx:id="txtUsuario" editable="false" layoutX="351.0" layoutY="70.0" promptText="Usuario" />
@@ -34,16 +34,17 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button layoutX="338.0" layoutY="292.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="126.0" text="Modificar Dato" />
+            <Button fx:id="modificarDatoUsu" layoutX="338.0" layoutY="292.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="126.0" text="Modificar Dato" />
          </children>
       </Pane>
-      <Pane id="PaneAdmin" fx:id="PaneAdmin" prefHeight="470.0" prefWidth="554.0" styleClass="background" stylesheets="@../css/estilo.css" visible="false">
+      <Pane id="PaneAdmin" fx:id="PaneAdmin" prefHeight="470.0" prefWidth="665.0" styleClass="background" stylesheets="@../css/estilo.css">
          <children>
-            <TableView fx:id="tablaDatosUsu" editable="true" layoutX="13.0" layoutY="208.0" prefHeight="200.0" prefWidth="528.0">
+            <TableView fx:id="tablaDatosUsu" editable="true" layoutX="13.0" layoutY="208.0" prefHeight="200.0" prefWidth="603.0">
               <columns>
                 <TableColumn fx:id="colEmail" prefWidth="75.0" text="Email" />
                 <TableColumn fx:id="colUsername" prefWidth="75.0" text="Username" />
                   <TableColumn fx:id="colTelefono" prefWidth="75.0" text="Teléfono" />
+                  <TableColumn fx:id="colContra" prefWidth="75.0" text="Contraseña" />
                   <TableColumn fx:id="colNombre" prefWidth="57.60003662109375" text="Nombre" />
                   <TableColumn fx:id="colApellidos" prefWidth="92.79998779296875" text="Apellidos" />
                   <TableColumn fx:id="colGenero" prefWidth="63.20001220703125" text="Género" />
@@ -63,8 +64,8 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button layoutX="218.0" layoutY="176.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="126.0" text="Modificar Datos" />
-            <Button layoutX="290.0" layoutY="425.0" mnemonicParsing="false" text="Modificar Datos Usuario" />
+            <Button fx:id="modDatosAdmin" layoutX="218.0" layoutY="176.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="126.0" text="Modificar Datos" />
+            <Button fx:id="btnModDatosTabla" layoutX="290.0" layoutY="425.0" mnemonicParsing="false" onAction="#modificarDatosTabla" text="Modificar Datos Usuario" />
          </children>
       </Pane>
    </children>
