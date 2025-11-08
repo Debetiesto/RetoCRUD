@@ -42,10 +42,14 @@ public class DaoImplementacionMysql implements Dao {
     final String BUSCARADMIN = "SELECT * FROM ADMINISTRADOR WHERE CODU = ?";
     final String BUSCARCUENTA = "SELECT cuenta_corriente FROM ADMINISTRADOR WHERE CODU = ?";
     final String BUSCARUSUARIO = "SELECT num_tarjeta, genero FROM USUARIO WHERE CODU = ?";
-    final String CARGARDATOSTABLA = "SELECT p.CODU, p.EMAIL, p.USERNAME, p.TELEFONO, p.NOMBRE, p.APELLIDOS, "
+    final String CARGARDATOSTABLA = "SELECT p.CODU, p.EMAIL, p.USERNAME, p.TELEFONO, p.CONTRA, p.NOMBRE, p.APELLIDOS, "
             + "u.GENERO, u.NUM_TARJETA "
             + "FROM PERFIL p JOIN USUARIO u ON p.CODU = u.CODU";
-    final String MODIFICARDATOSUSUARIO = "UPDATE USUARIO SET EMAIL = ?, NOMBRE = ?, APELLIDO = ?, GENERO = ?, N_TARJETA = ?, TELEFONO = ?, USERNAME = ?";
+    final String MODIFICARDATOSUSUARIO = "UPDATE PERFIL p\n"
+            + "JOIN USUARIO u ON p.CODU = u.CODU\n"
+            + "SET p.EMAIL=?, p.USERNAME=?, p.TELEFONO=?, p.CONTRA=?, p.NOMBRE=?, p.APELLIDOS=?,\n"
+            + "    u.GENERO=?, u.NUM_TARJETA=?\n"
+            + "WHERE p.CODU=?";
     final String LISTARUSUARIOS = "SELECT p.CODU, p.EMAIL, p.USERNAME, p.TELEFONO, p.NOMBRE, p.APELLIDOS, "
             + "u.GENERO, u.NUM_TARJETA "
             + "FROM PERFIL p JOIN USUARIO u ON p.CODU = u.CODU WHERE p.CODU = ?";
@@ -92,18 +96,18 @@ public class DaoImplementacionMysql implements Dao {
                     usu.setUser(rs.getString("USERNAME"));
                     usu.setTelefono(rs.getInt("TELEFONO"));
                     usu.setContra(rs.getString("CONTRA"));
-                    usu.setNom(rs.getString("NOMBRE"));     
+                    usu.setNom(rs.getString("NOMBRE"));
                     usu.setApe(rs.getString("APELLIDOS"));
-                    
+
                     PreparedStatement stmtUsu = con.prepareStatement(BUSCARUSUARIO);
                     stmtUsu.setInt(1, codU);
                     ResultSet rsUsu = stmtUsu.executeQuery();
                     if (rsUsu.next()) {
                         String gen = rsUsu.getString("GENERO");
-                         if (gen != null && !gen.isEmpty()) {
+                        if (gen != null && !gen.isEmpty()) {
                             usu.setGenero(Genero.valueOf(gen.toUpperCase()));
                         }
-                         usu.setNumTarjeta(rsUsu.getInt("NUM_TARJETA"));
+                        usu.setNumTarjeta(rsUsu.getInt("NUM_TARJETA"));
                     }
                     perfil = usu;
                 }
@@ -132,6 +136,7 @@ public class DaoImplementacionMysql implements Dao {
                 u.setEmail(rs.getString("EMAIL"));
                 u.setUser(rs.getString("USERNAME"));
                 u.setTelefono(rs.getInt("TELEFONO"));
+                u.setContra(rs.getString("CONTRA"));
                 u.setNom(rs.getString("NOMBRE"));
                 u.setApe(rs.getString("APELLIDOS"));
                 u.setGenero(Genero.valueOf(rs.getString("GENERO").toUpperCase()));
@@ -170,12 +175,15 @@ public class DaoImplementacionMysql implements Dao {
         try (Connection con = Conector.open()) {
             stmt = con.prepareStatement(MODIFICARDATOSUSUARIO);
 
-            stmt.setString(1, usu.getNom());
-            stmt.setString(2, usu.getApe());
-            stmt.setString(3, usu.getContra());
-            stmt.setString(4, String.valueOf(usu.getGenero()));
-            stmt.setInt(5, usu.getNumTarjeta());
-            stmt.setString(6, usu.getEmail());
+            stmt.setString(1, usu.getEmail());
+            stmt.setString(2, usu.getUser());
+            stmt.setInt(3, usu.getTelefono());
+            stmt.setString(4, usu.getContra());
+            stmt.setString(5, usu.getNom());
+            stmt.setString(6, usu.getApe());
+            stmt.setString(7, usu.getGenero().toString());
+            stmt.setInt(8, usu.getNumTarjeta());
+            stmt.setInt(9, usu.getCodU());
 
             int filas = stmt.executeUpdate();
 

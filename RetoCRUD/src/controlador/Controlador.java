@@ -6,6 +6,7 @@
 package controlador;
 
 import hilos.HiloLeer;
+import hilos.HiloModificar;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -54,7 +55,8 @@ public class Controlador implements Initializable {
 
     @FXML
     private Button btnLogin;
-
+    @FXML
+    private Button BtnModDatosTabla;
     @FXML
     private Pane PaneAdmin;
     @FXML
@@ -94,6 +96,8 @@ public class Controlador implements Initializable {
     @FXML
     private TableColumn<Usuario, Integer> colTarjeta;
     @FXML
+    private TableColumn<Usuario, String> colContra;
+    @FXML
     private ComboBox<Genero> comboGenero;
 
     private Dao dao;
@@ -110,6 +114,12 @@ public class Controlador implements Initializable {
     private void venRegistrar(ActionEvent event) {
         dao = new DaoImplementacionMysql();
         ventanaRegistro();
+    }
+
+    @FXML
+    private void modificarDatosTabla(ActionEvent event) {
+        dao = new DaoImplementacionMysql();
+        modificarDatos();
     }
 
     @Override
@@ -168,6 +178,7 @@ public class Controlador implements Initializable {
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         colUsername.setCellValueFactory(new PropertyValueFactory<>("user"));
         colTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
+        colContra.setCellValueFactory(new PropertyValueFactory<>("contra"));
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nom"));
         colApellidos.setCellValueFactory(new PropertyValueFactory<>("ape"));
         colGenero.setCellValueFactory(new PropertyValueFactory<>("genero"));
@@ -182,7 +193,7 @@ public class Controlador implements Initializable {
                 txtEmailAdmin.setText(admin.getEmail());
                 txtNomAdmin.setText(admin.getNom());
                 txtCuenta.setText(admin.getCuentaCorriente());
-                
+
                 cargarDatos(null);
             }
         } else {
@@ -225,16 +236,72 @@ public class Controlador implements Initializable {
 
     }
 
-    private void modificarDatos(boolean esAdmin) {
-        
-        if (esAdmin) {
+    private void modificarDatos() {
+        tablaDatosUsu.setEditable(true);
+
+        colUsername.setCellFactory(TextFieldTableCell.forTableColumn());
+        colEmail.setCellFactory(TextFieldTableCell.forTableColumn());
         colNombre.setCellFactory(TextFieldTableCell.forTableColumn());
         colApellidos.setCellFactory(TextFieldTableCell.forTableColumn());
+        colContra.setCellFactory(TextFieldTableCell.forTableColumn());
         colTelefono.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-        colTarjeta.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));  
-        }
-       
+        colTarjeta.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
 
+        colContra.setOnEditCommit(event -> {
+            Usuario u = event.getRowValue();
+            u.setContra(event.getNewValue());
+            actualizarUsuarioEnHilo(u);
+        });
+
+        colUsername.setOnEditCommit(event -> {
+            Usuario u = event.getRowValue();
+            u.setUser(event.getNewValue());
+            actualizarUsuarioEnHilo(u);
+        });
+
+        colEmail.setOnEditCommit(event -> {
+            Usuario u = event.getRowValue();
+            u.setEmail(event.getNewValue());
+            actualizarUsuarioEnHilo(u);
+        });
+
+        colNombre.setOnEditCommit(event -> {
+            Usuario u = event.getRowValue();
+            u.setNom(event.getNewValue());
+            actualizarUsuarioEnHilo(u);
+        });
+
+        colApellidos.setOnEditCommit(event -> {
+            Usuario u = event.getRowValue();
+            u.setApe(event.getNewValue());
+            actualizarUsuarioEnHilo(u);
+        });
+
+        colTelefono.setOnEditCommit(event -> {
+            Usuario u = event.getRowValue();
+            u.setTelefono(event.getNewValue());
+            actualizarUsuarioEnHilo(u);
+        });
+
+        colTarjeta.setOnEditCommit(event -> {
+            Usuario u = event.getRowValue();
+            u.setNumTarjeta(event.getNewValue());
+            actualizarUsuarioEnHilo(u);
+        });
+
+    }
+
+    private void actualizarUsuarioEnHilo(Usuario usuario) {
+        HiloModificar hilo = new HiloModificar(dao, this, usuario);
+        new Thread(hilo).start();
+    }
+
+    public void mostrarMensaje(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Información");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 
 }
