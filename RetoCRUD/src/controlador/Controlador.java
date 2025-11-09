@@ -56,7 +56,9 @@ public class Controlador implements Initializable {
     @FXML
     private Button btnLogin;
     @FXML
-    private Button BtnModDatosTabla;
+    private Button btnModDatosTabla;
+    @FXML
+    private Button btnModDatosAdmin;
     @FXML
     private Pane PaneAdmin;
     @FXML
@@ -102,7 +104,7 @@ public class Controlador implements Initializable {
 
     private Dao dao;
 
-    private Perfil per;
+    private Perfil perLog;
 
     @FXML
     private void loginSQL(ActionEvent event) {
@@ -119,7 +121,13 @@ public class Controlador implements Initializable {
     @FXML
     private void modificarDatosTabla(ActionEvent event) {
         dao = new DaoImplementacionMysql();
-        modificarDatos();
+        modificarDatosTablaAdmin();
+    }
+
+    @FXML
+    private void modificarFieldAdmin(ActionEvent event) {
+        dao = new DaoImplementacionMysql();
+        modificarDatosAdmin();
     }
 
     @Override
@@ -137,7 +145,7 @@ public class Controlador implements Initializable {
         perf.setEmail(email);
         perf.setContra(contra);
 
-        Perfil perLog = dao.login(perf);
+        perLog = dao.login(perf);
         esAdmin = dao.esAdministrador(perLog.getCodU());
         if (perLog == null) {
             alert = new Alert(Alert.AlertType.ERROR);
@@ -236,7 +244,7 @@ public class Controlador implements Initializable {
 
     }
 
-    private void modificarDatos() {
+    private void modificarDatosTablaAdmin() {
         tablaDatosUsu.setEditable(true);
 
         colUsername.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -291,17 +299,48 @@ public class Controlador implements Initializable {
 
     }
 
+    private void modificarDatosAdmin() {
+        txtEmailAdmin.setEditable(true);
+        txtNomAdmin.setEditable(true);
+
+        txtEmailAdmin.requestFocus();
+        txtEmailAdmin.setOnAction(event -> guardarCambiosAdmin());
+        txtNomAdmin.setOnAction(event -> guardarCambiosAdmin());
+    }
+
     private void actualizarUsuarioEnHilo(Usuario usuario) {
         HiloModificar hilo = new HiloModificar(dao, this, usuario);
         new Thread(hilo).start();
     }
 
-    public void mostrarMensaje(String mensaje) {
+    private void actualizarAdminEnHilo(Administrador admin) {
+        HiloModificar hilo = new HiloModificar(dao, this, admin);
+        new Thread(hilo).start();
+    }
+
+    /* public void mostrarMensaje(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Información");
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
+     */
+    private void guardarCambiosAdmin() {
+        if (!(perLog instanceof Administrador)) {
+            System.out.println("❌ No hay administrador logueado.");
+        }
 
+        Administrador admin = (Administrador) perLog;
+
+        admin.setEmail(txtEmailAdmin.getText());
+        admin.setNom(txtNomAdmin.getText());
+
+        txtEmailAdmin.setEditable(false);
+        txtNomAdmin.setEditable(false);
+
+        actualizarAdminEnHilo(admin);
+
+        System.out.println("✅ Datos del administrador actualizados en BD.");
+    }
 }

@@ -6,6 +6,7 @@
 package controlador;
 
 import java.util.List;
+import modelo.Administrador;
 import modelo.Perfil;
 import modelo.Usuario;
 
@@ -23,4 +24,6 @@ public interface Dao {
     public boolean updateUsuario(Usuario usu);
     
     public List<Usuario> listaUsuarios(Usuario usu);
+    
+    public boolean updateAdmin(Administrador admin);
 }

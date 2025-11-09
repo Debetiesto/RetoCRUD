@@ -53,6 +53,11 @@ public class DaoImplementacionMysql implements Dao {
     final String LISTARUSUARIOS = "SELECT p.CODU, p.EMAIL, p.USERNAME, p.TELEFONO, p.NOMBRE, p.APELLIDOS, "
             + "u.GENERO, u.NUM_TARJETA "
             + "FROM PERFIL p JOIN USUARIO u ON p.CODU = u.CODU WHERE p.CODU = ?";
+    final String MODIFICARDATOSADMIN = "UPDATE PERFIL p "
+            + "JOIN ADMINISTRADOR a ON p.CODU = a.CODU "
+            + "SET p.EMAIL=?, p.USERNAME=?, p.TELEFONO=?, p.CONTRA=?, p.NOMBRE=?, p.APELLIDOS=?, "
+            + "a.CUENTA_CORRIENTE=? "
+            + "WHERE p.CODU=?";
 
     @Override
     public Perfil login(Perfil per) {
@@ -238,6 +243,31 @@ public class DaoImplementacionMysql implements Dao {
         }
 
         return usuarios;
+    }
+
+    @Override
+    public boolean updateAdmin(Administrador admin) {
+        boolean actualizado = false;
+        PreparedStatement stmt;
+        try (Connection con = Conector.open()) {
+            stmt = con.prepareStatement(MODIFICARDATOSADMIN);
+
+            stmt.setString(1, admin.getEmail());
+            stmt.setString(2, admin.getUser());
+            stmt.setInt(3, admin.getTelefono());
+            stmt.setString(4, admin.getContra());
+            stmt.setString(5, admin.getNom());
+            stmt.setString(6, admin.getApe());
+            stmt.setString(7, admin.getCuentaCorriente());
+            stmt.setInt(8, admin.getCodU());
+
+            actualizado = stmt.executeUpdate() > 0;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoImplementacionMysql.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return actualizado;
     }
 
 }

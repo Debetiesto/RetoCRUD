@@ -8,6 +8,7 @@ package hilos;
 import controlador.Controlador;
 import controlador.Dao;
 import javafx.application.Platform;
+import modelo.Administrador;
 import modelo.Usuario;
 
 /**
@@ -17,27 +18,34 @@ import modelo.Usuario;
 public class HiloModificar implements Runnable{
     private Dao dao;
     private Controlador cont;
-    private Usuario usuario;
+    private Object persona;
 
-    public HiloModificar(Dao dao, Controlador cont, Usuario usuario) {
+    public HiloModificar(Dao dao, Controlador cont, Object persona) {
         this.dao = dao;
         this.cont = cont;
-        this.usuario = usuario;
+        this.persona = persona;
     }
 
     @Override
     public void run() {
-       
-        boolean actualizado = dao.updateUsuario(usuario);
+       boolean actualizado;
+        if (persona instanceof Usuario) {
+           actualizado = dao.updateUsuario((Usuario) persona); 
+        } else if (persona instanceof Administrador) {
+           actualizado =  dao.updateAdmin((Administrador) persona);
+        } else {
+            System.err.println("❌ Tipo de objeto no reconocido en HiloModificar");
+        }
         
-        Platform.runLater(() -> {
+        
+     /*   Platform.runLater(() -> {
             if (actualizado) {
-                cont.mostrarMensaje("✅ Usuario actualizado correctamente: " + usuario.getEmail());
+                cont.mostrarMensaje("✅ Usuario actualizado correctamente");
             } else {
                 cont.mostrarMensaje("⚠️ No se ha podido actualizar el usuario.");
             }
         });
-        
+        */
     }
     
     
