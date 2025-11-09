@@ -60,6 +60,8 @@ public class Controlador implements Initializable {
     @FXML
     private Button btnModDatosAdmin;
     @FXML
+    private Button btnModificarDatosUsu;
+    @FXML
     private Pane PaneAdmin;
     @FXML
     private Pane PaneUsuario;
@@ -128,6 +130,12 @@ public class Controlador implements Initializable {
     private void modificarFieldAdmin(ActionEvent event) {
         dao = new DaoImplementacionMysql();
         modificarDatosAdmin();
+    }
+
+    @FXML
+    private void modificarFieldsUsuario(ActionEvent event) {
+        dao = new DaoImplementacionMysql();
+        modificarDatosVistaUsuario();
     }
 
     @Override
@@ -342,5 +350,40 @@ public class Controlador implements Initializable {
         actualizarAdminEnHilo(admin);
 
         System.out.println("✅ Datos del administrador actualizados en BD.");
+    }
+
+    private void modificarDatosVistaUsuario() {
+        txtEmailUsuario.setEditable(true);
+        txtUsuario.setEditable(true);
+        txtNomUsuario.setEditable(true);
+        txtApellido.setEditable(true);
+
+        txtEmailUsuario.setOnAction(e -> guardarCambiosVistaUsuario());
+        txtUsuario.setOnAction(e -> guardarCambiosVistaUsuario());
+        txtNomUsuario.setOnAction(e -> guardarCambiosVistaUsuario());
+        txtApellido.setOnAction(e -> guardarCambiosVistaUsuario());
+
+    }
+
+    private void guardarCambiosVistaUsuario() {
+        if (!(perLog instanceof Usuario)) {
+            System.out.println("❌ No hay usuario logueado.");
+        }
+
+        Usuario user = (Usuario) perLog;
+
+        user.setEmail(txtEmailUsuario.getText());
+        user.setUser(txtUsuario.getText());
+        user.setNom(txtNomUsuario.getText());
+        user.setApe(txtApellido.getText());
+
+        actualizarUsuarioEnHilo(user);
+
+        System.out.println("✅ Datos del usuario actualizados en BD.");
+
+        txtEmailUsuario.setEditable(false);
+        txtUsuario.setEditable(false);
+        txtNomUsuario.setEditable(false);
+        txtApellido.setEditable(false);
     }
 }
