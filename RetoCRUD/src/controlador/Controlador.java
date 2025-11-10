@@ -415,7 +415,7 @@ public class Controlador implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 hiloEliminarDatos(usu);
-                mostrarMensaje("Tu cuenta ha sido eliminada correctamente.");
+             //   mostrarMensaje("Tu cuenta ha sido eliminada correctamente.");
             }
         }
     }
