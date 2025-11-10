@@ -8,37 +8,49 @@ package hilos;
 import controlador.Controlador;
 import controlador.Dao;
 import javafx.application.Platform;
+import modelo.Administrador;
 import modelo.Usuario;
 
 /**
  *
  * @author 2dam
  */
-public class HiloModificar implements Runnable{
+public class HiloModificar implements Runnable {
+
     private Dao dao;
     private Controlador cont;
-    private Usuario usuario;
+    private Object persona;
 
-    public HiloModificar(Dao dao, Controlador cont, Usuario usuario) {
+    public HiloModificar(Dao dao, Controlador cont, Object persona) {
         this.dao = dao;
         this.cont = cont;
-        this.usuario = usuario;
+        this.persona = persona;
     }
 
     @Override
     public void run() {
-       
-        boolean actualizado = dao.updateUsuario(usuario);
-        
-        Platform.runLater(() -> {
-            if (actualizado) {
-                cont.mostrarMensaje("✅ Usuario actualizado correctamente: " + usuario.getEmail());
-            } else {
-                cont.mostrarMensaje("⚠️ No se ha podido actualizar el usuario.");
-            }
-        });
-        
+        boolean actualizado;
+        if (persona instanceof Usuario) {
+            actualizado = dao.updateUsuario((Usuario) persona);
+            Platform.runLater(() -> {
+                if (actualizado) {
+                    cont.mostrarMensaje("✅ Usuario actualizado correctamente");
+                } else {
+                    cont.mostrarMensaje("⚠️ No se ha podido actualizar el usuario.");
+                }
+            });
+        } else if (persona instanceof Administrador) {
+            actualizado = dao.updateAdmin((Administrador) persona);
+            Platform.runLater(() -> {
+                if (actualizado) {
+                    cont.mostrarMensaje("✅ Usuario actualizado correctamente");
+                } else {
+                    cont.mostrarMensaje("⚠️ No se ha podido actualizar el usuario.");
+                }
+            });
+        } else {
+            System.err.println("❌ Tipo de objeto no reconocido en HiloModificar");
+        }
     }
-    
-    
+
 }

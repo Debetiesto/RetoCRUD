@@ -5,11 +5,13 @@
  */
 package controlador;
 
+import hilos.HiloBorrar;
 import hilos.HiloLeer;
 import hilos.HiloModificar;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +25,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -56,7 +59,15 @@ public class Controlador implements Initializable {
     @FXML
     private Button btnLogin;
     @FXML
-    private Button BtnModDatosTabla;
+    private Button btnModDatosTabla;
+    @FXML
+    private Button btnModDatosAdmin;
+    @FXML
+    private Button btnModificarDatosUsu;
+    @FXML
+    private Button btnBorrarCuenta;
+    @FXML
+    private Button btnBorrarUsuario;
     @FXML
     private Pane PaneAdmin;
     @FXML
@@ -102,7 +113,7 @@ public class Controlador implements Initializable {
 
     private Dao dao;
 
-    private Perfil per;
+    private Perfil perLog;
 
     @FXML
     private void loginSQL(ActionEvent event) {
@@ -112,14 +123,32 @@ public class Controlador implements Initializable {
 
     @FXML
     private void venRegistrar(ActionEvent event) {
-        dao = new DaoImplementacionMysql();
         ventanaRegistro();
     }
 
     @FXML
     private void modificarDatosTabla(ActionEvent event) {
-        dao = new DaoImplementacionMysql();
-        modificarDatos();
+        modificarDatosTablaAdmin();
+    }
+
+    @FXML
+    private void modificarFieldAdmin(ActionEvent event) {
+        modificarDatosAdmin();
+    }
+
+    @FXML
+    private void modificarFieldsUsuario(ActionEvent event) {
+        modificarDatosVistaUsuario();
+    }
+
+    @FXML
+    private void borrarEnVistaUsuario(ActionEvent event) {
+        borrarCuenta();
+    }
+
+    @FXML
+    private void borrarEnVistaAdmin(ActionEvent event) {
+        borrarUsuario();
     }
 
     @Override
@@ -137,7 +166,7 @@ public class Controlador implements Initializable {
         perf.setEmail(email);
         perf.setContra(contra);
 
-        Perfil perLog = dao.login(perf);
+        perLog = dao.login(perf);
         esAdmin = dao.esAdministrador(perLog.getCodU());
         if (perLog == null) {
             alert = new Alert(Alert.AlertType.ERROR);
@@ -236,7 +265,7 @@ public class Controlador implements Initializable {
 
     }
 
-    private void modificarDatos() {
+    private void modificarDatosTablaAdmin() {
         tablaDatosUsu.setEditable(true);
 
         colUsername.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -291,9 +320,25 @@ public class Controlador implements Initializable {
 
     }
 
+    private void modificarDatosAdmin() {
+        txtEmailAdmin.setEditable(true);
+        txtNomAdmin.setEditable(true);
+
+        txtEmailAdmin.requestFocus();
+        txtEmailAdmin.setOnAction(event -> guardarCambiosAdmin());
+        txtNomAdmin.setOnAction(event -> guardarCambiosAdmin());
+    }
+
     private void actualizarUsuarioEnHilo(Usuario usuario) {
-        HiloModificar hilo = new HiloModificar(dao, this, usuario);
-        new Thread(hilo).start();
+        HiloModificar h = new HiloModificar(dao, this, usuario);
+        Thread hilo = new Thread(h);
+        hilo.start();
+    }
+
+    private void actualizarAdminEnHilo(Administrador admin) {
+        HiloModificar h = new HiloModificar(dao, this, admin);
+        Thread hilo = new Thread(h);
+        hilo.start();
     }
 
     public void mostrarMensaje(String mensaje) {
@@ -302,6 +347,92 @@ public class Controlador implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
+        System.exit(0);
     }
 
+    private void guardarCambiosAdmin() {
+        if (!(perLog instanceof Administrador)) {
+            System.out.println("❌ No hay administrador logueado.");
+        }
+
+        Administrador admin = (Administrador) perLog;
+
+        admin.setEmail(txtEmailAdmin.getText());
+        admin.setNom(txtNomAdmin.getText());
+
+        txtEmailAdmin.setEditable(false);
+        txtNomAdmin.setEditable(false);
+
+        actualizarAdminEnHilo(admin);
+
+        System.out.println("✅ Datos del administrador actualizados en BD.");
+    }
+
+    private void modificarDatosVistaUsuario() {
+        txtEmailUsuario.setEditable(true);
+        txtUsuario.setEditable(true);
+        txtNomUsuario.setEditable(true);
+        txtApellido.setEditable(true);
+
+        txtEmailUsuario.setOnAction(e -> guardarCambiosVistaUsuario());
+        txtUsuario.setOnAction(e -> guardarCambiosVistaUsuario());
+        txtNomUsuario.setOnAction(e -> guardarCambiosVistaUsuario());
+        txtApellido.setOnAction(e -> guardarCambiosVistaUsuario());
+
+    }
+
+    private void guardarCambiosVistaUsuario() {
+        if (!(perLog instanceof Usuario)) {
+            System.out.println("❌ No hay usuario logueado.");
+        }
+
+        Usuario user = (Usuario) perLog;
+
+        user.setEmail(txtEmailUsuario.getText());
+        user.setUser(txtUsuario.getText());
+        user.setNom(txtNomUsuario.getText());
+        user.setApe(txtApellido.getText());
+
+        actualizarUsuarioEnHilo(user);
+
+        System.out.println("✅ Datos del usuario actualizados en BD.");
+
+        txtEmailUsuario.setEditable(false);
+        txtUsuario.setEditable(false);
+        txtNomUsuario.setEditable(false);
+        txtApellido.setEditable(false);
+    }
+
+    private void borrarCuenta() {
+        if (perLog instanceof Usuario) {
+            Usuario usu = (Usuario) perLog;
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmar eliminación");
+            alert.setHeaderText("¿Seguro que deseas eliminar tu cuenta?");
+            alert.setContentText("Esta acción no se puede deshacer.");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                hiloEliminarDatos(usu);
+             //   mostrarMensaje("Tu cuenta ha sido eliminada correctamente.");
+            }
+        }
+    }
+
+    private void borrarUsuario() {
+        Usuario seleccionado = (Usuario) tablaDatosUsu.getSelectionModel().getSelectedItem();
+        if (seleccionado != null) {
+            hiloEliminarDatos(seleccionado);
+            tablaDatosUsu.getItems().remove(seleccionado);
+        } else {
+            System.out.println("⚠️ No hay usuario seleccionado.");
+        }
+    }
+
+    private void hiloEliminarDatos(Usuario usu) {
+        HiloBorrar h = new HiloBorrar(dao, this, usu);
+        Thread hilo = new Thread(h);
+        hilo.start();
+    }
 }
