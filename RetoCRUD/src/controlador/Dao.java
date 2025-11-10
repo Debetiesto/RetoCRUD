@@ -26,4 +26,6 @@ public interface Dao {
     public List<Usuario> listaUsuarios(Usuario usu);
     
     public boolean updateAdmin(Administrador admin);
+
+    public boolean borrarUsuario(int codU);
 }

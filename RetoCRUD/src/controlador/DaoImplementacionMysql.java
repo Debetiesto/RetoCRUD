@@ -58,6 +58,7 @@ public class DaoImplementacionMysql implements Dao {
             + "SET p.EMAIL=?, p.USERNAME=?, p.TELEFONO=?, p.CONTRA=?, p.NOMBRE=?, p.APELLIDOS=?, "
             + "a.CUENTA_CORRIENTE=? "
             + "WHERE p.CODU=?";
+    final String BORRARUSUARIO = "DELETE FROM PERFIL WHERE CODU = ?";
 
     @Override
     public Perfil login(Perfil per) {
@@ -268,6 +269,30 @@ public class DaoImplementacionMysql implements Dao {
         }
 
         return actualizado;
+    }
+
+    @Override
+    public boolean borrarUsuario(int codU) {
+        boolean eliminado = false;
+        PreparedStatement stmt;
+
+        try (Connection con = Conector.open()) {
+            stmt = con.prepareStatement(BORRARUSUARIO);
+
+            stmt.setInt(1, codU);
+            int filasAfectadas = stmt.executeUpdate();
+
+            if (filasAfectadas > 0) {
+                System.out.println("✅ Usuario eliminado correctamente: " + codU);
+            } else {
+                System.out.println("⚠️ No se encontró usuario con código: " + codU);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoImplementacionMysql.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return eliminado;
     }
 
 }

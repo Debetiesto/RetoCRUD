@@ -15,7 +15,8 @@ import modelo.Usuario;
  *
  * @author 2dam
  */
-public class HiloModificar implements Runnable{
+public class HiloModificar implements Runnable {
+
     private Dao dao;
     private Controlador cont;
     private Object persona;
@@ -28,25 +29,28 @@ public class HiloModificar implements Runnable{
 
     @Override
     public void run() {
-       boolean actualizado;
+        boolean actualizado;
         if (persona instanceof Usuario) {
-           actualizado = dao.updateUsuario((Usuario) persona); 
+            actualizado = dao.updateUsuario((Usuario) persona);
+            Platform.runLater(() -> {
+                if (actualizado) {
+                    cont.mostrarMensaje("✅ Usuario actualizado correctamente");
+                } else {
+                    cont.mostrarMensaje("⚠️ No se ha podido actualizar el usuario.");
+                }
+            });
         } else if (persona instanceof Administrador) {
-           actualizado =  dao.updateAdmin((Administrador) persona);
+            actualizado = dao.updateAdmin((Administrador) persona);
+            Platform.runLater(() -> {
+                if (actualizado) {
+                    cont.mostrarMensaje("✅ Usuario actualizado correctamente");
+                } else {
+                    cont.mostrarMensaje("⚠️ No se ha podido actualizar el usuario.");
+                }
+            });
         } else {
             System.err.println("❌ Tipo de objeto no reconocido en HiloModificar");
         }
-        
-        
-     /*   Platform.runLater(() -> {
-            if (actualizado) {
-                cont.mostrarMensaje("✅ Usuario actualizado correctamente");
-            } else {
-                cont.mostrarMensaje("⚠️ No se ha podido actualizar el usuario.");
-            }
-        });
-        */
     }
-    
-    
+
 }

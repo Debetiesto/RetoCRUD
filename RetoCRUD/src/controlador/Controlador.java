@@ -5,11 +5,13 @@
  */
 package controlador;
 
+import hilos.HiloBorrar;
 import hilos.HiloLeer;
 import hilos.HiloModificar;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +25,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -61,6 +64,10 @@ public class Controlador implements Initializable {
     private Button btnModDatosAdmin;
     @FXML
     private Button btnModificarDatosUsu;
+    @FXML
+    private Button btnBorrarCuenta;
+    @FXML
+    private Button btnBorrarUsuario;
     @FXML
     private Pane PaneAdmin;
     @FXML
@@ -116,26 +123,32 @@ public class Controlador implements Initializable {
 
     @FXML
     private void venRegistrar(ActionEvent event) {
-        dao = new DaoImplementacionMysql();
         ventanaRegistro();
     }
 
     @FXML
     private void modificarDatosTabla(ActionEvent event) {
-        dao = new DaoImplementacionMysql();
         modificarDatosTablaAdmin();
     }
 
     @FXML
     private void modificarFieldAdmin(ActionEvent event) {
-        dao = new DaoImplementacionMysql();
         modificarDatosAdmin();
     }
 
     @FXML
     private void modificarFieldsUsuario(ActionEvent event) {
-        dao = new DaoImplementacionMysql();
         modificarDatosVistaUsuario();
+    }
+
+    @FXML
+    private void borrarEnVistaUsuario(ActionEvent event) {
+        borrarCuenta();
+    }
+
+    @FXML
+    private void borrarEnVistaAdmin(ActionEvent event) {
+        borrarUsuario();
     }
 
     @Override
@@ -317,23 +330,26 @@ public class Controlador implements Initializable {
     }
 
     private void actualizarUsuarioEnHilo(Usuario usuario) {
-        HiloModificar hilo = new HiloModificar(dao, this, usuario);
-        new Thread(hilo).start();
+        HiloModificar h = new HiloModificar(dao, this, usuario);
+        Thread hilo = new Thread(h);
+        hilo.start();
     }
 
     private void actualizarAdminEnHilo(Administrador admin) {
-        HiloModificar hilo = new HiloModificar(dao, this, admin);
-        new Thread(hilo).start();
+        HiloModificar h = new HiloModificar(dao, this, admin);
+        Thread hilo = new Thread(h);
+        hilo.start();
     }
 
-    /* public void mostrarMensaje(String mensaje) {
+    public void mostrarMensaje(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Información");
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
+        System.exit(0);
     }
-     */
+
     private void guardarCambiosAdmin() {
         if (!(perLog instanceof Administrador)) {
             System.out.println("❌ No hay administrador logueado.");
@@ -385,5 +401,38 @@ public class Controlador implements Initializable {
         txtUsuario.setEditable(false);
         txtNomUsuario.setEditable(false);
         txtApellido.setEditable(false);
+    }
+
+    private void borrarCuenta() {
+        if (perLog instanceof Usuario) {
+            Usuario usu = (Usuario) perLog;
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmar eliminación");
+            alert.setHeaderText("¿Seguro que deseas eliminar tu cuenta?");
+            alert.setContentText("Esta acción no se puede deshacer.");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                hiloEliminarDatos(usu);
+                mostrarMensaje("Tu cuenta ha sido eliminada correctamente.");
+            }
+        }
+    }
+
+    private void borrarUsuario() {
+        Usuario seleccionado = (Usuario) tablaDatosUsu.getSelectionModel().getSelectedItem();
+        if (seleccionado != null) {
+            hiloEliminarDatos(seleccionado);
+            tablaDatosUsu.getItems().remove(seleccionado);
+        } else {
+            System.out.println("⚠️ No hay usuario seleccionado.");
+        }
+    }
+
+    private void hiloEliminarDatos(Usuario usu) {
+        HiloBorrar h = new HiloBorrar(dao, this, usu);
+        Thread hilo = new Thread(h);
+        hilo.start();
     }
 }
