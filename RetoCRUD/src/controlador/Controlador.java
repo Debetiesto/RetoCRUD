@@ -29,6 +29,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -110,6 +111,22 @@ public class Controlador implements Initializable {
     private TableColumn<Usuario, String> colContra;
     @FXML
     private ComboBox<Genero> comboGenero;
+    @FXML
+    private TextField txtNom;
+    @FXML
+    private TextField txtApe;
+    @FXML
+    private TextField txtTelefono;
+    @FXML
+    private TextField txtUser;
+    @FXML
+    private TextField Email;
+    @FXML
+    private TextField txtTarjeta;
+    @FXML
+    private PasswordField txtContrasena;
+    @FXML
+    private ComboBox<Genero> desplegableGenero;
 
     private Dao dao;
 
@@ -262,7 +279,73 @@ public class Controlador implements Initializable {
     }
 
     private void ventanaRegistro() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/VistaRegistro.fxml"));
+            Parent root;
+            root = loader.load();
 
+            // Obtener el controlador de esta ventana
+            Controlador controladorRegistro = loader.getController();
+
+            // Llenar el ComboBox de la ventana de registro
+            controladorRegistro.desplegableGenero.getItems().setAll(Genero.values());
+            controladorRegistro.desplegableGenero.getSelectionModel().selectFirst();
+
+            Stage stage = (Stage) txtEmail.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void registrarUsuario(ActionEvent event) {
+
+        // Validar campos vacíos
+        if (txtNom.getText().isEmpty()
+                || txtApe.getText().isEmpty()
+                || txtTelefono.getText().isEmpty()
+                || txtUser.getText().isEmpty()
+                || txtEmail.getText().isEmpty()
+                || txtContrasena.getText().isEmpty()
+                || txtTarjeta.getText().isEmpty()
+                || comboGenero.getValue() == null) {
+
+            mostrarMensaje("Campos vacíos ,Por favor, complete todos los campos antes de continuar.");
+            return;
+        }
+
+        try {
+            // Inicializar DAO
+            dao = new DaoImplementacionMysql();
+
+            // Crear objeto Usuario
+            Usuario nuevoUsuario = new Usuario();
+            nuevoUsuario.setNom(txtNom.getText().trim());
+            nuevoUsuario.setApe(txtApe.getText().trim());
+            nuevoUsuario.setTelefono(Integer.parseInt(txtTelefono.getText().trim()));
+            nuevoUsuario.setUser(txtUser.getText().trim());
+            nuevoUsuario.setEmail(txtEmail.getText().trim());
+            nuevoUsuario.setContra(txtContrasena.getText().trim());
+            nuevoUsuario.setNumTarjeta(Integer.parseInt(txtTarjeta.getText().trim()));
+            nuevoUsuario.setGenero(comboGenero.getValue());
+
+            // Insertar en BD
+            boolean insertado = dao.insertarUsuario(nuevoUsuario);
+
+            if (insertado) {
+                mostrarMensaje("Registro exitoso , El usuario se registró correctamente.");
+                login();
+            } else {
+                mostrarMensaje("Error en el registro, No se pudo registrar el usuario. Intente nuevamente.");
+            }
+
+        } catch (NumberFormatException e) {
+            mostrarMensaje("Error de formato, El teléfono y la tarjeta deben ser números válidos.");
+        } catch (Exception e) {
+            mostrarMensaje("Error inesperado");
+        }
     }
 
     private void modificarDatosTablaAdmin() {
@@ -415,7 +498,7 @@ public class Controlador implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 hiloEliminarDatos(usu);
-             //   mostrarMensaje("Tu cuenta ha sido eliminada correctamente.");
+                //   mostrarMensaje("Tu cuenta ha sido eliminada correctamente.");
             }
         }
     }
