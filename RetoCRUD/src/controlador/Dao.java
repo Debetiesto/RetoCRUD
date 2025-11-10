@@ -28,4 +28,6 @@ public interface Dao {
     public boolean updateAdmin(Administrador admin);
 
     public boolean borrarUsuario(int codU);
+    
+    public boolean insertarUsuario(Usuario usuario);
 }

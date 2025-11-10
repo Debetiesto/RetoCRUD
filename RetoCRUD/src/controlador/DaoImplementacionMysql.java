@@ -59,6 +59,8 @@ public class DaoImplementacionMysql implements Dao {
             + "a.CUENTA_CORRIENTE=? "
             + "WHERE p.CODU=?";
     final String BORRARUSUARIO = "DELETE FROM PERFIL WHERE CODU = ?";
+    String InsertarUsuario = "INSERT INTO usuario (nombre, apellidos, telefono, username, email, contrasena, numTarjeta, genero) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+              
 
     @Override
     public Perfil login(Perfil per) {
@@ -293,6 +295,31 @@ public class DaoImplementacionMysql implements Dao {
         }
 
         return eliminado;
+    }
+
+    @Override
+    public boolean insertarUsuario(Usuario usuario) {
+         PreparedStatement stmt;
+
+        try (Connection con = Conector.open()){
+            stmt = con.prepareStatement(InsertarUsuario);
+
+           stmt.setString(1, usuario.getNom());
+           stmt.setString(2, usuario.getApe());
+           stmt.setInt(3, usuario.getTelefono());
+           stmt.setString(4, usuario.getUser());
+           stmt.setString(5, usuario.getEmail());
+           stmt.setString(6, usuario.getContra());
+           stmt.setInt(7, usuario.getNumTarjeta());
+           stmt.setString(8, usuario.getGenero().name()); // Si Genero es un Enum
+
+            int filas = stmt.executeUpdate();
+            return filas > 0;
+
+        } catch (SQLException e) {
+        System.err.println("Error al insertar usuario: " + e.getMessage());
+        return false;
+    }
     }
 
 }
