@@ -7,6 +7,7 @@ package controlador;
 
 import static com.mysql.cj.conf.PropertyKey.logger;
 import conexion.Conector;
+import excepciones.UsuarioExisteException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -62,6 +63,7 @@ public class DaoImplementacionMysql implements Dao {
     final String BORRARUSUARIO = "DELETE FROM PERFIL WHERE CODU = ?";
 
     final String ANIADIRPERFIL = "{CALL InsertarUsuarioCompleto2(?, ?, ?, ?, ?, ?, ?, ?)}";
+    final String COMPROBARUSUARIO = "SELECT COUNT(*) FROM USUARIO u JOIN PERFIL p ON u.CODU = p.CODU WHERE p.EMAIL = ? OR p.USERNAME = ?";
 
     @Override
     public Perfil login(Perfil per) {
@@ -298,21 +300,36 @@ public class DaoImplementacionMysql implements Dao {
         return eliminado;
     }
 
+    /**
+     *
+     * @param u
+     * @return
+     * @throws UsuarioExisteException
+     */
     @Override
-    public boolean insertarUsuario(Usuario u) {
-
+    public boolean insertarUsuario(Usuario u) throws UsuarioExisteException {
         //rezamos a dios
         try (Connection con = Conector.open();
                 CallableStatement stmt = con.prepareCall(ANIADIRPERFIL)) {
 
-            stmt.setString(1, u.getEmail());                         // pEmail
-            stmt.setString(2, u.getUser());                          // pUsername
-            stmt.setInt(3, u.getTelefono());                         // pTelefono
-            stmt.setString(4, u.getContra());                        // pContra
-            stmt.setString(5, u.getNom());                           // pNombre
-            stmt.setString(6, u.getApe());                           // pApellidos
-            stmt.setString(7, u.getGenero().name().toUpperCase());   // pGenero (ENUM)
-            stmt.setInt(8, u.getNumTarjeta());                       // pNumTarjeta
+            try (PreparedStatement psCheck = con.prepareStatement(COMPROBARUSUARIO)) {
+                psCheck.setString(1, u.getEmail());
+                psCheck.setString(2, u.getUser());
+                ResultSet rs = psCheck.executeQuery();
+
+                if (rs.next() && rs.getInt(1) > 0) {
+                    throw new UsuarioExisteException("El usuario o email ya está registrado.");
+                }
+            }
+
+            stmt.setString(1, u.getEmail());
+            stmt.setString(2, u.getUser());
+            stmt.setInt(3, u.getTelefono());
+            stmt.setString(4, u.getContra());
+            stmt.setString(5, u.getNom());
+            stmt.setString(6, u.getApe());
+            stmt.setString(7, u.getGenero().name().toUpperCase());
+            stmt.setInt(8, u.getNumTarjeta());
 
             int filas = stmt.executeUpdate();
 

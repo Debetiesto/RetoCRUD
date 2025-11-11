@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import excepciones.UsuarioExisteException;
 import java.util.List;
 import modelo.Administrador;
 import modelo.Perfil;
@@ -29,5 +30,7 @@ public interface Dao {
 
     public boolean borrarUsuario(int codU);
     
-    public boolean insertarUsuario(Usuario usuario);
+    public boolean insertarUsuario(Usuario usuario) throws UsuarioExisteException;
+    
+
 }
