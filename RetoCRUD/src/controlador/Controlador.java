@@ -307,10 +307,10 @@ public class Controlador implements Initializable {
                 || txtApe.getText().isEmpty()
                 || txtTelefono.getText().isEmpty()
                 || txtUser.getText().isEmpty()
-                || txtEmail.getText().isEmpty()
+                || Email.getText().isEmpty()
                 || txtContrasena.getText().isEmpty()
                 || txtTarjeta.getText().isEmpty()
-                || comboGenero.getValue() == null) {
+                || desplegableGenero.getValue() == null) {
 
             mostrarMensaje("Campos vacíos ,Por favor, complete todos los campos antes de continuar.");
             return;
@@ -326,10 +326,10 @@ public class Controlador implements Initializable {
             nuevoUsuario.setApe(txtApe.getText().trim());
             nuevoUsuario.setTelefono(Integer.parseInt(txtTelefono.getText().trim()));
             nuevoUsuario.setUser(txtUser.getText().trim());
-            nuevoUsuario.setEmail(txtEmail.getText().trim());
+            nuevoUsuario.setEmail(Email.getText().trim());
             nuevoUsuario.setContra(txtContrasena.getText().trim());
             nuevoUsuario.setNumTarjeta(Integer.parseInt(txtTarjeta.getText().trim()));
-            nuevoUsuario.setGenero(comboGenero.getValue());
+            nuevoUsuario.setGenero(desplegableGenero.getValue());
 
             // Insertar en BD
             boolean insertado = dao.insertarUsuario(nuevoUsuario);
