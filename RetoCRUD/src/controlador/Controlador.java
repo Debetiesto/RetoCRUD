@@ -52,7 +52,7 @@ import modelo.Usuario;
 
 /**
  *
- * @author 2dam
+ * @author Unai, Luis
  */
 public class Controlador implements Initializable {
 

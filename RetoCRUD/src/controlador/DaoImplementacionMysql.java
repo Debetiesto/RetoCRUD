@@ -27,7 +27,7 @@ import modelo.Usuario;
 
 /**
  *
- * @author 2dam
+ * @author Unai, Luis
  */
 public class DaoImplementacionMysql implements Dao {
 
@@ -65,6 +65,12 @@ public class DaoImplementacionMysql implements Dao {
     final String ANIADIRPERFIL = "{CALL InsertarUsuarioCompleto2(?, ?, ?, ?, ?, ?, ?, ?)}";
     final String COMPROBARUSUARIO = "SELECT COUNT(*) FROM USUARIO u JOIN PERFIL p ON u.CODU = p.CODU WHERE p.EMAIL = ? OR p.USERNAME = ?";
 
+    /**
+     * Método de inicio de sesión tanto de usuario
+     * como de administrador
+     * @param per
+     * @return 
+     */
     @Override
     public Perfil login(Perfil per) {
         ResultSet rs = null;
@@ -132,6 +138,11 @@ public class DaoImplementacionMysql implements Dao {
         return perfil;
     }
 
+    /**
+     * Método para cargar los datos de los usuarios 
+     * en la tabla del administrador
+     * @return 
+     */
     @Override
     public List<Usuario> cargarDatosTabla() {
         List<Usuario> lista = new ArrayList<>();
@@ -161,6 +172,13 @@ public class DaoImplementacionMysql implements Dao {
         return lista;
     }
 
+    /**
+     * Método de comprobación de si el usuario
+     * que ha iniciado sesión es administrador o no
+     * @param codU es el parámetro que recibe el método para comprobar si el codigo del usuario
+     * que ha tratado de iniciar sesión coincide con un código de administrador.
+     * @return 
+     */
     @Override
     public boolean esAdministrador(int codU) {
         ResultSet rs = null;
@@ -180,6 +198,12 @@ public class DaoImplementacionMysql implements Dao {
         return esAdmin;
     }
 
+    /**
+     * Método para modificar un usuario tanto en el panel del usuario
+     * como en la tabla que se muestra al administrador
+     * @param usu
+     * @return 
+     */
     @Override
     public boolean updateUsuario(Usuario usu) {
         boolean actualizado = false;
@@ -212,7 +236,13 @@ public class DaoImplementacionMysql implements Dao {
 
         return actualizado;
     }
-
+    
+    /**
+     * Lista de usuarios para rellenar la tabla de la vista
+     * de administrador
+     * @param usu
+     * @return 
+     */
     @Override
     public List<Usuario> listaUsuarios(Usuario usu) {
         List<Usuario> usuarios = new ArrayList<>();
@@ -252,6 +282,11 @@ public class DaoImplementacionMysql implements Dao {
         return usuarios;
     }
 
+    /**
+     * Método para actualizar los 3 fields del administrador
+     * @param admin
+     * @return 
+     */
     @Override
     public boolean updateAdmin(Administrador admin) {
         boolean actualizado = false;
@@ -277,6 +312,12 @@ public class DaoImplementacionMysql implements Dao {
         return actualizado;
     }
 
+    /**
+     * Método para borrar un usuario tanto en el panel de usuario
+     * como en la tabla que se muestra al administrador
+     * @param codU
+     * @return 
+     */
     @Override
     public boolean borrarUsuario(int codU) {
         boolean eliminado = false;
@@ -302,7 +343,7 @@ public class DaoImplementacionMysql implements Dao {
     }
 
     /**
-     *
+     * Método para registrar usuarios en la base de datos
      * @param u
      * @return
      * @throws UsuarioExisteException

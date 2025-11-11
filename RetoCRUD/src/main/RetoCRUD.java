@@ -14,10 +14,15 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author 2dam
+ * @author Unai, Luis
  */
 public class RetoCRUD extends Application {
 
+    /**
+     * Método que abre la ventana principal de la aplicación
+     * @param stage 
+     * @throws Exception 
+     */
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/vista/VistaLogin.fxml"));
@@ -28,6 +33,9 @@ public class RetoCRUD extends Application {
         stage.show();
     }
 
+    /**
+     * Método que cierra el pool de conexiones.
+     */
     @Override
     public void stop() {
         PoolCon.closePool();

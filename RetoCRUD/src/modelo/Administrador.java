@@ -7,7 +7,7 @@ package modelo;
 
 /**
  *
- * @author 2dam
+ * @author Unai, Luis
  */
 public class Administrador extends Perfil{
     private int codU;
