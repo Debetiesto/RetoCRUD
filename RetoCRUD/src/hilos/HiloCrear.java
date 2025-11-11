@@ -7,6 +7,7 @@ package hilos;
 
 import controlador.Controlador;
 import controlador.Dao;
+import excepciones.UsuarioExisteException;
 import javafx.application.Platform;
 import modelo.Usuario;
 
@@ -28,16 +29,29 @@ public class HiloCrear implements Runnable {
 
     @Override
     public void run() {
-        boolean insertado = dao.insertarUsuario(usu);
+        try {
+            boolean insertado = dao.insertarUsuario(usu);
 
+            Platform.runLater(() -> {
+                if (insertado) {
+                    cont.mostrarMensaje("Registro exitoso." + " Usuario registrado correctamente.");
+                    cont.volverLogin();
+                }
+            });
+        } catch (UsuarioExisteException e) {
+            Platform.runLater(() -> {
+                cont.mostrarMensaje("⚠️ " + e.getMessage());
+            });
+        } catch (Exception e) {
         Platform.runLater(() -> {
-            if (insertado) {
-                cont.mostrarMensaje("Registro exitoso." + " Usuario registrado correctamente.");
-                cont.volverLogin();
-            } else {
-                cont.mostrarMensaje("Error, " + "no se pudo registrar el usuario.");
-            }
+            cont.mostrarMensaje("❌ Error al registrar: " + e.getMessage());
         });
+    }
+        /* if (dao.existeUsuario(usu.getEmail(), usu.getUser())) {
+            Platform.runLater(() -> {
+                cont.mostrarMensaje("⚠️ El usuario o email ya está registrado.");
+            });
+        }*/
 
     }
 
