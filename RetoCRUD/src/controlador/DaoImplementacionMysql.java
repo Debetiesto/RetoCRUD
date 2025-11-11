@@ -305,19 +305,13 @@ public class DaoImplementacionMysql implements Dao {
          CallableStatement stmt;
 
         try (Connection con = Conector.open()){
-<<<<<<< HEAD
-            stmt = con.prepareStatement(INSERTARUSUARIO);
 
-           stmt.setString(1, usuario.getNom());
-           stmt.setString(2, usuario.getApe());
-=======
             stmt = con.prepareCall(InsertarUsuario);
             
             
             
            stmt.setString(1, usuario.getEmail());
            stmt.setString(2, usuario.getUser());
->>>>>>> 2e51a2002e6007301bbb91c8666cf94462ba750f
            stmt.setInt(3, usuario.getTelefono());
            stmt.setString(4, usuario.getContra());
            stmt.setString(5, usuario.getNom());
