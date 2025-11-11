@@ -430,7 +430,6 @@ public class Controlador implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
-        System.exit(0);
     }
 
     private void guardarCambiosAdmin() {

@@ -8,11 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-<<<<<<< HEAD
-    <jar href="RetoCRUD.jar" size="2999700" download="eager" />
-=======
-    <jar href="RetoCRUD.jar" size="2999747" download="eager" />
->>>>>>> 2e51a2002e6007301bbb91c8666cf94462ba750f
+    <jar href="RetoCRUD.jar" size="2999717" download="eager" />
     <jar href="lib\commons-dbcp2-2.13.0.jar" size="221765" download="eager" />
     <jar href="lib\commons-logging-1.3.5.jar" size="73737" download="eager" />
     <jar href="lib\commons-pool2-2.12.1.jar" size="152289" download="eager" />
