@@ -38,12 +38,42 @@ VALUES
 -- 2️⃣ Insertamos usuarios (enlazados con los perfiles 1 y 2)
 INSERT INTO USUARIO (CODU, GENERO, NUM_TARJETA)
 VALUES
-(1, 'MUJER', 123456789),
-(2, 'HOMBRE', 987654321);
+(1, 'Mujer', 123456789),
+(2, 'Hombre', 987654321);
 
 -- 3️⃣ Insertamos un administrador (enlazado con el perfil 3)
 INSERT INTO ADMINISTRADOR (CODU, CUENTA_CORRIENTE)
 VALUES
 (3, 'ES9121000418450200051332');
+
+DELIMITER //
+
+CREATE PROCEDURE InsertarUsuarioCompleto2(
+    IN pEmail VARCHAR(100),
+    IN pUsername VARCHAR(50),
+    IN pTelefono INT,
+    IN pContra VARCHAR(100),
+    IN pNombre VARCHAR(50),
+    IN pApellidos VARCHAR(50),
+    IN pGenero ENUM('HOMBRE','MUJER','OTRO'),
+    IN pNumTarjeta INT
+)
+BEGIN
+    DECLARE nuevoID INT;
+
+    -- 1️⃣ Insertar en PERFIL
+    INSERT INTO PERFIL (EMAIL, USERNAME, TELEFONO, CONTRA, NOMBRE, APELLIDOS)
+    VALUES (pEmail, pUsername, pTelefono, pContra, pNombre, pApellidos);
+
+    -- Obtener el ID generado automáticamente
+    SET nuevoID = LAST_INSERT_ID();
+
+    -- 2️⃣ Insertar en USUARIO con el CODU generado
+    INSERT INTO USUARIO (CODU, GENERO, NUM_TARJETA)
+    VALUES (nuevoID, pGenero, pNumTarjeta);
+END //
+
+DELIMITER ;
+
 
 
