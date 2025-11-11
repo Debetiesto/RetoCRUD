@@ -13,7 +13,7 @@ import modelo.Usuario;
 
 /**
  *
- * @author 2dam
+ * @author Luis
  */
 public class HiloModificar implements Runnable {
 

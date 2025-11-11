@@ -7,7 +7,7 @@ package excepciones;
 
 /**
  *
- * @author 2dam
+ * @author Luis
  */
 public class UsuarioExisteException extends Exception {
 

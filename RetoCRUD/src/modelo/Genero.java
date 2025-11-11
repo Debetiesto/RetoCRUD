@@ -7,7 +7,7 @@ package modelo;
 
 /**
  *
- * @author 2dam
+ * @author Unai, Luis
  */
 public enum Genero {
     HOMBRE, MUJER, OTRO;

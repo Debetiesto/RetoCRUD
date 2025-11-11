@@ -12,13 +12,16 @@ import org.apache.commons.dbcp2.BasicDataSource;
 
 /**
  *
- * @author 2dam
+ * @author Luis
  */
 public class PoolCon {
-
+    
     private static BasicDataSource dataSource;
     private static long PAUSA_MS;
 
+    /**
+     * Recibir credenciales del ResourceBundle
+     */
     static {
         try {
             ResourceBundle conf = ResourceBundle.getBundle("modelo.configClass");
@@ -48,10 +51,18 @@ public class PoolCon {
         }
     }
 
+    /**
+     * Método que inicia la conexión con la base de datos
+     * @return
+     * @throws SQLException 
+     */
     public static Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }
 
+    /**
+     * Método que cierra el Pool de conexiones
+     */
     public static void closePool() {
         try {
             if (dataSource != null) {
@@ -63,6 +74,10 @@ public class PoolCon {
         }
     }
 
+    /**
+     * Método que duerme el hilo durante unos segundos
+     * @param con 
+     */
     public static void pausarConexion(Connection con) {
         if (con == null) {
             return;

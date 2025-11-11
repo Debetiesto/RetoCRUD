@@ -13,7 +13,7 @@ import modelo.Usuario;
 
 /**
  *
- * @author 2dam
+ * @author Unai, Luis
  */
 public interface Dao {
     public Perfil login(Perfil per);
