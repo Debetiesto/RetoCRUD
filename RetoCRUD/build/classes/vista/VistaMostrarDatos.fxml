@@ -10,31 +10,31 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="422.0" prefWidth="554.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="422.0" prefWidth="554.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane id="PaneUsuario" fx:id="PaneUsuario" prefHeight="462.0" prefWidth="554.0" styleClass="background" stylesheets="@../css/estilo.css">
+      <Pane id="PaneUsuario" fx:id="PaneUsuario" prefHeight="470.0" prefWidth="665.0" styleClass="background" stylesheets="@../css/estilo.css">
          <children>
-            <TextField fx:id="txtEmailUsuario" editable="false" layoutX="109.0" layoutY="70.0" promptText="ejemplo@ejemplo.com" />
-            <TextField fx:id="txtUsuario" editable="false" layoutX="351.0" layoutY="70.0" promptText="Usuario" />
-            <TextField fx:id="txtNomUsuario" editable="false" layoutX="112.0" layoutY="121.0" promptText="Nombre" />
-            <TextField fx:id="txtApellido" editable="false" layoutX="351.0" layoutY="121.0" promptText="Apellido" />
-            <TextField fx:id="txtTel" editable="false" layoutX="112.0" layoutY="167.0" promptText="Teléfono" />
-            <ComboBox fx:id="comboGenero" layoutX="220.0" layoutY="219.0" prefWidth="150.0" promptText="Género" />
-            <TextField fx:id="txtNTarjeta" editable="false" layoutX="351.0" layoutY="167.0" promptText="Nº Tarjeta" />
-            <Button layoutX="70.0" layoutY="292.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="126.0" text="Cerrar Sesión" />
-            <Button fx:id="btnBorrarCuenta" layoutX="201.0" layoutY="292.0" mnemonicParsing="false" onAction="#borrarEnVistaUsuario" prefHeight="37.0" prefWidth="126.0" text="Borrar Cuenta" />
-            <Label layoutX="42.0" layoutY="74.0" prefHeight="17.0" prefWidth="42.0" text="Email:" />
-            <Label layoutX="289.0" layoutY="74.0" prefHeight="19.0" prefWidth="62.0" text="Usuario:" />
-            <Label layoutX="36.0" layoutY="125.0" prefHeight="17.0" prefWidth="62.0" text="Nombre:" />
-            <Label layoutX="286.0" layoutY="125.0" prefHeight="17.0" prefWidth="68.0" text="Apellido:" />
-            <Label layoutX="35.0" layoutY="171.0" prefHeight="17.0" prefWidth="56.0" text="Teléfono:" />
-            <Label layoutX="286.0" layoutY="171.0" prefHeight="19.0" prefWidth="68.0" text="Nº Tarjeta:" />
-            <Label layoutX="232.0" layoutY="26.0" text="BIENVENIDO/A">
+            <TextField fx:id="txtEmailUsuario" editable="false" layoutX="112.0" layoutY="93.0" promptText="ejemplo@ejemplo.com" />
+            <TextField fx:id="txtUsuario" editable="false" layoutX="383.0" layoutY="93.0" promptText="Usuario" />
+            <TextField fx:id="txtNomUsuario" editable="false" layoutX="112.0" layoutY="144.0" promptText="Nombre" />
+            <TextField fx:id="txtApellido" editable="false" layoutX="383.0" layoutY="144.0" promptText="Apellido" />
+            <TextField fx:id="txtTel" editable="false" layoutX="112.0" layoutY="198.0" promptText="Teléfono" />
+            <ComboBox fx:id="comboGenero" layoutX="245.0" layoutY="272.0" prefWidth="150.0" promptText="Género" />
+            <TextField fx:id="txtNTarjeta" editable="false" layoutX="383.0" layoutY="198.0" promptText="Nº Tarjeta" />
+            <Button layoutX="109.0" layoutY="353.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="126.0" text="Cerrar Sesión" />
+            <Button fx:id="btnBorrarCuenta" layoutX="257.0" layoutY="353.0" mnemonicParsing="false" onAction="#borrarEnVistaUsuario" prefHeight="37.0" prefWidth="126.0" text="Borrar Cuenta" />
+            <Label layoutX="46.0" layoutY="99.0" prefHeight="17.0" prefWidth="42.0" text="Email:" />
+            <Label layoutX="312.0" layoutY="99.0" prefHeight="19.0" prefWidth="62.0" text="Usuario:" />
+            <Label layoutX="36.0" layoutY="150.0" prefHeight="17.0" prefWidth="62.0" text="Nombre:" />
+            <Label layoutX="309.0" layoutY="150.0" prefHeight="17.0" prefWidth="68.0" text="Apellido:" />
+            <Label layoutX="39.0" layoutY="204.0" prefHeight="17.0" prefWidth="56.0" text="Teléfono:" />
+            <Label layoutX="309.0" layoutY="204.0" prefHeight="19.0" prefWidth="68.0" text="Nº Tarjeta:" />
+            <Label layoutX="275.0" layoutY="30.0" text="BIENVENIDO/A">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button fx:id="btnModificarDatoUsu" layoutX="338.0" layoutY="292.0" mnemonicParsing="false" onAction="#modificarFieldsUsuario" prefHeight="37.0" prefWidth="136.0" text="Modificar Dato" />
+            <Button fx:id="btnModificarDatoUsu" layoutX="408.0" layoutY="353.0" mnemonicParsing="false" onAction="#modificarFieldsUsuario" prefHeight="37.0" prefWidth="136.0" text="Modificar Dato" />
          </children>
       </Pane>
       <Pane id="PaneAdmin" fx:id="PaneAdmin" prefHeight="470.0" prefWidth="665.0" styleClass="background" stylesheets="@../css/estilo.css" visible="false">

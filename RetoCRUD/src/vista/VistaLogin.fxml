@@ -10,14 +10,14 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="244.0" prefWidth="397.0" styleClass="background" stylesheets="@../css/estilo.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.Controlador">
+<AnchorPane id="AnchorPane" prefHeight="244.0" prefWidth="397.0" styleClass="background" stylesheets="@../css/estilo.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.Controlador">
     <children>
         <Label layoutX="85.0" layoutY="98.0" minHeight="16" minWidth="42.0" prefHeight="18.0" prefWidth="42.0" text="Email:" />
       <Label layoutX="85.0" layoutY="146.0" minHeight="16" minWidth="69" text="Contraseña:" />
       <PasswordField fx:id="txtContra" layoutX="170.0" layoutY="142.0" promptText="Contraseña" />
       <TextField fx:id="txtEmail" layoutX="170.0" layoutY="94.0" promptText="ejemplo@ejemplo.com" />
       <Label fx:id="lblNoCuenta" layoutX="180.0" layoutY="196.0" text="No tienes cuenta?" />
-      <Label fx:id="lblInicia" layoutX="112.0" layoutY="37.0" text="INICIA SESIÓN">
+      <Label fx:id="lblInicia" layoutX="155.0" layoutY="46.0" text="INICIA SESIÓN">
          <font>
             <Font size="27.0" />
          </font>
@@ -31,6 +31,6 @@
             </InnerShadow>
          </effect>
       </Hyperlink>
-      <Button fx:id="btnLogin" layoutX="112.0" layoutY="192.0" mnemonicParsing="false" onAction="#loginSQL" text="Login" />
+      <Button fx:id="btnLogin" layoutX="92.0" layoutY="188.0" mnemonicParsing="false" onAction="#loginSQL" text="Login" />
     </children>
 </AnchorPane>
