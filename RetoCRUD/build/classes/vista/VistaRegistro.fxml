@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.Controlador">
    <children>
       <Label layoutX="137.0" layoutY="61.0" text="Nombre" />
       <Label layoutX="137.0" layoutY="101.0" text="Apellido" />
@@ -22,11 +22,11 @@
       <TextField fx:id="txtApe" layoutX="301.0" layoutY="97.0" />
       <TextField fx:id="txtTelefono" layoutX="302.0" layoutY="136.0" />
       <TextField fx:id="txtUser" layoutX="303.0" layoutY="172.0" />
-      <TextField fx:id="txtEmail" layoutX="304.0" layoutY="209.0" />
+      <TextField fx:id="Email" layoutX="304.0" layoutY="209.0" />
       <TextField fx:id="txtTarjeta" layoutX="306.0" layoutY="284.0" />
       <Button fx:id="btnRegistrate" layoutX="158.0" layoutY="361.0" mnemonicParsing="false" onAction="#registrarUsuario" text="Registrate" />
       <Hyperlink layoutX="307.0" layoutY="362.0" text="Ya tienes una cuenta? Registrate" />
       <ComboBox fx:id="desplegableGenero" layoutX="307.0" layoutY="247.0" prefWidth="150.0" visibleRowCount="3" />
-      <PasswordField layoutX="306.0" layoutY="320.0" />
+      <PasswordField fx:id="txtContrasena" layoutX="306.0" layoutY="320.0" />
    </children>
 </AnchorPane>

@@ -7,6 +7,7 @@ package controlador;
 
 import static com.mysql.cj.conf.PropertyKey.logger;
 import conexion.Conector;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -59,7 +60,7 @@ public class DaoImplementacionMysql implements Dao {
             + "a.CUENTA_CORRIENTE=? "
             + "WHERE p.CODU=?";
     final String BORRARUSUARIO = "DELETE FROM PERFIL WHERE CODU = ?";
-    String InsertarUsuario = "INSERT INTO usuario (nombre, apellidos, telefono, username, email, contrasena, numTarjeta, genero) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    final String InsertarUsuario = "{CALL InsertarUsuarioCompleto2(?, ?, ?, ?, ?, ?, ?, ?)}";
               
 
     @Override
@@ -299,19 +300,22 @@ public class DaoImplementacionMysql implements Dao {
 
     @Override
     public boolean insertarUsuario(Usuario usuario) {
-         PreparedStatement stmt;
+         CallableStatement stmt;
 
         try (Connection con = Conector.open()){
-            stmt = con.prepareStatement(InsertarUsuario);
-
-           stmt.setString(1, usuario.getNom());
-           stmt.setString(2, usuario.getApe());
+            stmt = con.prepareCall(InsertarUsuario);
+            
+            
+            
+           stmt.setString(1, usuario.getEmail());
+           stmt.setString(2, usuario.getUser());
            stmt.setInt(3, usuario.getTelefono());
-           stmt.setString(4, usuario.getUser());
-           stmt.setString(5, usuario.getEmail());
-           stmt.setString(6, usuario.getContra());
-           stmt.setInt(7, usuario.getNumTarjeta());
-           stmt.setString(8, usuario.getGenero().name()); // Si Genero es un Enum
+           stmt.setString(4, usuario.getContra());
+           stmt.setString(5, usuario.getNom());
+           stmt.setString(6, usuario.getApe());
+           stmt.setString(7, usuario.getGenero().toString().toUpperCase());
+           stmt.setInt(8, usuario.getNumTarjeta());
+            
 
             int filas = stmt.executeUpdate();
             return filas > 0;
