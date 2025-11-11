@@ -59,7 +59,7 @@ public class DaoImplementacionMysql implements Dao {
             + "a.CUENTA_CORRIENTE=? "
             + "WHERE p.CODU=?";
     final String BORRARUSUARIO = "DELETE FROM PERFIL WHERE CODU = ?";
-    String InsertarUsuario = "INSERT INTO usuario (nombre, apellidos, telefono, username, email, contrasena, numTarjeta, genero) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    final String INSERTARUSUARIO = "INSERT INTO usuario (nombre, apellidos, telefono, username, email, contrasena, numTarjeta, genero) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
               
 
     @Override
@@ -302,7 +302,7 @@ public class DaoImplementacionMysql implements Dao {
          PreparedStatement stmt;
 
         try (Connection con = Conector.open()){
-            stmt = con.prepareStatement(InsertarUsuario);
+            stmt = con.prepareStatement(INSERTARUSUARIO);
 
            stmt.setString(1, usuario.getNom());
            stmt.setString(2, usuario.getApe());
