@@ -61,9 +61,7 @@ public class DaoImplementacionMysql implements Dao {
             + "WHERE p.CODU=?";
     final String BORRARUSUARIO = "DELETE FROM PERFIL WHERE CODU = ?";
 
-    final String InsertarUsuario = "{CALL InsertarUsuarioCompleto2(?, ?, ?, ?, ?, ?, ?, ?)}";
-
-              
+    final String ANIADIRPERFIL = "{CALL InsertarUsuarioCompleto2(?, ?, ?, ?, ?, ?, ?, ?)}";
 
     @Override
     public Perfil login(Perfil per) {
@@ -301,32 +299,30 @@ public class DaoImplementacionMysql implements Dao {
     }
 
     @Override
-    public boolean insertarUsuario(Usuario usuario) {
-         CallableStatement stmt;
+    public boolean insertarUsuario(Usuario u) {
 
-        try (Connection con = Conector.open()){
+        //rezamos a dios
+        try (Connection con = Conector.open();
+                CallableStatement stmt = con.prepareCall(ANIADIRPERFIL)) {
 
-            stmt = con.prepareCall(InsertarUsuario);
-            
-            
-            
-           stmt.setString(1, usuario.getEmail());
-           stmt.setString(2, usuario.getUser());
-           stmt.setInt(3, usuario.getTelefono());
-           stmt.setString(4, usuario.getContra());
-           stmt.setString(5, usuario.getNom());
-           stmt.setString(6, usuario.getApe());
-           stmt.setString(7, usuario.getGenero().toString().toUpperCase());
-           stmt.setInt(8, usuario.getNumTarjeta());
-            
+            stmt.setString(1, u.getEmail());                         // pEmail
+            stmt.setString(2, u.getUser());                          // pUsername
+            stmt.setInt(3, u.getTelefono());                         // pTelefono
+            stmt.setString(4, u.getContra());                        // pContra
+            stmt.setString(5, u.getNom());                           // pNombre
+            stmt.setString(6, u.getApe());                           // pApellidos
+            stmt.setString(7, u.getGenero().name().toUpperCase());   // pGenero (ENUM)
+            stmt.setInt(8, u.getNumTarjeta());                       // pNumTarjeta
 
             int filas = stmt.executeUpdate();
+
+            System.out.println("✅ Usuario insertado correctamente con procedimiento almacenado.");
             return filas > 0;
 
         } catch (SQLException e) {
-        System.err.println("Error al insertar usuario: " + e.getMessage());
-        return false;
-    }
+            System.err.println("❌ Error al insertar usuario: " + e.getMessage());
+            return false;
+        }
     }
 
 }
