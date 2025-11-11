@@ -70,6 +70,8 @@ public class Controlador implements Initializable {
     @FXML
     private Button btnBorrarUsuario;
     @FXML
+    private Button btnRegistrate;
+    @FXML
     private Pane PaneAdmin;
     @FXML
     private Pane PaneUsuario;
@@ -302,49 +304,39 @@ public class Controlador implements Initializable {
     @FXML
     private void registrarUsuario(ActionEvent event) {
 
-        // Validar campos vacíos
-        if (txtNom.getText().isEmpty()
-                || txtApe.getText().isEmpty()
-                || txtTelefono.getText().isEmpty()
-                || txtUser.getText().isEmpty()
-                || Email.getText().isEmpty()
-                || txtContrasena.getText().isEmpty()
-                || txtTarjeta.getText().isEmpty()
+        if (txtNom.getText().isEmpty() || txtApe.getText().isEmpty() || txtTelefono.getText().isEmpty()
+                || txtUser.getText().isEmpty() || Email.getText().isEmpty()
+                || txtContrasena.getText().isEmpty() || txtTarjeta.getText().isEmpty()
                 || desplegableGenero.getValue() == null) {
 
-            mostrarMensaje("Campos vacíos ,Por favor, complete todos los campos antes de continuar.");
-            return;
+            mostrarMensaje("Campos vacíos." + " Por favor, complete todos los campos.");
         }
 
         try {
-            // Inicializar DAO
+
             dao = new DaoImplementacionMysql();
 
-            // Crear objeto Usuario
-            Usuario nuevoUsuario = new Usuario();
-            nuevoUsuario.setNom(txtNom.getText().trim());
-            nuevoUsuario.setApe(txtApe.getText().trim());
-            nuevoUsuario.setTelefono(Integer.parseInt(txtTelefono.getText().trim()));
-            nuevoUsuario.setUser(txtUser.getText().trim());
-            nuevoUsuario.setEmail(Email.getText().trim());
-            nuevoUsuario.setContra(txtContrasena.getText().trim());
-            nuevoUsuario.setNumTarjeta(Integer.parseInt(txtTarjeta.getText().trim()));
-            nuevoUsuario.setGenero(desplegableGenero.getValue());
+            Usuario nuevo = new Usuario();
+            nuevo.setNom(txtNom.getText());
+            nuevo.setApe(txtApe.getText());
+            nuevo.setTelefono(Integer.parseInt(txtTelefono.getText()));
+            nuevo.setUser(txtUser.getText());
+            nuevo.setEmail(Email.getText());
+            nuevo.setContra(txtContrasena.getText());
+            nuevo.setNumTarjeta(Integer.parseInt(txtTarjeta.getText()));
+            nuevo.setGenero((Genero) desplegableGenero.getValue());
 
-            // Insertar en BD
-            boolean insertado = dao.insertarUsuario(nuevoUsuario);
+            boolean insertado = dao.insertarUsuario(nuevo);
 
             if (insertado) {
-                mostrarMensaje("Registro exitoso , El usuario se registró correctamente.");
-                login();
+                mostrarMensaje("Registro exitoso." + " Usuario registrado correctamente.");
+                volverLogin();
             } else {
-                mostrarMensaje("Error en el registro, No se pudo registrar el usuario. Intente nuevamente.");
+                mostrarMensaje("Error, " + "no se pudo registrar el usuario.");
             }
 
-        } catch (NumberFormatException e) {
-            mostrarMensaje("Error de formato, El teléfono y la tarjeta deben ser números válidos.");
         } catch (Exception e) {
-            mostrarMensaje("Error inesperado");
+            mostrarMensaje(e.getMessage());
         }
     }
 
@@ -516,5 +508,20 @@ public class Controlador implements Initializable {
         HiloBorrar h = new HiloBorrar(dao, this, usu);
         Thread hilo = new Thread(h);
         hilo.start();
+    }
+
+    private void volverLogin() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/VistaLogin.fxml"));
+
+            Parent root = loader.load();
+
+            Stage stage = (Stage) txtNom.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Inicio de sesión");
+            stage.show();
+        } catch (IOException ex) {
+            logger.log(Level.SEVERE, "Error al volver al login", ex);
+        }
     }
 }
