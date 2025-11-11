@@ -1,11 +1,11 @@
-/* 🌈 Fondo general */
+/* 🌈 Fondo general
 .background {
     -fx-background-image: url("/img/abstract-watercolor-texture-wallpaper-background-free-vector.jpg");
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
     -fx-background-position: center;
 }
-
+ */
 /* 🧩 Labels (etiquetas de texto) */
 .label {
     -fx-font-family: "Segoe UI Semibold";
@@ -16,7 +16,7 @@
 /* 🪶 Títulos grandes (como “INICIA SESIÓN” o “BIENVENIDO/A”) */
 .label:title {
     -fx-font-family: "Segoe UI Bold";
-    -fx-font-size: 24px;
+    -fx-font-size: 36px;
     -fx-text-fill: #0b3954;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0.3, 1, 1);
 }
