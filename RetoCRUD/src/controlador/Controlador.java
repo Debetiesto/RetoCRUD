@@ -6,6 +6,7 @@
 package controlador;
 
 import hilos.HiloBorrar;
+import hilos.HiloCrear;
 import hilos.HiloLeer;
 import hilos.HiloModificar;
 import java.io.IOException;
@@ -326,14 +327,8 @@ public class Controlador implements Initializable {
             nuevo.setNumTarjeta(Integer.parseInt(txtTarjeta.getText()));
             nuevo.setGenero((Genero) desplegableGenero.getValue());
 
-            boolean insertado = dao.insertarUsuario(nuevo);
-
-            if (insertado) {
-                mostrarMensaje("Registro exitoso." + " Usuario registrado correctamente.");
-                volverLogin();
-            } else {
-                mostrarMensaje("Error, " + "no se pudo registrar el usuario.");
-            }
+            hiloRegistrar(nuevo);
+           
 
         } catch (Exception e) {
             mostrarMensaje(e.getMessage());
@@ -510,7 +505,7 @@ public class Controlador implements Initializable {
         hilo.start();
     }
 
-    private void volverLogin() {
+    public void volverLogin() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/VistaLogin.fxml"));
 
@@ -523,5 +518,11 @@ public class Controlador implements Initializable {
         } catch (IOException ex) {
             logger.log(Level.SEVERE, "Error al volver al login", ex);
         }
+    }
+
+    private void hiloRegistrar(Usuario nuevo) {
+       HiloCrear h = new HiloCrear(dao, this, nuevo);
+       Thread hilo = new Thread(h);
+       hilo.start();
     }
 }
