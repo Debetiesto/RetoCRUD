@@ -39,7 +39,10 @@ public class HiloLeer implements Runnable {
             usuarios = dao.listaUsuarios(usu);
         }
 
-        Platform.runLater(() -> cont.agregarDatosTabla(usuarios));
+        Platform.runLater(() -> {
+            cont.agregarDatosTabla(usuarios);
+            cont.cerrarPopupCarga();
+        });
 
     }
 
