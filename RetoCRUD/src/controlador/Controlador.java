@@ -16,12 +16,14 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -31,12 +33,15 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import main.RetoCRUD;
@@ -271,6 +276,8 @@ public class Controlador implements Initializable {
     }
 
     private void cargarDatos(Perfil per) {
+        mostrarPopupCarga();
+        
         HiloLeer h1 = new HiloLeer(dao, this, (Usuario) per);
         Thread hilo = new Thread(h1);
         hilo.start();
@@ -279,6 +286,7 @@ public class Controlador implements Initializable {
     public void agregarDatosTabla(List<Usuario> usuarios) {
         ObservableList<Usuario> obsList = FXCollections.observableArrayList(usuarios);
         tablaDatosUsu.setItems(obsList);
+
     }
 
     private void ventanaRegistro() {
@@ -328,7 +336,6 @@ public class Controlador implements Initializable {
             nuevo.setGenero((Genero) desplegableGenero.getValue());
 
             hiloRegistrar(nuevo);
-           
 
         } catch (Exception e) {
             mostrarMensaje(e.getMessage());
@@ -521,8 +528,50 @@ public class Controlador implements Initializable {
     }
 
     private void hiloRegistrar(Usuario nuevo) {
-       HiloCrear h = new HiloCrear(dao, this, nuevo);
-       Thread hilo = new Thread(h);
-       hilo.start();
+        HiloCrear h = new HiloCrear(dao, this, nuevo);
+        Thread hilo = new Thread(h);
+        hilo.start();
     }
+
+    private Stage popupCarga;
+
+    public void mostrarPopupCarga() {
+        Platform.runLater(() -> {
+            // Evitar abrir dos popups a la vez
+            if (popupCarga != null && popupCarga.isShowing()) {
+                return;
+            }
+
+            popupCarga = new Stage();
+            popupCarga.setTitle("Cargando datos...");
+
+            ProgressIndicator progress = new ProgressIndicator();
+            Label lbl = new Label("Por favor, espere. Cargando información...");
+            lbl.setStyle("-fx-font-size: 14px;");
+
+            VBox vbox = new VBox(15, progress, lbl);
+            vbox.setAlignment(Pos.CENTER);
+            vbox.setStyle("-fx-padding: 20;");
+
+            Scene scene = new Scene(vbox, 300, 150);
+            popupCarga.setScene(scene);
+            popupCarga.setResizable(false);
+
+            // Hacerlo modal (bloquea la ventana principal)
+            Stage mainStage = (Stage) txtEmail.getScene().getWindow();
+            popupCarga.initOwner(mainStage);
+            popupCarga.initModality(Modality.WINDOW_MODAL);
+
+            popupCarga.show();
+        });
+    }
+
+    public void cerrarPopupCarga() {
+        Platform.runLater(() -> {
+            if (popupCarga != null && popupCarga.isShowing()) {
+                popupCarga.close();
+            }
+        });
+    }
+
 }

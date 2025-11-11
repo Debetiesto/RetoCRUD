@@ -25,7 +25,7 @@
       <TextField fx:id="Email" layoutX="304.0" layoutY="209.0" />
       <TextField fx:id="txtTarjeta" layoutX="306.0" layoutY="284.0" />
       <Button fx:id="btnRegistrate" layoutX="158.0" layoutY="361.0" mnemonicParsing="false" onAction="#registrarUsuario" text="Registrate" />
-      <Hyperlink layoutX="307.0" layoutY="362.0" text="Ya tienes una cuenta? Registrate" />
+      <Hyperlink layoutX="307.0" layoutY="362.0" text="Ya tienes una cuenta? Inicia Sesión!" />
       <ComboBox fx:id="desplegableGenero" layoutX="307.0" layoutY="247.0" prefWidth="150.0" visibleRowCount="3" />
       <PasswordField fx:id="txtContrasena" layoutX="306.0" layoutY="320.0" />
    </children>

@@ -40,7 +40,7 @@ public class PoolCon {
             dataSource.setMinIdle(Integer.parseInt(conf.getString("minIdle")));
             dataSource.setMaxWaitMillis(Long.parseLong(conf.getString("maxWaitMillis")));
 
-            PAUSA_MS = Long.parseLong(conf.getString("tiempoEspera")) * 1000;
+            PAUSA_MS = Long.parseLong(conf.getString("holdTimeSecond")) * 1000;
 
             System.out.println("Pool de conexiones inicializado.");
         } catch (Exception e) {
