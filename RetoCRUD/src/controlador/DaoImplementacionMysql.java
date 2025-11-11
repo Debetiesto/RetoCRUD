@@ -13,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -42,26 +43,11 @@ public class DaoImplementacionMysql implements Dao {
     final String LOGIN = "SELECT * FROM PERFIL WHERE email = ? AND contra = ?";
     final String BUSCARADMIN = "SELECT * FROM ADMINISTRADOR WHERE CODU = ?";
     final String BUSCARCUENTA = "SELECT cuenta_corriente FROM ADMINISTRADOR WHERE CODU = ?";
-    final String BUSCARUSUARIO = "SELECT num_tarjeta, genero FROM USUARIO WHERE CODU = ?";
-    final String CARGARDATOSTABLA = "SELECT p.CODU, p.EMAIL, p.USERNAME, p.TELEFONO, p.CONTRA, p.NOMBRE, p.APELLIDOS, "
+    final String BUSCARTARJETA = "SELECT num_tarjeta FROM USUARIO WHERE CODU = ?";
+    final String CARGARDATOSTABLA = "SELECT p.CODU, p.EMAIL, p.USERNAME, p.TELEFONO, p.NOMBRE, p.APELLIDOS, "
             + "u.GENERO, u.NUM_TARJETA "
             + "FROM PERFIL p JOIN USUARIO u ON p.CODU = u.CODU";
-    final String MODIFICARDATOSUSUARIO = "UPDATE PERFIL p\n"
-            + "JOIN USUARIO u ON p.CODU = u.CODU\n"
-            + "SET p.EMAIL=?, p.USERNAME=?, p.TELEFONO=?, p.CONTRA=?, p.NOMBRE=?, p.APELLIDOS=?,\n"
-            + "    u.GENERO=?, u.NUM_TARJETA=?\n"
-            + "WHERE p.CODU=?";
-    final String LISTARUSUARIOS = "SELECT p.CODU, p.EMAIL, p.USERNAME, p.TELEFONO, p.NOMBRE, p.APELLIDOS, "
-            + "u.GENERO, u.NUM_TARJETA "
-            + "FROM PERFIL p JOIN USUARIO u ON p.CODU = u.CODU WHERE p.CODU = ?";
-    final String MODIFICARDATOSADMIN = "UPDATE PERFIL p "
-            + "JOIN ADMINISTRADOR a ON p.CODU = a.CODU "
-            + "SET p.EMAIL=?, p.USERNAME=?, p.TELEFONO=?, p.CONTRA=?, p.NOMBRE=?, p.APELLIDOS=?, "
-            + "a.CUENTA_CORRIENTE=? "
-            + "WHERE p.CODU=?";
-    final String BORRARUSUARIO = "DELETE FROM PERFIL WHERE CODU = ?";
-    final String InsertarUsuario = "{CALL InsertarUsuarioCompleto2(?, ?, ?, ?, ?, ?, ?, ?)}";
-              
+    final String AñadirPerfil = "{CALL InsertarUsuarioCompleto2(?, ?, ?, ?, ?, ?, ?, ?)}";
 
     @Override
     public Perfil login(Perfil per) {
@@ -108,16 +94,15 @@ public class DaoImplementacionMysql implements Dao {
                     usu.setNom(rs.getString("NOMBRE"));
                     usu.setApe(rs.getString("APELLIDOS"));
 
-                    PreparedStatement stmtUsu = con.prepareStatement(BUSCARUSUARIO);
-                    stmtUsu.setInt(1, codU);
-                    ResultSet rsUsu = stmtUsu.executeQuery();
-                    if (rsUsu.next()) {
-                        String gen = rsUsu.getString("GENERO");
-                        if (gen != null && !gen.isEmpty()) {
-                            usu.setGenero(Genero.valueOf(gen.toUpperCase()));
-                        }
-                        usu.setNumTarjeta(rsUsu.getInt("NUM_TARJETA"));
+                    PreparedStatement stmtUsuario = con.prepareStatement(BUSCARTARJETA);
+                    stmtUsuario.setInt(1, codU);
+                    ResultSet rsUsuario = stmtUsuario.executeQuery();
+                    if (rsUsuario.next()) {
+                        usu.setNumTarjeta(rsUsuario.getInt("num_tarjeta"));
                     }
+                    rsUsuario.close();
+                    stmtUsuario.close();
+
                     perfil = usu;
                 }
             } else {
@@ -145,7 +130,6 @@ public class DaoImplementacionMysql implements Dao {
                 u.setEmail(rs.getString("EMAIL"));
                 u.setUser(rs.getString("USERNAME"));
                 u.setTelefono(rs.getInt("TELEFONO"));
-                u.setContra(rs.getString("CONTRA"));
                 u.setNom(rs.getString("NOMBRE"));
                 u.setApe(rs.getString("APELLIDOS"));
                 u.setGenero(Genero.valueOf(rs.getString("GENERO").toUpperCase()));
@@ -163,7 +147,7 @@ public class DaoImplementacionMysql implements Dao {
         ResultSet rs = null;
         boolean esAdmin = false;
 
-        try (Connection con = Conector.open()) {
+        try (Connection con = Conector.open()){
             stmt = con.prepareStatement(BUSCARADMIN);
 
             stmt.setInt(1, codU);
@@ -176,154 +160,30 @@ public class DaoImplementacionMysql implements Dao {
         }
         return esAdmin;
     }
+     public boolean insertarUsuario(Usuario u) {
+         
+         
+     //rezamos a dios
+        try (Connection con = Conector.open();
+         CallableStatement stmt = con.prepareCall(AñadirPerfil)) {
 
-    @Override
-    public boolean updateUsuario(Usuario usu) {
-        boolean actualizado = false;
+        stmt.setString(1, u.getEmail());                         // pEmail
+        stmt.setString(2, u.getUser());                          // pUsername
+        stmt.setInt(3, u.getTelefono());                         // pTelefono
+        stmt.setString(4, u.getContra());                        // pContra
+        stmt.setString(5, u.getNom());                           // pNombre
+        stmt.setString(6, u.getApe());                           // pApellidos
+        stmt.setString(7, u.getGenero().name().toUpperCase());   // pGenero (ENUM)
+        stmt.setInt(8, u.getNumTarjeta());                       // pNumTarjeta
 
-        try (Connection con = Conector.open()) {
-            stmt = con.prepareStatement(MODIFICARDATOSUSUARIO);
+        int filas = stmt.executeUpdate();
 
-            stmt.setString(1, usu.getEmail());
-            stmt.setString(2, usu.getUser());
-            stmt.setInt(3, usu.getTelefono());
-            stmt.setString(4, usu.getContra());
-            stmt.setString(5, usu.getNom());
-            stmt.setString(6, usu.getApe());
-            stmt.setString(7, usu.getGenero().toString());
-            stmt.setInt(8, usu.getNumTarjeta());
-            stmt.setInt(9, usu.getCodU());
+        System.out.println("✅ Usuario insertado correctamente con procedimiento almacenado.");
+        return filas > 0;
 
-            int filas = stmt.executeUpdate();
-
-            if (filas > 0) {
-                System.out.println("✅ Usuario modificado correctamente: " + usu.getEmail());
-                actualizado = true;
-            } else {
-                System.out.println("⚠️ No se encontró el usuario con correo: " + usu.getEmail());
-                actualizado = false;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DaoImplementacionMysql.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return actualizado;
-    }
-
-    @Override
-    public List<Usuario> listaUsuarios(Usuario usu) {
-        List<Usuario> usuarios = new ArrayList<>();
-        ResultSet rs = null;
-
-        try (Connection con = Conector.open()) {
-            stmt = con.prepareStatement(LISTARUSUARIOS);
-
-            stmt.setInt(1, usu.getCodU());
-            rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                usu.setEmail(rs.getString("EMAIL"));
-                usu.setUser(rs.getString("USERNAME"));
-                usu.setTelefono(rs.getInt("TELEFONO"));
-                usu.setNom(rs.getString("NOMBRE"));
-                usu.setApe(rs.getString("APELLIDOS"));
-
-                PreparedStatement stmtUsuario = con.prepareStatement(BUSCARUSUARIO);
-                stmtUsuario.setInt(1, usu.getCodU());
-                ResultSet rsUsuario = stmtUsuario.executeQuery();
-                if (rsUsuario.next()) {
-                    String gen = rs.getString("GENERO");
-                    if (gen != null && !gen.isEmpty()) {
-                        usu.setGenero(Genero.valueOf(gen.toUpperCase()));
-                    }
-                }
-                usu.setNumTarjeta(rs.getInt("NUM_TARJETA"));
-                usuarios.add(usu);
-
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(DaoImplementacionMysql.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return usuarios;
-    }
-
-    @Override
-    public boolean updateAdmin(Administrador admin) {
-        boolean actualizado = false;
-        PreparedStatement stmt;
-        try (Connection con = Conector.open()) {
-            stmt = con.prepareStatement(MODIFICARDATOSADMIN);
-
-            stmt.setString(1, admin.getEmail());
-            stmt.setString(2, admin.getUser());
-            stmt.setInt(3, admin.getTelefono());
-            stmt.setString(4, admin.getContra());
-            stmt.setString(5, admin.getNom());
-            stmt.setString(6, admin.getApe());
-            stmt.setString(7, admin.getCuentaCorriente());
-            stmt.setInt(8, admin.getCodU());
-
-            actualizado = stmt.executeUpdate() > 0;
-
-        } catch (SQLException ex) {
-            Logger.getLogger(DaoImplementacionMysql.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return actualizado;
-    }
-
-    @Override
-    public boolean borrarUsuario(int codU) {
-        boolean eliminado = false;
-        PreparedStatement stmt;
-
-        try (Connection con = Conector.open()) {
-            stmt = con.prepareStatement(BORRARUSUARIO);
-
-            stmt.setInt(1, codU);
-            int filasAfectadas = stmt.executeUpdate();
-
-            if (filasAfectadas > 0) {
-                System.out.println("✅ Usuario eliminado correctamente: " + codU);
-            } else {
-                System.out.println("⚠️ No se encontró usuario con código: " + codU);
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(DaoImplementacionMysql.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return eliminado;
-    }
-
-    @Override
-    public boolean insertarUsuario(Usuario usuario) {
-         CallableStatement stmt;
-
-        try (Connection con = Conector.open()){
-            stmt = con.prepareCall(InsertarUsuario);
-            
-            
-            
-           stmt.setString(1, usuario.getEmail());
-           stmt.setString(2, usuario.getUser());
-           stmt.setInt(3, usuario.getTelefono());
-           stmt.setString(4, usuario.getContra());
-           stmt.setString(5, usuario.getNom());
-           stmt.setString(6, usuario.getApe());
-           stmt.setString(7, usuario.getGenero().toString().toUpperCase());
-           stmt.setInt(8, usuario.getNumTarjeta());
-            
-
-            int filas = stmt.executeUpdate();
-            return filas > 0;
-
-        } catch (SQLException e) {
-        System.err.println("Error al insertar usuario: " + e.getMessage());
+    } catch (SQLException e) {
+        System.err.println("❌ Error al insertar usuario: " + e.getMessage());
         return false;
     }
-    }
-
+}
 }
