@@ -16,6 +16,9 @@ import java.util.logging.Logger;
  */
 public class Conector {
 
+    private static boolean holdEnabled = true;
+    private static int holdTimeSeconds = 5;
+
     public static Connection open() throws SQLException {
         return PoolCon.getConnection();
     }
@@ -29,4 +32,17 @@ public class Conector {
             Logger.getLogger(Conector.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public static void holdConnection() {
+        if (holdEnabled) {
+            try {
+                System.err.println("⏳ Reteniendo conexión durante " + holdTimeSeconds + " segundos...");
+                Thread.sleep(holdTimeSeconds * 1000L);
+                System.err.println("✅ Continuando con la conexión a BD.");
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+
 }

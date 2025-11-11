@@ -157,6 +157,7 @@ public class DaoImplementacionMysql implements Dao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        Conector.holdConnection();
         return lista;
     }
 
