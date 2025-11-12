@@ -8,10 +8,12 @@ package controlador;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeoutException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.RetoCRUD;
 import modelo.Usuario;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -19,18 +21,24 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.testfx.api.FxAssert.verifyThat;
+import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
+import static org.testfx.matcher.base.NodeMatchers.isVisible;
+
 /**
  *
  * @author 2dam
  */
-public class ControladorTest extends ApplicationTest{
+public class ControladorTest extends ApplicationTest {
 
     public ControladorTest() {
     }
 
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass() throws TimeoutException {
+        FxToolkit.registerPrimaryStage();
+        FxToolkit.setupApplication(RetoCRUD.class);
     }
 
     @AfterClass
@@ -45,27 +53,19 @@ public class ControladorTest extends ApplicationTest{
     public void tearDown() {
     }
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        Parent mainNode = FXMLLoader.load(getClass().getResource("/vista/VistaLogin.fxml"));
-        stage.setScene(new Scene(mainNode));
-        stage.show();
-    }
-
     /**
      * Test of Login method, of class Controlador.
      */
     @Test
     public void testLoginUI() {
-        // Ejemplo: escribe en los campos y pulsa el botón
+        // escribe en los campos y pulsa el botón
         clickOn("#txtEmail").write("lucas@empresa.com");
         clickOn("#txtContra").write("adminLucas!");
         clickOn("#btnLogin");
-
-        // Aquí podrías comprobar que se abre otra ventana,
-        // o que aparece un texto en pantalla, etc.
-        // assertEquals(...);
+        // comprueba que se abre la vista de admin
+        verifyThat("#PaneAdmin", isVisible());
     }
+
     /**
      * Test of initialize method, of class Controlador.
      */
@@ -142,4 +142,10 @@ public class ControladorTest extends ApplicationTest{
         fail("The test case is a prototype.");
     }
 
+    @Override
+    public void start(Stage stage) throws Exception {
+        Parent mainNode = FXMLLoader.load(getClass().getResource("/vista/VistaLogin.fxml"));
+        stage.setScene(new Scene(mainNode));
+        stage.show();
+    }
 }
