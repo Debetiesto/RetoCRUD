@@ -21,12 +21,24 @@ public class HiloModificar implements Runnable {
     private Controlador cont;
     private Object persona;
 
+    /**
+     * Constructor del hilo modificar
+     * @param dao
+     * @param cont
+     * @param persona 
+     */
     public HiloModificar(Dao dao, Controlador cont, Object persona) {
         this.dao = dao;
         this.cont = cont;
         this.persona = persona;
     }
 
+    /**
+     * Método que ejecuta el hilo y llama
+     * tanto al método del dao updateUsuario, 
+     * como al updateAdmin (dependiendo del tipo de objeto) para hacer la modificación
+     * en un hilo
+     */
     @Override
     public void run() {
         boolean actualizado;

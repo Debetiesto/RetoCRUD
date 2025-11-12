@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="422.0" prefWidth="554.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" fx:id="vistaMostrarDatos" prefHeight="422.0" prefWidth="554.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane id="PaneUsuario" fx:id="PaneUsuario" prefHeight="470.0" prefWidth="665.0" styleClass="background" stylesheets="@../css/estilo.css" visible="false">
          <children>
@@ -34,7 +34,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button fx:id="btnModificarDatoUsu" layoutX="408.0" layoutY="353.0" mnemonicParsing="false" onAction="#modificarFieldsUsuario" prefHeight="37.0" prefWidth="136.0" text="Modificar Dato" />
+            <Button fx:id="btnModificarDatoUsu" layoutX="408.0" layoutY="353.0" mnemonicParsing="false" onAction="#modificarFieldsUsuario" prefHeight="37.0" prefWidth="136.0" text="Modificar Datos" />
          </children>
       </Pane>
       <Pane id="PaneAdmin" fx:id="PaneAdmin" prefHeight="470.0" prefWidth="665.0" styleClass="background" stylesheets="@../css/estilo.css">

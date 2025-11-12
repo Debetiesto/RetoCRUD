@@ -21,21 +21,32 @@ public class HiloLeer implements Runnable {
     private Controlador cont;
     private Usuario usu;
 
+    /**
+     * Constructor del hilo leer
+     * @param dao
+     * @param cont
+     * @param usu 
+     */
     public HiloLeer(Dao dao, Controlador cont, Usuario usu) {
         this.dao = dao;
         this.cont = cont;
         this.usu = usu;
     }
 
+    /**
+     * Método que inicia el hilo que llama a los métodos
+     * del dao para cargar los datos de los usuarios en la tabla
+     * o cargar los datos de los usuarios normales 
+     */
     @Override
     public void run() {
         List<Usuario> usuarios;
         System.out.println("DEBUG hilo -> dao: " + dao + " | usu: " + usu);
         if (usu == null) {
-            // 🟢 Caso admin: cargar todos los usuarios
+            // cargar todos los usuarios en tabla admin
             usuarios = dao.cargarDatosTabla();
         } else {
-            // 🟢 Caso usuario: cargar solo su información o sus datos relacionados
+            // cargar solo su información o sus datos relacionados
             usuarios = dao.listaUsuarios(usu);
         }
 
