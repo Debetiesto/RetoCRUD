@@ -12,7 +12,7 @@ import modelo.Usuario;
 
 /**
  *
- * @author 2dam
+ * @author Luis
  */
 public class HiloBorrar implements Runnable {
 
@@ -20,12 +20,22 @@ public class HiloBorrar implements Runnable {
     private Controlador cont;
     private Usuario usu;
 
+    /**
+     * Constructor del hilo
+     * @param dao
+     * @param cont
+     * @param usu 
+     */
     public HiloBorrar(Dao dao, Controlador cont, Usuario usu) {
         this.dao = dao;
         this.cont = cont;
         this.usu = usu;
     }
 
+    /**
+     * Método que ejecuta el hilo y llama al método
+     * de borrarUsuario del dao para hacer el borrado en un hilo
+     */
     @Override
     public void run() {
         boolean eliminado;

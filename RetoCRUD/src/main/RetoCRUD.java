@@ -28,7 +28,7 @@ public class RetoCRUD extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/vista/VistaLogin.fxml"));
 
         Scene scene = new Scene(root);
-        stage.setTitle("Iniciar Sesión - RetoCRUD");
+        stage.setTitle("RetoCRUD - GRUPO3");
         stage.setScene(scene);
         stage.show();
     }
