@@ -10,5 +10,8 @@ package modelo;
  * @author Unai, Luis
  */
 public enum Genero {
+    /**
+     * Valores del enum
+     */
     HOMBRE, MUJER, OTRO;
 }
