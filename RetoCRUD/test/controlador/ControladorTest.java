@@ -6,12 +6,16 @@
 package controlador;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeoutException;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableView;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import main.RetoCRUD;
 import modelo.Usuario;
@@ -54,6 +58,13 @@ public class ControladorTest extends ApplicationTest {
     }
 
     /**
+     * Stops application to be tested: it does nothing.
+     */
+    @Override
+    public void stop() {
+    }
+
+    /**
      * Test of Login method, of class Controlador.
      */
     @Test
@@ -64,6 +75,22 @@ public class ControladorTest extends ApplicationTest {
         clickOn("#btnLogin");
         // comprueba que se abre la vista de admin
         verifyThat("#PaneAdmin", isVisible());
+
+    }
+
+    @Test
+    public void testModifyDataTable() {
+        clickOn("#btnModDatosTabla");
+
+        TableView<?> tabla = lookup("#tablaDatosUsu").queryTableView();
+        clickOn(tabla.lookup(".table-row-cell"));
+        List<Node> celdas = new ArrayList<>(lookup(".table-cell").queryAll());
+        Node segundaCelda = celdas.get(1); // índice 1 = segunda columna
+        doubleClickOn(segundaCelda);
+        write("anita_102");
+        push(KeyCode.ENTER);
+        Object value = tabla.getItems().get(0);
+        assertTrue(value.toString().contains("anita_102"));
     }
 
     /**
