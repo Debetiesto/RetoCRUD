@@ -21,12 +21,22 @@ public class HiloCrear implements Runnable {
     private Controlador cont;
     private Usuario usu;
 
+    /**
+     * Constructor del hilo crear
+     * @param dao
+     * @param cont
+     * @param usu 
+     */
     public HiloCrear(Dao dao, Controlador cont, Usuario usu) {
         this.dao = dao;
         this.cont = cont;
         this.usu = usu;
     }
 
+    /**
+     * Método que ejecuta el hilo que llama al método
+     * del dao para insertar un nuevo usuario
+     */
     @Override
     public void run() {
         try {

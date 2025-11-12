@@ -11,6 +11,10 @@ package excepciones;
  */
 public class UsuarioExisteException extends Exception {
 
+    /**
+     * Excepción de que un usuario ya existe en la base de datos
+     * @param mensaje 
+     */
     public UsuarioExisteException(String mensaje) {
         super(mensaje);
     }
