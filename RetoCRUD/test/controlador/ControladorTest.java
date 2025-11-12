@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -29,6 +30,7 @@ import static org.testfx.api.FxAssert.verifyThat;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 import static org.testfx.matcher.base.NodeMatchers.isVisible;
+import org.testfx.util.WaitForAsyncUtils;
 
 /**
  *
@@ -41,6 +43,7 @@ public class ControladorTest extends ApplicationTest {
 
     @BeforeClass
     public static void setUpClass() throws TimeoutException {
+        System.setProperty("testfx.running", "true");
         FxToolkit.registerPrimaryStage();
         FxToolkit.setupApplication(RetoCRUD.class);
     }
@@ -65,17 +68,16 @@ public class ControladorTest extends ApplicationTest {
     }
 
     /**
-     * Test of Login method, of class Controlador.
+     * Test of Login adn Modify methods, of class Controlador.
      */
     @Test
-    public void testLoginUI() {
+    public void testLoginAndModify() {
         // escribe en los campos y pulsa el botón
         clickOn("#txtEmail").write("lucas@empresa.com");
         clickOn("#txtContra").write("adminLucas!");
         clickOn("#btnLogin");
         // comprueba que se abre la vista de admin
         verifyThat("#PaneAdmin", isVisible());
-
     }
 
     @Test

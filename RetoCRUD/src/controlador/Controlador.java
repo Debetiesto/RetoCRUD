@@ -141,10 +141,12 @@ public class Controlador implements Initializable {
     private Perfil perLog;
 
     private Stage popupCarga;
+
     /**
-     * Método que inicia el dao y llama al método de login cuando
-     * se le da al botón de login
-     * @param event 
+     * Método que inicia el dao y llama al método de login cuando se le da al
+     * botón de login
+     *
+     * @param event
      */
     @FXML
     private void loginSQL(ActionEvent event) {
@@ -153,9 +155,10 @@ public class Controlador implements Initializable {
     }
 
     /**
-     * Método que llama a la ventana de registro cuando
-     * se da al label de registrar
-     * @param event 
+     * Método que llama a la ventana de registro cuando se da al label de
+     * registrar
+     *
+     * @param event
      */
     @FXML
     private void venRegistrar(ActionEvent event) {
@@ -163,9 +166,10 @@ public class Controlador implements Initializable {
     }
 
     /**
-     * Método que llama al método de modificar datos
-     * de la tabla cuando se da al botón de "modificar datos usuario"
-     * @param event 
+     * Método que llama al método de modificar datos de la tabla cuando se da al
+     * botón de "modificar datos usuario"
+     *
+     * @param event
      */
     @FXML
     private void modificarDatosTabla(ActionEvent event) {
@@ -173,9 +177,10 @@ public class Controlador implements Initializable {
     }
 
     /**
-     * Método que llama al método de modificar datos de administrador
-     * cuando se da al botón de "modificar datos"
-     * @param event 
+     * Método que llama al método de modificar datos de administrador cuando se
+     * da al botón de "modificar datos"
+     *
+     * @param event
      */
     @FXML
     private void modificarFieldAdmin(ActionEvent event) {
@@ -183,19 +188,21 @@ public class Controlador implements Initializable {
     }
 
     /**
-     * Método que llama al método de modificar datos de usuario
-     * cuando se da al botón de "modificar datos"
-     * @param event 
+     * Método que llama al método de modificar datos de usuario cuando se da al
+     * botón de "modificar datos"
+     *
+     * @param event
      */
     @FXML
     private void modificarFieldsUsuario(ActionEvent event) {
         modificarDatosVistaUsuario();
     }
-    
+
     /**
-     * Método que llama al método de borrar cuenta de usuario
-     * en el panel de usuario cuando se da al botón "borrar cuenta"
-     * @param event 
+     * Método que llama al método de borrar cuenta de usuario en el panel de
+     * usuario cuando se da al botón "borrar cuenta"
+     *
+     * @param event
      */
     @FXML
     private void borrarEnVistaUsuario(ActionEvent event) {
@@ -203,9 +210,10 @@ public class Controlador implements Initializable {
     }
 
     /**
-     * Método que borra el usuario de la tabla en el panel
-     * de admin cuando se da al botón de "borrar usuario"
-     * @param event 
+     * Método que borra el usuario de la tabla en el panel de admin cuando se da
+     * al botón de "borrar usuario"
+     *
+     * @param event
      */
     @FXML
     private void borrarEnVistaAdmin(ActionEvent event) {
@@ -214,8 +222,9 @@ public class Controlador implements Initializable {
 
     /**
      * Método que inicia la aplicación
+     *
      * @param url
-     * @param rb 
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -223,8 +232,8 @@ public class Controlador implements Initializable {
     }
 
     /**
-     * Método de login, diferenciando el usuario que ha entrado
-     * es decir, si es admin o si no.
+     * Método de login, diferenciando el usuario que ha entrado es decir, si es
+     * admin o si no.
      */
     private void login() {
         String email = txtEmail.getText();
@@ -256,8 +265,9 @@ public class Controlador implements Initializable {
 
     /**
      * Método que muestra la ventana con los datos del usuario logeado
+     *
      * @param perLog
-     * @param esAdmin 
+     * @param esAdmin
      */
     private void mostrarVentana(Perfil perLog, boolean esAdmin) {
 
@@ -279,12 +289,12 @@ public class Controlador implements Initializable {
     }
 
     /**
-     * Método que rellena los campos necesarios con los datos
-     * del usuario que se ha logeado. 
-     * Si es admin se cargan los datos del admin y los datos de la tabla
-     * Si es usuario, solo sus datos.
+     * Método que rellena los campos necesarios con los datos del usuario que se
+     * ha logeado. Si es admin se cargan los datos del admin y los datos de la
+     * tabla Si es usuario, solo sus datos.
+     *
      * @param perLog
-     * @param esAdmin 
+     * @param esAdmin
      */
     private void setDatos(Perfil perLog, boolean esAdmin) {
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -335,20 +345,21 @@ public class Controlador implements Initializable {
 
     /**
      * Hilo de leer los datos del usuario
-     * @param per 
+     *
+     * @param per
      */
     private void cargarDatos(Perfil per) {
         mostrarPopupCarga();
-        
+
         HiloLeer h1 = new HiloLeer(dao, this, (Usuario) per);
         Thread hilo = new Thread(h1);
         hilo.start();
     }
 
     /**
-     * Método que carga los datos de los usuarios en la tabla
-     * del administrador
-     * @param usuarios 
+     * Método que carga los datos de los usuarios en la tabla del administrador
+     *
+     * @param usuarios
      */
     public void agregarDatosTabla(List<Usuario> usuarios) {
         ObservableList<Usuario> obsList = FXCollections.observableArrayList(usuarios);
@@ -382,7 +393,8 @@ public class Controlador implements Initializable {
 
     /**
      * Método para registrar un nuevo usuario
-     * @param event 
+     *
+     * @param event
      */
     @FXML
     private void registrarUsuario(ActionEvent event) {
@@ -415,8 +427,8 @@ public class Controlador implements Initializable {
     }
 
     /**
-     * Método que habilita las celdas de la tabla
-     * de la vista admin para poder modificar los datos
+     * Método que habilita las celdas de la tabla de la vista admin para poder
+     * modificar los datos
      */
     private void modificarDatosTablaAdmin() {
         tablaDatosUsu.setEditable(true);
@@ -487,7 +499,8 @@ public class Controlador implements Initializable {
 
     /**
      * Hilo de modificar el usuario
-     * @param usuario 
+     *
+     * @param usuario
      */
     private void actualizarUsuarioEnHilo(Usuario usuario) {
         HiloModificar h = new HiloModificar(dao, this, usuario);
@@ -497,7 +510,8 @@ public class Controlador implements Initializable {
 
     /**
      * Hilo de modificar el administrador
-     * @param admin 
+     *
+     * @param admin
      */
     private void actualizarAdminEnHilo(Administrador admin) {
         HiloModificar h = new HiloModificar(dao, this, admin);
@@ -506,16 +520,16 @@ public class Controlador implements Initializable {
     }
 
     /**
-     * Método para mostrar un popup con la información necesaria
-     * del evento
-     * @param mensaje 
+     * Método para mostrar un popup con la información necesaria del evento
+     *
+     * @param mensaje
      */
     public void mostrarMensaje(String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Información");
-        alert.setHeaderText(null);
-        alert.setContentText(mensaje);
-        alert.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Información");
+            alert.setHeaderText(null);
+            alert.setContentText(mensaje);
+            alert.show();
     }
 
     /**
@@ -579,10 +593,9 @@ public class Controlador implements Initializable {
         txtNomUsuario.setEditable(false);
         txtApellido.setEditable(false);
     }
-    
+
     /**
-     * Método para borrar un usuario de la base de datos
-     * en la vista de usuario
+     * Método para borrar un usuario de la base de datos en la vista de usuario
      */
     private void borrarCuenta() {
         if (perLog instanceof Usuario) {
@@ -602,8 +615,8 @@ public class Controlador implements Initializable {
     }
 
     /**
-     * Método para borrar un usuario que ha sido seleccionado
-     * en la tabla de la vista de administrador
+     * Método para borrar un usuario que ha sido seleccionado en la tabla de la
+     * vista de administrador
      */
     private void borrarUsuario() {
         Usuario seleccionado = (Usuario) tablaDatosUsu.getSelectionModel().getSelectedItem();
@@ -617,7 +630,8 @@ public class Controlador implements Initializable {
 
     /**
      * Hilo de eliminar datos del usuario
-     * @param usu 
+     *
+     * @param usu
      */
     private void hiloEliminarDatos(Usuario usu) {
         HiloBorrar h = new HiloBorrar(dao, this, usu);
@@ -626,8 +640,7 @@ public class Controlador implements Initializable {
     }
 
     /**
-     * Método para volver al login al terminar de
-     * registrar un usuario nuevo
+     * Método para volver al login al terminar de registrar un usuario nuevo
      */
     public void volverLogin() {
         try {
@@ -646,7 +659,8 @@ public class Controlador implements Initializable {
 
     /**
      * Hilo de registrar un nuevo usuario
-     * @param nuevo 
+     *
+     * @param nuevo
      */
     private void hiloRegistrar(Usuario nuevo) {
         HiloCrear h = new HiloCrear(dao, this, nuevo);
@@ -687,6 +701,7 @@ public class Controlador implements Initializable {
             popupCarga.show();
         });
     }
+
     /**
      * Método que cierra el popup al cabo de unos segundos
      */
