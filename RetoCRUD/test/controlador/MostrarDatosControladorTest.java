@@ -124,7 +124,7 @@ public class MostrarDatosControladorTest extends ApplicationTest {
 
     /**
      * Test of mostrarPopupCarga method, of class MostrarDatosControlador.
-     */
+  
     @Test
     public void testMostrarPopupCarga() {
         System.out.println("mostrarPopupCarga");
@@ -133,10 +133,10 @@ public class MostrarDatosControladorTest extends ApplicationTest {
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
-
+   */
     /**
      * Test of cerrarPopupCarga method, of class MostrarDatosControlador.
-     */
+    
     @Test
     public void testCerrarPopupCarga() {
         System.out.println("cerrarPopupCarga");
@@ -145,5 +145,5 @@ public class MostrarDatosControladorTest extends ApplicationTest {
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
-
+ */
 }

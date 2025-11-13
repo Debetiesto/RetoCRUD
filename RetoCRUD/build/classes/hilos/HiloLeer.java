@@ -8,6 +8,7 @@ package hilos;
 //import controlador.Controlador;
 import controlador.Dao;
 import controlador.MostrarDatosControlador;
+import java.util.List;
 import javafx.application.Platform;
 import modelo.Usuario;
 
@@ -15,43 +16,46 @@ import modelo.Usuario;
  *
  * @author Luis
  */
-public class HiloBorrar implements Runnable {
+public class HiloLeer implements Runnable {
 
     private Dao dao;
     private MostrarDatosControlador cont;
     private Usuario usu;
 
     /**
-     * Constructor del hilo
+     * Constructor del hilo leer
      * @param dao parámetro del dao que necesita recibir este constructor
      * @param cont parámetro del controlador de mostrar datos que necesita recibir este constructor
      * @param usu parámetro de un objeto de usuario que necesita recibir este constructor
      */
-    public HiloBorrar(Dao dao, MostrarDatosControlador cont, Usuario usu) {
+    public HiloLeer(Dao dao, MostrarDatosControlador cont, Usuario usu) {
         this.dao = dao;
         this.cont = cont;
         this.usu = usu;
     }
 
     /**
-     * Método que ejecuta el hilo y llama al método
-     * de borrarUsuario del dao para hacer el borrado en un hilo
+     * Método que inicia el hilo que llama a los métodos
+     * del dao para cargar los datos de los usuarios en la tabla
+     * o cargar los datos de los usuarios normales 
      */
     @Override
     public void run() {
-        boolean eliminado;
-        if (usu != null) {
-            eliminado = dao.borrarUsuario(usu.getCodU());
-            Platform.runLater(() -> {
-                if (eliminado) {
-                    cont.mostrarMensaje("✅ Usuario eliminado correctamente");
-                } else {
-                    cont.mostrarMensaje("⚠️ No se ha podido eliminar el usuario.");
-                }
-            });
+        List<Usuario> usuarios;
+        System.out.println("DEBUG hilo -> dao: " + dao + " | usu: " + usu);
+        if (usu == null) {
+            // cargar todos los usuarios en tabla admin
+            usuarios = dao.cargarDatosTabla();
         } else {
-            System.err.println("❌ Error en la eliminación de datos.");
+            // cargar solo su información o sus datos relacionados
+            usuarios = dao.listaUsuarios(usu);
         }
+
+        Platform.runLater(() -> {
+            cont.agregarDatosTabla(usuarios);
+            cont.cerrarPopupCarga();
+        });
+
     }
 
 }
