@@ -60,6 +60,8 @@ public class MostrarDatosControlador implements Initializable {
     @FXML
     private Button btnCerrarSesionAdmin;
     @FXML
+    private Button btnCerrarSesionUsuario;
+    @FXML
     private Pane PaneAdmin;
     @FXML
     private TextField txtEmailAdmin;
@@ -137,10 +139,15 @@ public class MostrarDatosControlador implements Initializable {
     private void modificarFieldAdmin(ActionEvent event) {
         modificarDatosAdmin();
     }
-    
+
     @FXML
     private void cerrarSesionAdmin(ActionEvent event) {
-        cerrarAdmin(event);
+        cerrarSesionGeneral(event);
+    }
+    
+    @FXML
+    private void cerrarSesionUsu(ActionEvent event){
+        cerrarSesionGeneral(event);
     }
 
     @Override
@@ -169,7 +176,7 @@ public class MostrarDatosControlador implements Initializable {
             cargarDatos(null);
         } else {
             setupVistaUsuario((Usuario) perLog);
-            cargarDatos((Usuario)perLog);
+            cargarDatos((Usuario) perLog);
         }
     }
 
@@ -483,27 +490,27 @@ public class MostrarDatosControlador implements Initializable {
         });
     }
 
-    private void cerrarAdmin(ActionEvent event) {
+    private void cerrarSesionGeneral(ActionEvent event) {
         try {
-        // 1. Cargar la vista de login
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/VistaLogin.fxml"));
-        Parent root = loader.load();
+            // 1. Cargar la vista de login
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/VistaLogin.fxml"));
+            Parent root = loader.load();
 
-        // 2. Obtener la Stage actual
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        
-        // 3. Configurar la nueva Scene y mostrar
-        stage.setScene(new Scene(root));
-        stage.setTitle("Inicio de Sesión");
-        stage.show();
+            // 2. Obtener la Stage actual
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        // 4. (Opcional) Limpiar variables de sesión si existieran (e.g., this.perLog = null;)
-        this.perLog = null;
-        this.dao = null;
+            // 3. Configurar la nueva Scene y mostrar
+            stage.setScene(new Scene(root));
+            stage.setTitle("Inicio de Sesión");
+            stage.show();
 
-    } catch (IOException ex) {
-        Logger.getLogger(MostrarDatosControlador.class.getName()).log(Level.SEVERE, "Error al volver a la VistaLogin.fxml", ex);
-        mostrarMensaje("No se pudo cargar la pantalla de login.");
-    }
+            // 4. (Opcional) Limpiar variables de sesión si existieran (e.g., this.perLog = null;)
+            this.perLog = null;
+            this.dao = null;
+
+        } catch (IOException ex) {
+            Logger.getLogger(MostrarDatosControlador.class.getName()).log(Level.SEVERE, "Error al volver a la VistaLogin.fxml", ex);
+            mostrarMensaje("No se pudo cargar la pantalla de login.");
+        }
     }
 }
