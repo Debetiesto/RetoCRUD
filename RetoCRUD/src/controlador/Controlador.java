@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/*
 package controlador;
 
 import hilos.HiloBorrar;
@@ -54,6 +55,7 @@ import modelo.Usuario;
  *
  * @author Unai, Luis
  */
+/*
 public class Controlador implements Initializable {
 
     private static final Logger logger = Logger.getLogger(Controlador.class.getName());
@@ -148,6 +150,7 @@ public class Controlador implements Initializable {
      *
      * @param event
      */
+/*
     @FXML
     private void loginSQL(ActionEvent event) {
         dao = new DaoImplementacionMysql();
@@ -160,6 +163,7 @@ public class Controlador implements Initializable {
      *
      * @param event
      */
+/*
     @FXML
     private void venRegistrar(ActionEvent event) {
         ventanaRegistro();
@@ -171,6 +175,7 @@ public class Controlador implements Initializable {
      *
      * @param event
      */
+/*
     @FXML
     private void modificarDatosTabla(ActionEvent event) {
         modificarDatosTablaAdmin();
@@ -182,6 +187,7 @@ public class Controlador implements Initializable {
      *
      * @param event
      */
+/*
     @FXML
     private void modificarFieldAdmin(ActionEvent event) {
         modificarDatosAdmin();
@@ -193,6 +199,7 @@ public class Controlador implements Initializable {
      *
      * @param event
      */
+/*
     @FXML
     private void modificarFieldsUsuario(ActionEvent event) {
         modificarDatosVistaUsuario();
@@ -204,6 +211,7 @@ public class Controlador implements Initializable {
      *
      * @param event
      */
+/*
     @FXML
     private void borrarEnVistaUsuario(ActionEvent event) {
         borrarCuenta();
@@ -215,6 +223,7 @@ public class Controlador implements Initializable {
      *
      * @param event
      */
+/*
     @FXML
     private void borrarEnVistaAdmin(ActionEvent event) {
         borrarUsuario();
@@ -226,6 +235,7 @@ public class Controlador implements Initializable {
      * @param url
      * @param rb
      */
+/*
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         logger.info("Aplicación inicializada, DAO configurado a MySQL.");
@@ -235,6 +245,7 @@ public class Controlador implements Initializable {
      * Método de login, diferenciando el usuario que ha entrado es decir, si es
      * admin o si no.
      */
+/*
     private void login() {
         String email = txtEmail.getText();
         String contra = txtContra.getText();
@@ -269,6 +280,7 @@ public class Controlador implements Initializable {
      * @param perLog
      * @param esAdmin
      */
+/*
     private void mostrarVentana(Perfil perLog, boolean esAdmin) {
 
         try {
@@ -296,6 +308,7 @@ public class Controlador implements Initializable {
      * @param perLog
      * @param esAdmin
      */
+/*
     private void setDatos(Perfil perLog, boolean esAdmin) {
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         colUsername.setCellValueFactory(new PropertyValueFactory<>("user"));
@@ -348,6 +361,7 @@ public class Controlador implements Initializable {
      *
      * @param per
      */
+/*
     private void cargarDatos(Perfil per) {
         mostrarPopupCarga();
 
@@ -361,6 +375,7 @@ public class Controlador implements Initializable {
      *
      * @param usuarios
      */
+/*
     public void agregarDatosTabla(List<Usuario> usuarios) {
         ObservableList<Usuario> obsList = FXCollections.observableArrayList(usuarios);
         tablaDatosUsu.setItems(obsList);
@@ -370,6 +385,7 @@ public class Controlador implements Initializable {
     /**
      * Método que abre la ventana de registro
      */
+/*
     private void ventanaRegistro() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/VistaRegistro.fxml"));
@@ -396,6 +412,7 @@ public class Controlador implements Initializable {
      *
      * @param event
      */
+/*
     @FXML
     private void registrarUsuario(ActionEvent event) {
 
@@ -430,6 +447,7 @@ public class Controlador implements Initializable {
      * Método que habilita las celdas de la tabla de la vista admin para poder
      * modificar los datos
      */
+/*
     private void modificarDatosTablaAdmin() {
         tablaDatosUsu.setEditable(true);
 
@@ -488,6 +506,7 @@ public class Controlador implements Initializable {
     /**
      * Método para modificar datos del admin
      */
+/*
     private void modificarDatosAdmin() {
         txtEmailAdmin.setEditable(true);
         txtNomAdmin.setEditable(true);
@@ -502,6 +521,7 @@ public class Controlador implements Initializable {
      *
      * @param usuario
      */
+/*
     private void actualizarUsuarioEnHilo(Usuario usuario) {
         HiloModificar h = new HiloModificar(dao, this, usuario);
         Thread hilo = new Thread(h);
@@ -513,6 +533,7 @@ public class Controlador implements Initializable {
      *
      * @param admin
      */
+/*
     private void actualizarAdminEnHilo(Administrador admin) {
         HiloModificar h = new HiloModificar(dao, this, admin);
         Thread hilo = new Thread(h);
@@ -524,6 +545,7 @@ public class Controlador implements Initializable {
      *
      * @param mensaje
      */
+/*
     public void mostrarMensaje(String mensaje) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Información");
@@ -535,6 +557,7 @@ public class Controlador implements Initializable {
     /**
      * Método para guardar los datos del administrador
      */
+/*
     private void guardarCambiosAdmin() {
         if (!(perLog instanceof Administrador)) {
             System.out.println("❌ No hay administrador logueado.");
@@ -556,6 +579,7 @@ public class Controlador implements Initializable {
     /**
      * Método para modificar datos del usuario en su vista
      */
+/*
     private void modificarDatosVistaUsuario() {
         txtEmailUsuario.setEditable(true);
         txtUsuario.setEditable(true);
@@ -572,6 +596,7 @@ public class Controlador implements Initializable {
     /**
      * Método para guardar los cambios modificados
      */
+/*
     private void guardarCambiosVistaUsuario() {
         if (!(perLog instanceof Usuario)) {
             System.out.println("❌ No hay usuario logueado.");
@@ -597,6 +622,7 @@ public class Controlador implements Initializable {
     /**
      * Método para borrar un usuario de la base de datos en la vista de usuario
      */
+/*
     private void borrarCuenta() {
         if (perLog instanceof Usuario) {
             Usuario usu = (Usuario) perLog;
@@ -618,6 +644,7 @@ public class Controlador implements Initializable {
      * Método para borrar un usuario que ha sido seleccionado en la tabla de la
      * vista de administrador
      */
+/*
     private void borrarUsuario() {
         Usuario seleccionado = (Usuario) tablaDatosUsu.getSelectionModel().getSelectedItem();
         if (seleccionado != null) {
@@ -633,6 +660,7 @@ public class Controlador implements Initializable {
      *
      * @param usu
      */
+/*
     private void hiloEliminarDatos(Usuario usu) {
         HiloBorrar h = new HiloBorrar(dao, this, usu);
         Thread hilo = new Thread(h);
@@ -642,6 +670,7 @@ public class Controlador implements Initializable {
     /**
      * Método para volver al login al terminar de registrar un usuario nuevo
      */
+/*
     public void volverLogin() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/VistaLogin.fxml"));
@@ -662,6 +691,7 @@ public class Controlador implements Initializable {
      *
      * @param nuevo
      */
+/*
     private void hiloRegistrar(Usuario nuevo) {
         HiloCrear h = new HiloCrear(dao, this, nuevo);
         Thread hilo = new Thread(h);
@@ -671,6 +701,7 @@ public class Controlador implements Initializable {
     /**
      * Método para mostar un popup de carga de datos
      */
+/*
     public void mostrarPopupCarga() {
         Platform.runLater(() -> {
             // Evitar abrir dos popups a la vez
@@ -705,6 +736,7 @@ public class Controlador implements Initializable {
     /**
      * Método que cierra el popup al cabo de unos segundos
      */
+/*
     public void cerrarPopupCarga() {
         Platform.runLater(() -> {
             if (popupCarga != null && popupCarga.isShowing()) {
@@ -713,4 +745,4 @@ public class Controlador implements Initializable {
         });
     }
 
-}
+}*/

@@ -5,10 +5,12 @@
  */
 package hilos;
 
-import controlador.Controlador;
+//import controlador.Controlador;
 import controlador.Dao;
+import controlador.RegistroControlador;
 import excepciones.UsuarioExisteException;
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
 import modelo.Usuario;
 
 /**
@@ -18,7 +20,7 @@ import modelo.Usuario;
 public class HiloCrear implements Runnable {
 
     private Dao dao;
-    private Controlador cont;
+    private RegistroControlador cont;
     private Usuario usu;
 
     /**
@@ -27,7 +29,7 @@ public class HiloCrear implements Runnable {
      * @param cont
      * @param usu 
      */
-    public HiloCrear(Dao dao, Controlador cont, Usuario usu) {
+    public HiloCrear(Dao dao, RegistroControlador cont, Usuario usu) {
         this.dao = dao;
         this.cont = cont;
         this.usu = usu;
@@ -44,17 +46,17 @@ public class HiloCrear implements Runnable {
 
             Platform.runLater(() -> {
                 if (insertado) {
-                    cont.mostrarMensaje("Registro exitoso." + " Usuario registrado correctamente.");
+                    cont.mostrarMensaje(Alert.AlertType.INFORMATION, "Registro Exitoso", "Usuario registrado correctamente.");
                     cont.volverLogin();
                 }
             });
         } catch (UsuarioExisteException e) {
             Platform.runLater(() -> {
-                cont.mostrarMensaje("⚠️ " + e.getMessage());
+                cont.mostrarMensaje(Alert.AlertType.WARNING, "Advertencia", "⚠️ " + e.getMessage());
             });
         } catch (Exception e) {
         Platform.runLater(() -> {
-            cont.mostrarMensaje("❌ Error al registrar: " + e.getMessage());
+            cont.mostrarMensaje(Alert.AlertType.ERROR, "Error", "❌ Error al registrar: " + e.getMessage());
         });
     }
         /* if (dao.existeUsuario(usu.getEmail(), usu.getUser())) {
