@@ -23,7 +23,7 @@ import static org.testfx.matcher.base.NodeMatchers.isVisible;
 
 /**
  *
- * @author luisv
+ * @author Unai y Luis
  */
 public class RegistroControladorTest extends ApplicationTest {
 

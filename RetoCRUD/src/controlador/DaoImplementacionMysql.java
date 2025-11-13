@@ -334,6 +334,7 @@ public class DaoImplementacionMysql implements Dao {
             int filasAfectadas = stmt.executeUpdate();
 
             if (filasAfectadas > 0) {
+                eliminado = true;
                 System.out.println("✅ Usuario eliminado correctamente: " + codU);
             } else {
                 System.out.println("⚠️ No se encontró usuario con código: " + codU);
