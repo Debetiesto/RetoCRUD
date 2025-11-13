@@ -1,0 +1,112 @@
+/* 🌈 Fondo general
+.background {
+    -fx-background-image: url("/img/abstract-watercolor-texture-wallpaper-background-free-vector.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+ */
+/* 🧩 Labels (etiquetas de texto) */
+.label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #1b1b1b;
+    -fx-font-size: 13px;
+}
+
+/* 🪶 Títulos grandes (como “INICIA SESIÓN” o “BIENVENIDO/A”) */
+.label:title {
+    -fx-font-family: "Segoe UI Bold";
+    -fx-font-size: 36px;
+    -fx-text-fill: #0b3954;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0.3, 1, 1);
+}
+
+/* ✉️ Campos de texto */
+.text-field, .password-field, .combo-box {
+    -fx-background-color: rgba(255, 255, 255, 0.85);
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #4db6ac;
+    -fx-border-width: 1.2;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-text-fill: #1a1a1a;
+    -fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);
+    -fx-padding: 6 10 6 10;
+}
+
+/* ✨ Efecto al enfocar un campo */
+.text-field:focused, .password-field:focused, .combo-box:focused {
+    -fx-border-color: #0288d1;
+    -fx-background-color: rgba(255,255,255,0.95);
+    -fx-effect: dropshadow(gaussian, rgba(0, 136, 204, 0.3), 6, 0.3, 0, 0);
+}
+
+/* 🔘 Botones */
+.button {
+    -fx-background-color: linear-gradient(to bottom, #26c6da, #0097a7);
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 13px;
+    -fx-background-radius: 8;
+    -fx-padding: 7 18 7 18;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0.2, 1, 1);
+    -fx-border-color: transparent;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom, #4dd0e1, #00acc1);
+}
+
+.button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #0097a7, #006064);
+}
+
+/* 🔗 Links */
+.hyperlink {
+    -fx-text-fill: #0277bd;
+    -fx-font-weight: bold;
+    -fx-border-color: transparent;
+    -fx-underline: true;
+}
+
+.hyperlink:hover {
+    -fx-text-fill: #01579b;
+}
+
+/* 📋 Tabla de admin */
+.table-view {
+    -fx-background-color: rgba(255,255,255,0.8);
+    -fx-border-color: #80cbc4;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 12px;
+}
+
+.table-column {
+    -fx-alignment: CENTER;
+}
+
+/* 🔲 Paneles (usuario y admin) */
+#PaneUsuario, #PaneAdmin {
+    -fx-background-color: rgba(255,255,255,0.7);
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+    -fx-border-color: #0097a7;
+    -fx-border-width: 1.5;
+    -fx-padding: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0.3, 0, 0);
+}
+
+/* 🧍 Login pane */
+#AnchorPane {
+    -fx-background-color: rgba(255,255,255,0.6);
+    -fx-background-radius: 20;
+    -fx-border-color: #26c6da;
+    -fx-border-width: 2;
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0.3, 0, 2);
+    -fx-padding: 15;
+}

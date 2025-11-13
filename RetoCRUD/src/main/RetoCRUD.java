@@ -5,6 +5,7 @@
  */
 package main;
 
+import conexion.PoolCon;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,18 +14,31 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author 2dam
+ * @author Unai, Luis
  */
 public class RetoCRUD extends Application {
-    
+
+    /**
+     * Método que abre la ventana principal de la aplicación
+     * @param stage parámetro que requiere éste método para abrir la ventana
+     * @throws Exception es una excepción genérica
+     */
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("vista/FXMLDocument.fxml"));
-        
+        Parent root = FXMLLoader.load(getClass().getResource("/vista/VistaLogin.fxml"));
+
         Scene scene = new Scene(root);
-        
+        stage.setTitle("RetoCRUD - GRUPO3");
         stage.setScene(scene);
         stage.show();
+    }
+
+    /**
+     * Método que cierra el pool de conexiones.
+     */
+    @Override
+    public void stop() {
+        PoolCon.closePool();
     }
 
     /**
@@ -33,5 +47,5 @@ public class RetoCRUD extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
