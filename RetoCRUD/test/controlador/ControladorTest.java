@@ -71,9 +71,9 @@ public class ControladorTest extends ApplicationTest {
      * Test of Login adn Modify methods, of class Controlador.
      */
     @Test
-    public void testLoginAndModify() {
+    public void testLogin() {
         // escribe en los campos y pulsa el botón
-        clickOn("#txtEmail").write("lucas@empresa.com");
+        clickOn("#txtEmail").write("lucas2@empresa.com");
         clickOn("#txtContra").write("adminLucas!");
         clickOn("#btnLogin");
         // comprueba que se abre la vista de admin
@@ -103,7 +103,7 @@ public class ControladorTest extends ApplicationTest {
         System.out.println("initialize");
         URL url = null;
         ResourceBundle rb = null;
-        Controlador instance = new Controlador();
+        LoginControlador instance = new LoginControlador();
         instance.initialize(url, rb);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -116,7 +116,7 @@ public class ControladorTest extends ApplicationTest {
     public void testAgregarDatosTabla() {
         System.out.println("agregarDatosTabla");
         List<Usuario> usuarios = null;
-        Controlador instance = new Controlador();
+        MostrarDatosControlador instance = new MostrarDatosControlador();
         instance.agregarDatosTabla(usuarios);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -129,7 +129,7 @@ public class ControladorTest extends ApplicationTest {
     public void testMostrarMensaje() {
         System.out.println("mostrarMensaje");
         String mensaje = "";
-        Controlador instance = new Controlador();
+        MostrarDatosControlador instance = new MostrarDatosControlador();
         instance.mostrarMensaje(mensaje);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -141,7 +141,7 @@ public class ControladorTest extends ApplicationTest {
     @Test
     public void testVolverLogin() {
         System.out.println("volverLogin");
-        Controlador instance = new Controlador();
+        RegistroControlador instance = new RegistroControlador();
         instance.volverLogin();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -153,7 +153,7 @@ public class ControladorTest extends ApplicationTest {
     @Test
     public void testMostrarPopupCarga() {
         System.out.println("mostrarPopupCarga");
-        Controlador instance = new Controlador();
+        MostrarDatosControlador instance = new MostrarDatosControlador();
         instance.mostrarPopupCarga();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -165,7 +165,7 @@ public class ControladorTest extends ApplicationTest {
     @Test
     public void testCerrarPopupCarga() {
         System.out.println("cerrarPopupCarga");
-        Controlador instance = new Controlador();
+        MostrarDatosControlador instance = new MostrarDatosControlador();
         instance.cerrarPopupCarga();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
