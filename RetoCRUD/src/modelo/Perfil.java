@@ -21,7 +21,7 @@ public class Perfil {
 
     /**
      * Getter de codigo usuario
-     * @return 
+     * @return devuelve el código del usuario
      */
     public int getCodU() {
         return codU;
@@ -29,7 +29,8 @@ public class Perfil {
 
     /**
      * Setter de codigo usuario
-     * @param codU 
+     * @param codU parámetro que necesita este método
+     * para darle un valor al atributo de esta clase
      */
     public void setCodU(int codU) {
         this.codU = codU;
@@ -37,7 +38,8 @@ public class Perfil {
 
     /**
      * Getter de email
-     * @return 
+     * @return Devuelve un string con el valor que tiene
+     * el atributo email
      */
     public String getEmail() {
         return email;
@@ -45,7 +47,8 @@ public class Perfil {
 
     /**
      * Setter de email
-     * @param email 
+     * @param email parámetro que necesita este método
+     * para darle un valor al atributo de esta clase
      */
     public void setEmail(String email) {
         this.email = email;
@@ -53,7 +56,8 @@ public class Perfil {
 
     /**
      * Getter de nombre de usuario
-     * @return 
+     * @return Devuelve un string con el valor que tiene
+     * el atributo user
      */
     public String getUser() {
         return user;
@@ -61,7 +65,8 @@ public class Perfil {
 
     /**
      * Setter de nombre de usuario
-     * @param user 
+     * @param user parámetro que necesita este método
+     * para darle un valor al atributo de esta clase
      */
     public void setUser(String user) {
         this.user = user;
@@ -69,7 +74,8 @@ public class Perfil {
 
     /**
      * Getter de telefono
-     * @return 
+     * @return Devuelve un int con el valor que tiene
+     * el atributo telefono
      */
     public int getTelefono() {
         return telefono;
@@ -77,7 +83,8 @@ public class Perfil {
 
     /**
      * Srter de telefono
-     * @param telefono 
+     * @param telefono parámetro que necesita este método
+     * para darle un valor al atributo de esta clase
      */
     public void setTelefono(int telefono) {
         this.telefono = telefono;
@@ -85,7 +92,8 @@ public class Perfil {
 
     /**
      * Getter de contraseña
-     * @return 
+     * @return Devuelve un string con el valor que tiene
+     * el atributo contra
      */
     public String getContra() {
         return contra;
@@ -93,7 +101,8 @@ public class Perfil {
 
     /**
      * Setter de contraseña
-     * @param contra 
+     * @param contra parámetro que necesita este método
+     * para darle un valor al atributo de esta clase
      */
     public void setContra(String contra) {
         this.contra = contra;
@@ -101,7 +110,8 @@ public class Perfil {
 
     /**
      * Getter de nombre
-     * @return 
+     * @return Devuelve un string con el valor que tiene
+     * el atributo nom
      */
     public String getNom() {
         return nom;
@@ -109,7 +119,8 @@ public class Perfil {
 
     /**
      * Setter de nombre
-     * @param nom 
+     * @param nom parámetro que necesita este método
+     * para darle un valor al atributo de esta clase
      */
     public void setNom(String nom) {
         this.nom = nom;
@@ -117,7 +128,8 @@ public class Perfil {
 
     /**
      * Getter de apellidos
-     * @return 
+     * @return Devuelve un string con el valor que tiene
+     * el atributo ape
      */
     public String getApe() {
         return ape;
@@ -125,12 +137,17 @@ public class Perfil {
 
     /**
      * Setter de apellidos
-     * @param ape 
+     * @param ape parámetro que necesita este método
+     * para darle un valor al atributo de esta clase
      */
     public void setApe(String ape) {
         this.ape = ape;
     }
 
+    /**
+     * ToString para mostrar los datos de Perfil
+     * @return devuelve un String con los valores que reciben los atributos
+     */
     @Override
     public String toString() {
         return "Perfil{" + "codU=" + codU + ", email=" + email + ", user=" + user + ", telefono=" + telefono + ", contra=" + contra + ", nom=" + nom + ", ape=" + ape + '}';

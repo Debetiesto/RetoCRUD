@@ -20,8 +20,8 @@ public class RetoCRUD extends Application {
 
     /**
      * Método que abre la ventana principal de la aplicación
-     * @param stage 
-     * @throws Exception 
+     * @param stage parámetro que requiere éste método para abrir la ventana
+     * @throws Exception es una excepción genérica
      */
     @Override
     public void start(Stage stage) throws Exception {

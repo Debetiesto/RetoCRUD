@@ -16,7 +16,7 @@ public class Administrador extends Perfil{
 
     /**
      * Getter de codigo usuario
-     * @return 
+     * @return devuelve el código del usuario
      */
     public int getCodU() {
         return codU;
@@ -24,7 +24,8 @@ public class Administrador extends Perfil{
 
     /**
      * Setter de codigo usuario
-     * @param codU 
+     * @param codU parámetro que necesita este método
+     * para darle un valor al atributo de esta clase
      */
     public void setCodU(int codU) {
         this.codU = codU;
@@ -32,7 +33,7 @@ public class Administrador extends Perfil{
 
     /**
      * Getter de cuenta corriente
-     * @return 
+     * @return devuelve la cuenta corriente del administrador
      */
     public String getCuentaCorriente() {
         return cuentaCorriente;
@@ -40,7 +41,8 @@ public class Administrador extends Perfil{
 
     /**
      * Setter de cuenta corriente
-     * @param cuentaCorriente 
+     * @param cuentaCorriente parámetro que necesita este método
+     * para darle un valor al atributo de esta clase
      */
     public void setCuentaCorriente(String cuentaCorriente) {
         this.cuentaCorriente = cuentaCorriente;
@@ -48,7 +50,7 @@ public class Administrador extends Perfil{
 
     /**
      * ToString que muestra los datos del administrador
-     * @return 
+     * @return devuelve un String con los valores que reciben los atributos
      */
     @Override
     public String toString() {

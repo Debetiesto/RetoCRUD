@@ -16,7 +16,8 @@ public class Usuario extends Perfil{
 
     /**
      * Constructor de Usuario
-     * @param codU 
+     * @param codU parámetro que requiere ser rellenado en la
+     * instancia de este objeto para identificar al usuario
      */
     public Usuario(int codU){
       //  super(email, user, telefono, contra, nom, ape);
@@ -32,7 +33,7 @@ public class Usuario extends Perfil{
     
     /**
      * Getter de codigo usuario
-     * @return 
+     * @return devuelve el código del usuario
      */
     public int getCodU() {
         return codU;
@@ -40,7 +41,8 @@ public class Usuario extends Perfil{
 
     /**
      * Setter de codigo usuario
-     * @param codU 
+     * @param codU parámetro que necesita este método
+     * para darle un valor al atributo de esta clase
      */
     public void setCodU(int codU) {
         this.codU = codU;
@@ -48,7 +50,8 @@ public class Usuario extends Perfil{
 
     /**
      * Getter de enum de genero
-     * @return 
+     * @return Devuelve un enum con el valor que tiene
+     * el atributo genero
      */
     public Genero getGenero() {
         return genero;
@@ -56,7 +59,8 @@ public class Usuario extends Perfil{
 
     /**
      * Setter de enum de genero
-     * @param genero 
+     * @param genero parámetro que necesita este método
+     * para darle un valor al atributo de esta clase
      */
     public void setGenero(Genero genero) {
         this.genero = genero;
@@ -64,7 +68,8 @@ public class Usuario extends Perfil{
 
     /**
      * Getter de numero de tarjeta
-     * @return 
+     * @return Devuelve un int con el valor que tiene
+     * el atributo numTarjeta
      */
     public int getNumTarjeta() {
         return numTarjeta;
@@ -72,7 +77,8 @@ public class Usuario extends Perfil{
 
     /**
      * Setter de num de tarjeta
-     * @param numTarjeta 
+     * @param numTarjeta parámetro que necesita este método
+     * para darle un valor al atributo de esta clase
      */
     public void setNumTarjeta(int numTarjeta) {
         this.numTarjeta = numTarjeta;
@@ -80,7 +86,7 @@ public class Usuario extends Perfil{
 
     /**
      * ToString para mostrar los datos del Usuario
-     * @return 
+     * @return devuelve un String con los valores que reciben los atributos
      */
     @Override
     public String toString() {
