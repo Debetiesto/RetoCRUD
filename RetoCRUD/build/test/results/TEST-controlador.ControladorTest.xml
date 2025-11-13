@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="5" failures="3" hostname="DESKTOP-JL24M65" name="controlador.ControladorTest" skipped="0" tests="7" time="6.579" timestamp="2025-11-12T17:38:19">
+<testsuite errors="5" failures="3" hostname="DESKTOP-JL24M65" name="controlador.ControladorTest" skipped="0" tests="8" time="6.621" timestamp="2025-11-12T18:49:00">
   <properties>
     <property name="libs.jsp-compiler.javadoc" value="" />
     <property name="netbeans.autoupdate.country" value="ES" />
@@ -67,7 +67,7 @@
     <property name="libs.j2me_common_ant.maven-pom" value="" />
     <property name="libs.spring-webmvc3.0.maven-pom" value="" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner controlador.ControladorTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\build\test\results\TEST-controlador.ControladorTest.xml crashfile=C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\build\junitvmwatcher4888633044521402206.properties propsfile=C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\build\junit6569508958623015163.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner controlador.ControladorTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\build\test\results\TEST-controlador.ControladorTest.xml crashfile=C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\build\junitvmwatcher5138036821814597403.properties propsfile=C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\build\junit1366853983715079671.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="build.sysclasspath" value="ignore" />
@@ -113,7 +113,7 @@
     <property name="javac.debug" value="true" />
     <property name="javadoc.splitindex" value="true" />
     <property name="file.separator" value="\" />
-    <property name="javac.includesfile.binary" value="C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\null1103365312" />
+    <property name="javac.includesfile.binary" value="C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\null772629534" />
     <property name="libs.junit_4.maven-pom" value="" />
     <property name="mkdist.disabled" value="false" />
     <property name="javac.test.processorpath" value="C:\Program Files\Java\jdk1.8.0_202\jre/lib/javaws.jar:C:\Program Files\Java\jdk1.8.0_202\jre/lib/deploy.jar:C:\Program Files\Java\jdk1.8.0_202\jre/lib/plugin.jar:src/conector/Conector/mysql-connector-java-8.0.15.jar:C:\Program Files\NetBeans 8.2\platform\modules\ext\junit-4.12.jar:lib/commons-dbcp2-2.13.0/commons-dbcp2-2.13.0.jar:lib/commons-pool2-2.12.1/commons-pool2-2.12.1.jar:lib/commons-logging-1.3.5/commons-logging-1.3.5.jar:C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\lib\TestFXLibrary\hamcrest-junit-2.0.0.0.jar;C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\lib\TestFXLibrary\java-hamcrest-2.0.0.0.jar;C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\lib\TestFXLibrary\testfx-core-4.0.13-alpha.jar;C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\lib\TestFXLibrary\testfx-junit-4.0.13-alpha.jar:build/classes:C:\Program Files\NetBeans 8.2\platform\modules\ext\junit-4.12.jar:C:\Program Files\NetBeans 8.2\platform\modules\ext\hamcrest-core-1.3.jar" />
@@ -448,14 +448,24 @@
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
     <property name="libs.javaee-web-api-7.0.javadoc" value="C:\Program Files\NetBeans 8.2\enterprise\docs\javaee-doc-api.jar" />
   </properties>
-  <testcase classname="controlador.ControladorTest" name="testMostrarPopupCarga" time="0.18">
+  <testcase classname="controlador.ControladorTest" name="testModifyDataTable" time="0.244">
+    <error message="the query &quot;#btnModDatosTabla&quot; returned no nodes." type="org.testfx.api.FxRobotException">org.testfx.api.FxRobotException: the query &quot;#btnModDatosTabla&quot; returned no nodes.
+	at org.testfx.api.FxRobot.queryVisibleNode(FxRobot.java:969)
+	at org.testfx.api.FxRobot.pointOfVisibleNode(FxRobot.java:940)
+	at org.testfx.api.FxRobot.clickOn(FxRobot.java:643)
+	at org.testfx.api.FxRobot.clickOn(FxRobot.java:60)
+	at org.testfx.api.FxRobotInterface.clickOn(FxRobotInterface.java:641)
+	at controlador.ControladorTest.testModifyDataTable(ControladorTest.java:85)
+</error>
+  </testcase>
+  <testcase classname="controlador.ControladorTest" name="testMostrarPopupCarga" time="0.2">
     <failure message="The test case is a prototype." type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: The test case is a prototype.
-	at controlador.ControladorTest.testMostrarPopupCarga(ControladorTest.java:162)
+	at controlador.ControladorTest.testMostrarPopupCarga(ControladorTest.java:159)
 </failure>
     <error message="java.lang.NullPointerException" type="java.lang.RuntimeException">java.lang.RuntimeException: java.lang.NullPointerException
 	at org.testfx.util.WaitForAsyncUtils.---- Delayed Exception: (See Trace Below) ----(WaitForAsyncUtils.java:0)
 Caused by: java.lang.NullPointerException
-	at controlador.Controlador.lambda$mostrarPopupCarga$14(Controlador.java:710)
+	at controlador.Controlador.lambda$mostrarPopupCarga$13(Controlador.java:697)
 	at com.sun.javafx.application.PlatformImpl.lambda$null$177(PlatformImpl.java:295)
 	at java.security.AccessController.doPrivileged(Native Method)
 	at com.sun.javafx.application.PlatformImpl.lambda$runLater$178(PlatformImpl.java:294)
@@ -465,30 +475,22 @@ Caused by: java.lang.NullPointerException
 	at java.lang.Thread.run(Thread.java:748)
 </error>
   </testcase>
-  <testcase classname="controlador.ControladorTest" name="testAgregarDatosTabla" time="0.22">
+  <testcase classname="controlador.ControladorTest" name="testAgregarDatosTabla" time="0.23">
     <error type="java.lang.NullPointerException">java.lang.NullPointerException
 	at java.util.AbstractCollection.addAll(AbstractCollection.java:343)
 	at javafx.collections.ModifiableObservableListBase.addAll(ModifiableObservableListBase.java:99)
 	at javafx.collections.FXCollections.observableArrayList(FXCollections.java:341)
 	at controlador.Controlador.agregarDatosTabla(Controlador.java:365)
-	at controlador.ControladorTest.testAgregarDatosTabla(ControladorTest.java:123)
+	at controlador.ControladorTest.testAgregarDatosTabla(ControladorTest.java:120)
 </error>
   </testcase>
-  <testcase classname="controlador.ControladorTest" name="testLoginAndModify" time="4.211">
-    <error type="java.lang.NullPointerException">java.lang.NullPointerException
-	at org.testfx.api.FxRobot.point(FxRobot.java:296)
-	at org.testfx.api.FxRobot.clickOn(FxRobot.java:628)
-	at org.testfx.api.FxRobot.clickOn(FxRobot.java:60)
-	at org.testfx.api.FxRobotInterface.clickOn(FxRobotInterface.java:599)
-	at controlador.ControladorTest.testLoginAndModify(ControladorTest.java:85)
-</error>
-  </testcase>
-  <testcase classname="controlador.ControladorTest" name="testInitialize" time="0.326">
+  <testcase classname="controlador.ControladorTest" name="testLoginAndModify" time="3.806" />
+  <testcase classname="controlador.ControladorTest" name="testInitialize" time="0.303">
     <failure message="The test case is a prototype." type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: The test case is a prototype.
-	at controlador.ControladorTest.testInitialize(ControladorTest.java:112)
+	at controlador.ControladorTest.testInitialize(ControladorTest.java:109)
 </failure>
   </testcase>
-  <testcase classname="controlador.ControladorTest" name="testMostrarMensaje" time="0.295">
+  <testcase classname="controlador.ControladorTest" name="testMostrarMensaje" time="0.313">
     <error message="Not on FX application thread; currentThread = main" type="java.lang.IllegalStateException">java.lang.IllegalStateException: Not on FX application thread; currentThread = main
 	at com.sun.javafx.tk.Toolkit.checkFxUserThread(Toolkit.java:279)
 	at com.sun.javafx.tk.quantum.QuantumToolkit.checkFxUserThread(QuantumToolkit.java:423)
@@ -499,41 +501,45 @@ Caused by: java.lang.NullPointerException
 	at javafx.scene.control.Dialog.&lt;init&gt;(Dialog.java:263)
 	at javafx.scene.control.Alert.&lt;init&gt;(Alert.java:245)
 	at javafx.scene.control.Alert.&lt;init&gt;(Alert.java:223)
-	at controlador.Controlador.mostrarMensaje(Controlador.java:529)
-	at controlador.ControladorTest.testMostrarMensaje(ControladorTest.java:136)
+	at controlador.Controlador.mostrarMensaje(Controlador.java:528)
+	at controlador.ControladorTest.testMostrarMensaje(ControladorTest.java:133)
 </error>
   </testcase>
-  <testcase classname="controlador.ControladorTest" name="testCerrarPopupCarga" time="0.265">
+  <testcase classname="controlador.ControladorTest" name="testCerrarPopupCarga" time="0.298">
     <failure message="The test case is a prototype." type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: The test case is a prototype.
-	at controlador.ControladorTest.testCerrarPopupCarga(ControladorTest.java:174)
+	at controlador.ControladorTest.testCerrarPopupCarga(ControladorTest.java:171)
 </failure>
   </testcase>
-  <testcase classname="controlador.ControladorTest" name="testVolverLogin" time="0.299">
+  <testcase classname="controlador.ControladorTest" name="testVolverLogin" time="0.265">
     <error type="java.lang.NullPointerException">java.lang.NullPointerException
-	at controlador.Controlador.volverLogin(Controlador.java:664)
-	at controlador.ControladorTest.testVolverLogin(ControladorTest.java:148)
+	at controlador.Controlador.volverLogin(Controlador.java:651)
+	at controlador.ControladorTest.testVolverLogin(ControladorTest.java:145)
 </error>
   </testcase>
   <system-out><![CDATA[mostrarPopupCarga
 agregarDatosTabla
 Pool de conexiones inicializado.
-DEBUG hilo -> dao: controlador.DaoImplementacionMysql@289a91ae | usu: null
+DEBUG hilo -> dao: controlador.DaoImplementacionMysql@1d12c9bd | usu: null
 initialize
 mostrarMensaje
 cerrarPopupCarga
 volverLogin
 ]]></system-out>
-  <system-err><![CDATA[nov 12, 2025 6:38:20 PM javafx.fxml.FXMLLoader$ValueElement processValue
+  <system-err><![CDATA[nov 12, 2025 7:49:01 PM javafx.fxml.FXMLLoader$ValueElement processValue
 ADVERTENCIA: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 8.0.202
-nov 12, 2025 6:38:20 PM controlador.Controlador initialize
+nov 12, 2025 7:49:01 PM controlador.Controlador initialize
 INFORMACIÓN: Aplicación inicializada, DAO configurado a MySQL.
-nov 12, 2025 6:38:20 PM javafx.fxml.FXMLLoader$ValueElement processValue
+nov 12, 2025 7:49:01 PM javafx.fxml.FXMLLoader$ValueElement processValue
 ADVERTENCIA: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 8.0.202
-nov 12, 2025 6:38:20 PM controlador.Controlador initialize
+nov 12, 2025 7:49:01 PM controlador.Controlador initialize
+INFORMACIÓN: Aplicación inicializada, DAO configurado a MySQL.
+nov 12, 2025 7:49:02 PM javafx.fxml.FXMLLoader$ValueElement processValue
+ADVERTENCIA: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 8.0.202
+nov 12, 2025 7:49:02 PM controlador.Controlador initialize
 INFORMACIÓN: Aplicación inicializada, DAO configurado a MySQL.
 --- Exception in Async Thread ---
 java.lang.NullPointerException: null
-	controlador.Controlador.lambda$mostrarPopupCarga$14(Controlador.java:710)
+	controlador.Controlador.lambda$mostrarPopupCarga$13(Controlador.java:697)
 	com.sun.javafx.application.PlatformImpl.lambda$null$177(PlatformImpl.java:295)
 	java.security.AccessController.doPrivileged(Native Method)
 	com.sun.javafx.application.PlatformImpl.lambda$runLater$178(PlatformImpl.java:294)
@@ -542,42 +548,42 @@ java.lang.NullPointerException: null
 	com.sun.glass.ui.win.WinApplication.lambda$null$152(WinApplication.java:177)
 	java.lang.Thread.run(Thread.java:748)
 
-nov 12, 2025 6:38:20 PM javafx.fxml.FXMLLoader$ValueElement processValue
+nov 12, 2025 7:49:02 PM javafx.fxml.FXMLLoader$ValueElement processValue
 ADVERTENCIA: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 8.0.202
-nov 12, 2025 6:38:20 PM controlador.Controlador initialize
+nov 12, 2025 7:49:02 PM controlador.Controlador initialize
 INFORMACIÓN: Aplicación inicializada, DAO configurado a MySQL.
-nov 12, 2025 6:38:21 PM javafx.fxml.FXMLLoader$ValueElement processValue
+nov 12, 2025 7:49:02 PM javafx.fxml.FXMLLoader$ValueElement processValue
 ADVERTENCIA: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 8.0.202
-nov 12, 2025 6:38:21 PM controlador.Controlador initialize
+nov 12, 2025 7:49:02 PM controlador.Controlador initialize
 INFORMACIÓN: Aplicación inicializada, DAO configurado a MySQL.
-nov 12, 2025 6:38:24 PM javafx.fxml.FXMLLoader$ValueElement processValue
+nov 12, 2025 7:49:05 PM javafx.fxml.FXMLLoader$ValueElement processValue
 ADVERTENCIA: Loading FXML document with JavaFX API of version 24.0.1 by JavaFX runtime of version 8.0.202
-nov 12, 2025 6:38:24 PM controlador.Controlador initialize
+nov 12, 2025 7:49:05 PM controlador.Controlador initialize
 INFORMACIÓN: Aplicación inicializada, DAO configurado a MySQL.
 ? Reteniendo conexión durante 5 segundos...
-nov 12, 2025 6:38:24 PM controlador.Controlador login
+nov 12, 2025 7:49:05 PM controlador.Controlador login
 INFORMACIÓN: Usuario autenticado: lucas_admin
-nov 12, 2025 6:38:25 PM javafx.fxml.FXMLLoader$ValueElement processValue
+nov 12, 2025 7:49:06 PM javafx.fxml.FXMLLoader$ValueElement processValue
 ADVERTENCIA: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 8.0.202
-nov 12, 2025 6:38:25 PM controlador.Controlador initialize
+nov 12, 2025 7:49:06 PM controlador.Controlador initialize
 INFORMACIÓN: Aplicación inicializada, DAO configurado a MySQL.
-nov 12, 2025 6:38:25 PM controlador.Controlador initialize
+nov 12, 2025 7:49:06 PM controlador.Controlador initialize
 INFORMACIÓN: Aplicación inicializada, DAO configurado a MySQL.
-nov 12, 2025 6:38:25 PM javafx.fxml.FXMLLoader$ValueElement processValue
+nov 12, 2025 7:49:06 PM javafx.fxml.FXMLLoader$ValueElement processValue
 ADVERTENCIA: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 8.0.202
-nov 12, 2025 6:38:25 PM controlador.Controlador initialize
+nov 12, 2025 7:49:06 PM controlador.Controlador initialize
 INFORMACIÓN: Aplicación inicializada, DAO configurado a MySQL.
-nov 12, 2025 6:38:25 PM javafx.fxml.FXMLLoader$ValueElement processValue
+nov 12, 2025 7:49:06 PM javafx.fxml.FXMLLoader$ValueElement processValue
 ADVERTENCIA: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 8.0.202
-nov 12, 2025 6:38:25 PM controlador.Controlador initialize
+nov 12, 2025 7:49:06 PM controlador.Controlador initialize
 INFORMACIÓN: Aplicación inicializada, DAO configurado a MySQL.
-nov 12, 2025 6:38:26 PM javafx.fxml.FXMLLoader$ValueElement processValue
+nov 12, 2025 7:49:07 PM javafx.fxml.FXMLLoader$ValueElement processValue
 ADVERTENCIA: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 8.0.202
-nov 12, 2025 6:38:26 PM controlador.Controlador initialize
+nov 12, 2025 7:49:07 PM controlador.Controlador initialize
 INFORMACIÓN: Aplicación inicializada, DAO configurado a MySQL.
-nov 12, 2025 6:38:26 PM javafx.fxml.FXMLLoader$ValueElement processValue
+nov 12, 2025 7:49:07 PM javafx.fxml.FXMLLoader$ValueElement processValue
 ADVERTENCIA: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 8.0.202
-nov 12, 2025 6:38:26 PM controlador.Controlador initialize
+nov 12, 2025 7:49:07 PM controlador.Controlador initialize
 INFORMACIÓN: Aplicación inicializada, DAO configurado a MySQL.
 ]]></system-err>
 </testsuite>
