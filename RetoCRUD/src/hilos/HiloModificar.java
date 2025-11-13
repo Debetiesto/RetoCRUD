@@ -5,8 +5,9 @@
  */
 package hilos;
 
-import controlador.Controlador;
+//import controlador.Controlador;
 import controlador.Dao;
+import controlador.MostrarDatosControlador;
 import javafx.application.Platform;
 import modelo.Administrador;
 import modelo.Usuario;
@@ -18,7 +19,7 @@ import modelo.Usuario;
 public class HiloModificar implements Runnable {
 
     private Dao dao;
-    private Controlador cont;
+    private MostrarDatosControlador cont;
     private Object persona;
 
     /**
@@ -27,7 +28,7 @@ public class HiloModificar implements Runnable {
      * @param cont
      * @param persona 
      */
-    public HiloModificar(Dao dao, Controlador cont, Object persona) {
+    public HiloModificar(Dao dao, MostrarDatosControlador cont, Object persona) {
         this.dao = dao;
         this.cont = cont;
         this.persona = persona;

@@ -10,7 +10,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="244.0" prefWidth="397.0" styleClass="background" stylesheets="@../css/estilo.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.Controlador">
+<AnchorPane id="AnchorPane" prefHeight="244.0" prefWidth="397.0" styleClass="background" stylesheets="@../css/estilo.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.LoginControlador">
     <children>
         <Label layoutX="85.0" layoutY="98.0" minHeight="16" minWidth="42.0" prefHeight="18.0" prefWidth="42.0" text="Email:" />
       <Label layoutX="85.0" layoutY="146.0" minHeight="16" minWidth="69" text="Contraseña:" />
