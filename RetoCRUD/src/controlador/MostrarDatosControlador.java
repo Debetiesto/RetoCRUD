@@ -111,7 +111,8 @@ public class MostrarDatosControlador implements Initializable {
      * Método que llama al método de modificar datos de la tabla cuando se da al
      * botón de "modificar datos usuario"
      *
-     * @param event
+     * @param event parámetro que necesita este método
+     * para el funcionamiento del botón previamente mencionado
      */
     @FXML
     private void modificarDatosTabla(ActionEvent event) {
@@ -122,7 +123,8 @@ public class MostrarDatosControlador implements Initializable {
      * Método que llama al método de modificar datos de usuario cuando se da al
      * botón de "modificar datos"
      *
-     * @param event
+     * @param event parámetro que necesita este método
+     * para el funcionamiento del botón previamente mencionado
      */
     @FXML
     private void modificarFieldsUsuario(ActionEvent event) {
@@ -133,17 +135,43 @@ public class MostrarDatosControlador implements Initializable {
      * Método que llama al método de modificar datos de administrador cuando se
      * da al botón de "modificar datos"
      *
-     * @param event
+     * @param event parámetro que necesita este método
+     * para el funcionamiento del botón previamente mencionado
      */
     @FXML
     private void modificarFieldAdmin(ActionEvent event) {
         modificarDatosAdmin();
     }
 
+        /**
+     * Método que llama al método de borrar cuenta de usuario en el panel de
+     * usuario cuando se da al botón "borrar cuenta"
+     *
+     * @param event parámetro que necesita este método
+     * para el funcionamiento del botón previamente mencionado
+     */
+    @FXML
+    private void borrarEnVistaUsuario(ActionEvent event) {
+        borrarCuenta();
+    }
+
+    /**
+     * Método que borra el usuario de la tabla en el panel de admin cuando se da
+     * al botón de "borrar usuario"
+     *
+     * @param event parámetro que necesita este método
+     * para el funcionamiento del botón previamente mencionado
+     */
+    @FXML
+    private void borrarEnVistaAdmin(ActionEvent event) {
+        borrarUsuario();
+    }
+    
     /**
      * Método que llama al método de cerrar sesión cuando se
      * da al botón de "cerrar sesisón" en el panel de admin
-     * @param event 
+     * @param event parámetro que necesita este método
+     * para el funcionamiento del botón previamente mencionado
      */
     @FXML
     private void cerrarSesionAdmin(ActionEvent event) {
@@ -153,7 +181,8 @@ public class MostrarDatosControlador implements Initializable {
         /**
      * Método que llama al método de cerrar sesión cuando se
      * da al botón de "cerrar sesisón" en el panel de usuario
-     * @param event 
+     * @param event parámetro que necesita este método
+     * para el funcionamiento del botón previamente mencionado
      */
     @FXML
     private void cerrarSesionUsu(ActionEvent event){
@@ -162,8 +191,9 @@ public class MostrarDatosControlador implements Initializable {
 
     /**
      * Método que inicializa la ventana
-     * @param location
-     * @param resources 
+     * @param location es la ubicación absoluta del archivo FXML que está 
+     * asociado con este controlador
+     * @param resources parámetro para adaptar la aplicación a diferentes idiomas
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -173,9 +203,12 @@ public class MostrarDatosControlador implements Initializable {
     /**
      * Método que se encarga de rellenar los datos en los fields
      * y demás, con varias comprobaciones
-     * @param perLog
-     * @param esAdmin
-     * @param dao 
+     * @param perLog parámetro que requiere este método para identificar el
+     * usuario que ha iniciado sesión en la aplicación
+     * @param esAdmin parámetro que requiere este método para verificar si el 
+     * usuario que ha iniciado sesión es administrador o no
+     * @param dao parámetro que requiere este método para que no se pierdan
+     * los datos del dao
      */
     public void setDatos(Perfil perLog, boolean esAdmin, Dao dao) {
         this.perLog = perLog;
@@ -205,7 +238,8 @@ public class MostrarDatosControlador implements Initializable {
     /**
      * Método que inserta los datos del admin logueado que encuentra en la base de datos
      * en los fields.
-     * @param admin 
+     * @param admin parámetro que requiere este método para poder insertar
+     * los datos del usuario logeado en sus respectivos lugares
      */
     private void setupVistaAdmin(Administrador admin) {
         PaneAdmin.setVisible(true);
@@ -218,7 +252,8 @@ public class MostrarDatosControlador implements Initializable {
     /**
      * Método que inserta los datos del usuario logeado que encuentra en la base de datos
      * en los fields.
-     * @param usu 
+     * @param usu parámetro que requiere este método para poder insertar
+     * los datos del usuario logeado en sus respectivos lugares
      */
     private void setupVistaUsuario(Usuario usu) {
         PaneAdmin.setVisible(false);
@@ -234,7 +269,8 @@ public class MostrarDatosControlador implements Initializable {
     
     /**
      * Método que inicia el hilo de cargar datos del usuario logeado
-     * @param per 
+     * @param per parámetro que requiere este método para cargar los datos
+     * del usuario en el hilo
      */
     private void cargarDatos(Usuario per) {
         mostrarPopupCarga();
@@ -246,7 +282,8 @@ public class MostrarDatosControlador implements Initializable {
     /**
      * Método que inserta los datos de los usuarios en la
      * tabla de el panel de admin
-     * @param usuarios 
+     * @param usuarios parámetro que requiere este método para devolver una
+     * lista con todos los usuarios y que se carguen en la tabla
      */
     public void agregarDatosTabla(List<Usuario> usuarios) {
         Platform.runLater(() -> {
@@ -390,28 +427,6 @@ public class MostrarDatosControlador implements Initializable {
     }
 
     /**
-     * Método que llama al método de borrar cuenta de usuario en el panel de
-     * usuario cuando se da al botón "borrar cuenta"
-     *
-     * @param event
-     */
-    @FXML
-    private void borrarEnVistaUsuario(ActionEvent event) {
-        borrarCuenta();
-    }
-
-    /**
-     * Método que borra el usuario de la tabla en el panel de admin cuando se da
-     * al botón de "borrar usuario"
-     *
-     * @param event
-     */
-    @FXML
-    private void borrarEnVistaAdmin(ActionEvent event) {
-        borrarUsuario();
-    }
-
-    /**
      * Método para borrar un usuario de la base de datos en la vista de usuario
      */
     private void borrarCuenta() {
@@ -448,7 +463,8 @@ public class MostrarDatosControlador implements Initializable {
     /**
      * Hilo de modificar el usuario
      *
-     * @param usuario
+     * @param usuario parámetro que necesita este método para que 
+     * dentro del hilo se identifique al usuario y modificarlo
      */
     private void actualizarUsuarioEnHilo(Usuario usuario) {
         HiloModificar h = new HiloModificar(dao, this, usuario);
@@ -459,7 +475,8 @@ public class MostrarDatosControlador implements Initializable {
     /**
      * Hilo de modificar el administrador
      *
-     * @param admin
+     * @param admin parámetro que necesita este método para que 
+     * dentro del hilo se identifique al admin y modificarlo
      */
     private void actualizarAdminEnHilo(Administrador admin) {
         HiloModificar h = new HiloModificar(dao, this, admin);
@@ -470,7 +487,8 @@ public class MostrarDatosControlador implements Initializable {
     /**
      * Método para mostrar un popup con la información necesaria del evento
      *
-     * @param mensaje
+     * @param mensaje parámetro que requiere este método para
+     * quye se muestre el mensaje deseado por pantalla
      */
     public void mostrarMensaje(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -482,7 +500,8 @@ public class MostrarDatosControlador implements Initializable {
 
     /**
      * Método que inicia el hilo de eliminar datos de un usuario
-     * @param usu 
+     * @param usu parámetro que necesita este método para que 
+     * dentro del hilo se identifique al usuario y eliminarlo
      */
     private void hiloEliminarDatos(Usuario usu) {
         HiloBorrar h = new HiloBorrar(dao, this, usu);
