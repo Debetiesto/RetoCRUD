@@ -24,9 +24,9 @@ public class HiloModificar implements Runnable {
 
     /**
      * Constructor del hilo modificar
-     * @param dao
-     * @param cont
-     * @param persona 
+     * @param dao parámetro del dao que necesita recibir este constructor
+     * @param cont parámetro del controlador de mostrar datos que necesita recibir este constructor
+     * @param persona parámetro de un objeto que necesita recibir este constructor
      */
     public HiloModificar(Dao dao, MostrarDatosControlador cont, Object persona) {
         this.dao = dao;

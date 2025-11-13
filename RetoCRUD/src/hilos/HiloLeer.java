@@ -24,9 +24,9 @@ public class HiloLeer implements Runnable {
 
     /**
      * Constructor del hilo leer
-     * @param dao
-     * @param cont
-     * @param usu 
+     * @param dao parámetro del dao que necesita recibir este constructor
+     * @param cont parámetro del controlador de mostrar datos que necesita recibir este constructor
+     * @param usu parámetro de un objeto de usuario que necesita recibir este constructor
      */
     public HiloLeer(Dao dao, MostrarDatosControlador cont, Usuario usu) {
         this.dao = dao;

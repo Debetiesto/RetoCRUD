@@ -23,9 +23,9 @@ public class HiloBorrar implements Runnable {
 
     /**
      * Constructor del hilo
-     * @param dao
-     * @param cont
-     * @param usu 
+     * @param dao parámetro del dao que necesita recibir este constructor
+     * @param cont parámetro del controlador de mostrar datos que necesita recibir este constructor
+     * @param usu parámetro de un objeto de usuario que necesita recibir este constructor
      */
     public HiloBorrar(Dao dao, MostrarDatosControlador cont, Usuario usu) {
         this.dao = dao;
