@@ -68,8 +68,9 @@ public class DaoImplementacionMysql implements Dao {
     /**
      * Método de inicio de sesión tanto de usuario
      * como de administrador
-     * @param per
-     * @return 
+     * @param per es el parámetro que necesita este método para pasarle a este
+     * método y comprobar las credenciales que se introducen
+     * @return Devuelve un objeto del perfil que se ha logeado
      */
     @Override
     public Perfil login(Perfil per) {
@@ -141,7 +142,7 @@ public class DaoImplementacionMysql implements Dao {
     /**
      * Método para cargar los datos de los usuarios 
      * en la tabla del administrador
-     * @return 
+     * @return Devuelve una lista de todos los usuarios
      */
     @Override
     public List<Usuario> cargarDatosTabla() {
@@ -177,7 +178,7 @@ public class DaoImplementacionMysql implements Dao {
      * que ha iniciado sesión es administrador o no
      * @param codU es el parámetro que recibe el método para comprobar si el codigo del usuario
      * que ha tratado de iniciar sesión coincide con un código de administrador.
-     * @return 
+     * @return Devuelve un booleano de si el usuario encontrado es admin o no
      */
     @Override
     public boolean esAdministrador(int codU) {
@@ -201,8 +202,9 @@ public class DaoImplementacionMysql implements Dao {
     /**
      * Método para modificar un usuario tanto en el panel del usuario
      * como en la tabla que se muestra al administrador
-     * @param usu
-     * @return 
+     * @param usu es el parámetro que necesita este método para modificar los datos del usuario
+     * que recibe este método
+     * @return Devuelve un booleano de si se modificó el usuario o no
      */
     @Override
     public boolean updateUsuario(Usuario usu) {
@@ -240,8 +242,8 @@ public class DaoImplementacionMysql implements Dao {
     /**
      * Lista de usuarios para rellenar la tabla de la vista
      * de administrador
-     * @param usu
-     * @return 
+     * @param usu es el parámetro que necesita este método para leer todos los usuarios
+     * @return Devuelve una lista con todos los usuarios
      */
     @Override
     public List<Usuario> listaUsuarios(Usuario usu) {
@@ -284,8 +286,9 @@ public class DaoImplementacionMysql implements Dao {
 
     /**
      * Método para actualizar los 3 fields del administrador
-     * @param admin
-     * @return 
+     * @param admin es el parámetro que necesita este método para modificar los datos del administrador
+     * que recibe este método
+     * @return Devuelve un booleano de si se modificó el admin o no
      */
     @Override
     public boolean updateAdmin(Administrador admin) {
@@ -315,8 +318,9 @@ public class DaoImplementacionMysql implements Dao {
     /**
      * Método para borrar un usuario tanto en el panel de usuario
      * como en la tabla que se muestra al administrador
-     * @param codU
-     * @return 
+     * @param codU es el parámetro que necesita este método para borrar un usuario por su
+     * código, ya que al ser único no tiene pérdida
+     * @return Devuelve un booleano de si se eliminó el usuario o no
      */
     @Override
     public boolean borrarUsuario(int codU) {
@@ -344,9 +348,10 @@ public class DaoImplementacionMysql implements Dao {
 
     /**
      * Método para registrar usuarios en la base de datos
-     * @param u
-     * @return
-     * @throws UsuarioExisteException
+     * @param u es el parámetro que necesita este método para recibir el nuevo
+     * objeto de usuario que va a recibir
+     * @return Devuelve un booleano de si se ha modificado algún dato o no
+     * @throws UsuarioExisteException Lanza esta excepción si el usuario ya existe
      */
     @Override
     public boolean insertarUsuario(Usuario u) throws UsuarioExisteException {

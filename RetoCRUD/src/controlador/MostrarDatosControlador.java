@@ -140,21 +140,43 @@ public class MostrarDatosControlador implements Initializable {
         modificarDatosAdmin();
     }
 
+    /**
+     * Método que llama al método de cerrar sesión cuando se
+     * da al botón de "cerrar sesisón" en el panel de admin
+     * @param event 
+     */
     @FXML
     private void cerrarSesionAdmin(ActionEvent event) {
         cerrarSesionGeneral(event);
     }
     
+        /**
+     * Método que llama al método de cerrar sesión cuando se
+     * da al botón de "cerrar sesisón" en el panel de usuario
+     * @param event 
+     */
     @FXML
     private void cerrarSesionUsu(ActionEvent event){
         cerrarSesionGeneral(event);
     }
 
+    /**
+     * Método que inicializa la ventana
+     * @param location
+     * @param resources 
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         logger.info("MostrarDatosControlador inicializado (esperando datos de login).");
     }
 
+    /**
+     * Método que se encarga de rellenar los datos en los fields
+     * y demás, con varias comprobaciones
+     * @param perLog
+     * @param esAdmin
+     * @param dao 
+     */
     public void setDatos(Perfil perLog, boolean esAdmin, Dao dao) {
         this.perLog = perLog;
         this.dao = dao;
@@ -180,6 +202,11 @@ public class MostrarDatosControlador implements Initializable {
         }
     }
 
+    /**
+     * Método que inserta los datos del admin logueado que encuentra en la base de datos
+     * en los fields.
+     * @param admin 
+     */
     private void setupVistaAdmin(Administrador admin) {
         PaneAdmin.setVisible(true);
         PaneUsuario.setVisible(false);
@@ -188,6 +215,11 @@ public class MostrarDatosControlador implements Initializable {
         txtCuenta.setText(admin.getCuentaCorriente());
     }
 
+    /**
+     * Método que inserta los datos del usuario logeado que encuentra en la base de datos
+     * en los fields.
+     * @param usu 
+     */
     private void setupVistaUsuario(Usuario usu) {
         PaneAdmin.setVisible(false);
         PaneUsuario.setVisible(true);
@@ -199,7 +231,11 @@ public class MostrarDatosControlador implements Initializable {
         txtTel.setText(String.valueOf(usu.getTelefono()));
         txtNTarjeta.setText(String.valueOf(usu.getNumTarjeta()));
     }
-
+    
+    /**
+     * Método que inicia el hilo de cargar datos del usuario logeado
+     * @param per 
+     */
     private void cargarDatos(Usuario per) {
         mostrarPopupCarga();
         HiloLeer h1 = new HiloLeer(dao, this, per);
@@ -207,6 +243,11 @@ public class MostrarDatosControlador implements Initializable {
         hilo.start();
     }
 
+    /**
+     * Método que inserta los datos de los usuarios en la
+     * tabla de el panel de admin
+     * @param usuarios 
+     */
     public void agregarDatosTabla(List<Usuario> usuarios) {
         Platform.runLater(() -> {
             ObservableList<Usuario> obsList = FXCollections.observableArrayList(usuarios);
@@ -439,6 +480,10 @@ public class MostrarDatosControlador implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Método que inicia el hilo de eliminar datos de un usuario
+     * @param usu 
+     */
     private void hiloEliminarDatos(Usuario usu) {
         HiloBorrar h = new HiloBorrar(dao, this, usu);
         Thread hilo = new Thread(h);
