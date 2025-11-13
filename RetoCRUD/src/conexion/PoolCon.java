@@ -53,8 +53,8 @@ public class PoolCon {
 
     /**
      * Método que inicia la conexión con la base de datos
-     * @return
-     * @throws SQLException 
+     * @return devuelve la conexión con el archivo de configuración
+     * @throws SQLException es una excepción genérica de sql
      */
     public static Connection getConnection() throws SQLException {
         return dataSource.getConnection();
@@ -76,7 +76,8 @@ public class PoolCon {
 
     /**
      * Método que duerme el hilo durante unos segundos
-     * @param con 
+     * @param con parámetro que necesita el método para
+     * dormir el hilo
      */
     public static void pausarConexion(Connection con) {
         if (con == null) {

@@ -21,8 +21,8 @@ public class Conector {
 
     /**
      * Método que inicia el pool de conexiones
-     * @return
-     * @throws SQLException 
+     * @return devuelve la conexión con el pool de conexiones
+     * @throws SQLException es una excepción genérica de sql
      */
     public static Connection open() throws SQLException {
         return PoolCon.getConnection();
@@ -30,7 +30,8 @@ public class Conector {
 
     /**
      * Método que cierra la conexión con la base de datos
-     * @param con 
+     * @param con parámetro que necesita este método para
+     * cerrar la conexión
      */
     public static void close(Connection con) {
         try {
