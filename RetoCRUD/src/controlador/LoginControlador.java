@@ -44,6 +44,11 @@ public class LoginControlador implements Initializable {
 
     private Perfil perLog;
 
+    /**
+     * Método qee inicia el dao
+     * @param location
+     * @param resources 
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         dao = new DaoImplementacionMysql();
@@ -103,7 +108,12 @@ public class LoginControlador implements Initializable {
             mostrarMensaje(Alert.AlertType.ERROR, "Error de Sistema", "Ocurrió un error al intentar iniciar sesión.");
         }
     }
-
+    /**
+     * Método que muestra la ventana con los datos del usuario logeado
+     *
+     * @param perLog
+     * @param esAdmin
+     */
     private void mostrarVentanaDatos(Perfil perLog, boolean esAdmin) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/VistaMostrarDatos.fxml"));
@@ -144,6 +154,12 @@ public class LoginControlador implements Initializable {
         }
     }
 
+    /**
+     * Método para mostrar un popup con la información necesaria del evento
+     * @param type
+     * @param title
+     * @param content 
+     */
     private void mostrarMensaje(Alert.AlertType type, String title, String content) {
         Alert alert = new Alert(type);
         alert.setTitle(title);

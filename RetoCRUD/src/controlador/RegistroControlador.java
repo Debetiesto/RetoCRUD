@@ -53,10 +53,20 @@ public class RegistroControlador implements Initializable {
 
     private Dao dao;
 
+    /**
+     * Método para pasar el dao inicializado al registro
+     * @param dao 
+     */
     public void setDao(Dao dao) {
         this.dao = dao;
     }
 
+    /**
+     * Método que inicializa el controlador de registro
+     * y deja seleccionado el primer elemento del comboBox
+     * @param location
+     * @param resources 
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         desplegableGenero.getItems().setAll(Genero.values());
