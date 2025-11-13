@@ -46,8 +46,9 @@ public class LoginControlador implements Initializable {
 
     /**
      * Método qee inicia el dao
-     * @param location
-     * @param resources 
+     * @param location es la ubicación absoluta del archivo FXML que está 
+     * asociado con este controlador
+     * @param resources parámetro para adaptar la aplicación a diferentes idiomas
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -59,7 +60,8 @@ public class LoginControlador implements Initializable {
      * Método que inicia el dao y llama al método de login cuando se le da al
      * botón de login
      *
-     * @param event
+     * @param event parámetro que necesita este método
+     * para el funcionamiento del botón previamente mencionado
      */
     @FXML
     private void loginSQL(ActionEvent event) {
@@ -77,7 +79,8 @@ public class LoginControlador implements Initializable {
      * Método que llama a la ventana de registro cuando se da al label de
      * registrar
      *
-     * @param event
+     * @param event parámetro que necesita este método
+     * para el funcionamiento del botón previamente mencionado
      */
     @FXML
     private void venRegistrar(ActionEvent event) {
@@ -87,6 +90,7 @@ public class LoginControlador implements Initializable {
     /**
      * Método de login, diferenciando el usuario que ha entrado es decir, si es
      * admin o si no.
+     * 
      */
     private void login(String email, String contra) {
         try {
@@ -94,8 +98,8 @@ public class LoginControlador implements Initializable {
             perf.setEmail(email);
             perf.setContra(contra);
 
-            Perfil perLog = dao.login(perf);
-
+            perLog = dao.login(perf);
+             
             if (perLog == null) {
                 mostrarMensaje(Alert.AlertType.ERROR, "Acceso Denegado", "Email o contraseña incorrectos.");
             } else {
@@ -111,8 +115,10 @@ public class LoginControlador implements Initializable {
     /**
      * Método que muestra la ventana con los datos del usuario logeado
      *
-     * @param perLog
-     * @param esAdmin
+     * @param perLog parámetro que requiere este método para identificar al
+     * usuario que ha iniciado sesión
+     * @param esAdmin parámetro que requiere este método para comprobrar si el
+     * usuario que ha iniciado sesión es administrador o no
      */
     private void mostrarVentanaDatos(Perfil perLog, boolean esAdmin) {
         try {
@@ -156,9 +162,12 @@ public class LoginControlador implements Initializable {
 
     /**
      * Método para mostrar un popup con la información necesaria del evento
-     * @param type
-     * @param title
-     * @param content 
+     * @param type parámetro que necesita este método para definir el típo
+     * de alerta que se mostrará
+     * @param title parámetro que necesita este método para definir el título
+     * de la alerta
+     * @param content parámetro que necesita este método para definir el contenido
+     * qu tendrá la alerta
      */
     private void mostrarMensaje(Alert.AlertType type, String title, String content) {
         Alert alert = new Alert(type);
