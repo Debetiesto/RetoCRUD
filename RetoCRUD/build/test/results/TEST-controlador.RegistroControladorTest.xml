@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="DESKTOP-JL24M65" name="controlador.LoginControladorTest" skipped="0" tests="3" time="8.753" timestamp="2025-11-13T19:33:42">
+<testsuite errors="0" failures="0" hostname="DESKTOP-JL24M65" name="controlador.RegistroControladorTest" skipped="0" tests="2" time="8.363" timestamp="2025-11-13T20:45:36">
   <properties>
     <property name="libs.jsp-compiler.javadoc" value="" />
     <property name="netbeans.autoupdate.country" value="ES" />
@@ -11,7 +11,7 @@
     <property name="manifest.custom.codebase" value="*" />
     <property name="javafx.signing.blob" value="false" />
     <property name="libs.spring-webmvc4.0.src" value="" />
-    <property name="javac.includes" value="controlador/LoginControladorTest.java" />
+    <property name="javac.includes" value="controlador/RegistroControladorTest.java" />
     <property name="ant.core.lib" value="C:\Program Files\NetBeans 8.2\extide\ant\lib\ant.jar" />
     <property name="javadoc.windowtitle" value="" />
     <property name="libs.jsp-compilation.javadoc" value="" />
@@ -47,7 +47,7 @@
     <property name="libs.hamcrest.classpath" value="C:\Program Files\NetBeans 8.2\platform\modules\ext\hamcrest-core-1.3.jar" />
     <property name="libs.javac-api.javadoc" value="" />
     <property name="os.name" value="Windows 10" />
-    <property name="test.class" value="controlador.LoginControladorTest" />
+    <property name="test.class" value="controlador.RegistroControladorTest" />
     <property name="libs.beans-binding.classpath" value="C:\Program Files\NetBeans 8.2\java\modules\ext\beansbinding-1.2.1.jar" />
     <property name="libs.javaee-endorsed-api-7.0.maven-pom" value="" />
     <property name="ap.proc.none.internal" value="" />
@@ -70,7 +70,7 @@
     <property name="libs.j2me_common_ant.maven-pom" value="" />
     <property name="libs.spring-webmvc3.0.maven-pom" value="" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner controlador.LoginControladorTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\build\test\results\TEST-controlador.LoginControladorTest.xml crashfile=C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\build\junitvmwatcher286724043530708860.properties propsfile=C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\build\junit8252726557620808214.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner controlador.RegistroControladorTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\build\test\results\TEST-controlador.RegistroControladorTest.xml crashfile=C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\build\junitvmwatcher7633121042017681172.properties propsfile=C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\build\junit4459181937981643766.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="build.sysclasspath" value="ignore" />
@@ -97,7 +97,7 @@
     <property name="javafx.deploy.includeDT" value="true" />
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_202\jre\lib\endorsed" />
     <property name="libs.groovy-all.src" value="" />
-    <property name="test.includes" value="controlador/LoginControladorTest.java" />
+    <property name="test.includes" value="controlador/RegistroControladorTest.java" />
     <property name="netbeans.dynamic.classpath" value="C:\Program Files\NetBeans 8.2\platform\core\asm-all-5.0.1.jar;C:\Program Files\NetBeans 8.2\platform\core\core-base.jar;C:\Program Files\NetBeans 8.2\platform\core\core.jar;C:\Program Files\NetBeans 8.2\platform\core\org-netbeans-libs-asm.jar;C:\Program Files\NetBeans 8.2\platform\core\org-openide-filesystems-compat8.jar;C:\Program Files\NetBeans 8.2\platform\core\org-openide-filesystems.jar;C:\Program Files\NetBeans 8.2\platform\core\locale\core-base_ja.jar;C:\Program Files\NetBeans 8.2\platform\core\locale\core-base_pt_BR.jar;C:\Program Files\NetBeans 8.2\platform\core\locale\core-base_ru.jar;C:\Program Files\NetBeans 8.2\platform\core\locale\core-base_zh_CN.jar;C:\Program Files\NetBeans 8.2\platform\core\locale\core_ja.jar;C:\Program Files\NetBeans 8.2\platform\core\locale\core_pt_BR.jar;C:\Program Files\NetBeans 8.2\platform\core\locale\core_ru.jar;C:\Program Files\NetBeans 8.2\platform\core\locale\core_zh_CN.jar;C:\Program Files\NetBeans 8.2\platform\core\locale\org-netbeans-libs-asm_ja.jar;C:\Program Files\NetBeans 8.2\platform\core\locale\org-netbeans-libs-asm_pt_BR.jar;C:\Program Files\NetBeans 8.2\platform\core\locale\org-netbeans-libs-asm_ru.jar;C:\Program Files\NetBeans 8.2\platform\core\locale\org-netbeans-libs-asm_zh_CN.jar;C:\Program Files\NetBeans 8.2\platform\core\locale\org-openide-filesystems-compat8_ja.jar;C:\Program Files\NetBeans 8.2\platform\core\locale\org-openide-filesystems-compat8_pt_BR.jar;C:\Program Files\NetBeans 8.2\platform\core\locale\org-openide-filesystems-compat8_ru.jar;C:\Program Files\NetBeans 8.2\platform\core\locale\org-openide-filesystems-compat8_zh_CN.jar;C:\Program Files\NetBeans 8.2\platform\core\locale\org-openide-filesystems_ja.jar;C:\Program Files\NetBeans 8.2\platform\core\locale\org-openide-filesystems_pt_BR.jar;C:\Program Files\NetBeans 8.2\platform\core\locale\org-openide-filesystems_ru.jar;C:\Program Files\NetBeans 8.2\platform\core\locale\org-openide-filesystems_zh_CN.jar;C:\Program Files\NetBeans 8.2\nb\core\org-netbeans-upgrader.jar;C:\Program Files\NetBeans 8.2\nb\core\locale\core_nb.jar;C:\Program Files\NetBeans 8.2\nb\core\locale\core_nb_ja.jar;C:\Program Files\NetBeans 8.2\nb\core\locale\core_nb_pt_BR.jar;C:\Program Files\NetBeans 8.2\nb\core\locale\core_nb_ru.jar;C:\Program Files\NetBeans 8.2\nb\core\locale\core_nb_zh_CN.jar;C:\Program Files\NetBeans 8.2\nb\core\locale\org-netbeans-upgrader_ja.jar;C:\Program Files\NetBeans 8.2\nb\core\locale\org-netbeans-upgrader_pt_BR.jar;C:\Program Files\NetBeans 8.2\nb\core\locale\org-netbeans-upgrader_ru.jar;C:\Program Files\NetBeans 8.2\nb\core\locale\org-netbeans-upgrader_zh_CN.jar" />
     <property name="jnlp.enabled" value="false" />
     <property name="java.vm.specification.version" value="1.8" />
@@ -116,7 +116,7 @@
     <property name="javac.debug" value="true" />
     <property name="javadoc.splitindex" value="true" />
     <property name="file.separator" value="\" />
-    <property name="javac.includesfile.binary" value="C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\null709275144" />
+    <property name="javac.includesfile.binary" value="C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\null1179387296" />
     <property name="libs.junit_4.maven-pom" value="" />
     <property name="mkdist.disabled" value="false" />
     <property name="javac.test.processorpath" value="C:\Program Files\Java\jdk1.8.0_202\jre/lib/javaws.jar:C:\Program Files\Java\jdk1.8.0_202\jre/lib/deploy.jar:C:\Program Files\Java\jdk1.8.0_202\jre/lib/plugin.jar:src/conector/Conector/mysql-connector-java-8.0.15.jar:lib/commons-dbcp2-2.13.0/commons-dbcp2-2.13.0.jar:C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\lib\TestFXLibrary\hamcrest-junit-2.0.0.0.jar;C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\lib\TestFXLibrary\java-hamcrest-2.0.0.0.jar;C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\lib\TestFXLibrary\testfx-core-4.0.13-alpha.jar;C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\lib\TestFXLibrary\testfx-junit-4.0.13-alpha.jar:C:\Program Files\NetBeans 8.2\platform\modules\ext\junit-4.12.jar:lib/commons-pool2-2.12.1/commons-pool2-2.12.1.jar:lib/commons-logging-1.3.5/commons-logging-1.3.5.jar:build/classes:C:\Program Files\NetBeans 8.2\platform\modules\ext\junit-4.12.jar:C:\Program Files\NetBeans 8.2\platform\modules\ext\hamcrest-core-1.3.jar" />
@@ -130,7 +130,7 @@
     <property name="libs.hibernate4-persistencemodelgen.javadoc" value="" />
     <property name="libs.jaxb.javadoc" value="C:\Program Files\NetBeans 8.2\ide\docs\jaxb-api-doc.zip" />
     <property name="libs.struts.classpath" value="C:\Program Files\NetBeans 8.2\enterprise\modules\ext\struts\antlr-2.7.2.jar;C:\Program Files\NetBeans 8.2\enterprise\modules\ext\struts\bsf-2.3.0.jar;C:\Program Files\NetBeans 8.2\enterprise\modules\ext\struts\commons-beanutils-1.8.0.jar;C:\Program Files\NetBeans 8.2\enterprise\modules\ext\struts\commons-chain-1.2.jar;C:\Program Files\NetBeans 8.2\enterprise\modules\ext\struts\commons-digester-1.8.jar;C:\Program Files\NetBeans 8.2\enterprise\modules\ext\struts\commons-fileupload-1.1.1.jar;C:\Program Files\NetBeans 8.2\enterprise\modules\ext\struts\commons-io-1.1.jar;C:\Program Files\NetBeans 8.2\enterprise\modules\ext\struts\commons-logging-1.0.4.jar;C:\Program Files\NetBeans 8.2\enterprise\modules\ext\struts\commons-validator-1.3.1.jar;C:\Program Files\NetBeans 8.2\enterprise\modules\ext\struts\jstl-1.0.2.jar;C:\Program Files\NetBeans 8.2\enterprise\modules\ext\struts\oro-2.0.8.jar;C:\Program Files\NetBeans 8.2\enterprise\modules\ext\struts\standard-1.0.6.jar;C:\Program Files\NetBeans 8.2\enterprise\modules\ext\struts\struts-core-1.3.10.jar;C:\Program Files\NetBeans 8.2\enterprise\modules\ext\struts\struts-el-1.3.10.jar;C:\Program Files\NetBeans 8.2\enterprise\modules\ext\struts\struts-extras-1.3.10.jar;C:\Program Files\NetBeans 8.2\enterprise\modules\ext\struts\struts-faces-1.3.10.jar;C:\Program Files\NetBeans 8.2\enterprise\modules\ext\struts\struts-mailreader-dao-1.3.10.jar;C:\Program Files\NetBeans 8.2\enterprise\modules\ext\struts\struts-scripting-1.3.10.jar;C:\Program Files\NetBeans 8.2\enterprise\modules\ext\struts\struts-taglib-1.3.10.jar;C:\Program Files\NetBeans 8.2\enterprise\modules\ext\struts\struts-tiles-1.3.10.jar" />
-    <property name="javac.includes.binary" value="C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\build\test\classes\controlador\LoginControladorTest.class" />
+    <property name="javac.includes.binary" value="C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\build\test\classes\controlador\RegistroControladorTest.class" />
     <property name="ant.home" value="C:\Program Files\NetBeans 8.2\extide\ant" />
     <property name="libs.junit_4.src" value="C:\Program Files\NetBeans 8.2\platform\docs\junit-4.12-sources.jar" />
     <property name="javafx.run.height" value="600" />
@@ -457,32 +457,18 @@
     <property name="javafx.deploy.installpermanently" value="false" />
     <property name="libs.javaee-web-api-7.0.javadoc" value="C:\Program Files\NetBeans 8.2\enterprise\docs\javaee-doc-api.jar" />
   </properties>
-  <testcase classname="controlador.LoginControladorTest" name="testInitialize" time="0.202" />
-  <testcase classname="controlador.LoginControladorTest" name="testLoginUsuario" time="4.068" />
-  <testcase classname="controlador.LoginControladorTest" name="testLoginAdmin" time="3.718" />
-  <system-out><![CDATA[initialize
-Pool de conexiones inicializado.
-DEBUG hilo -> dao: controlador.DaoImplementacionMysql@7ea215ff | usu: Usuario{codU=1, genero=MUJER, numTarjeta=123456789}
-DEBUG hilo -> dao: controlador.DaoImplementacionMysql@468026fe | usu: null
+  <testcase classname="controlador.RegistroControladorTest" name="testRegistrar" time="7.391" />
+  <testcase classname="controlador.RegistroControladorTest" name="testSetDao" time="0.2" />
+  <system-out><![CDATA[Pool de conexiones inicializado.
+setDao
 ]]></system-out>
-  <system-err><![CDATA[nov 13, 2025 8:33:42 PM javafx.fxml.FXMLLoader$ValueElement processValue
+  <system-err><![CDATA[nov 13, 2025 9:45:37 PM javafx.fxml.FXMLLoader$ValueElement processValue
 ADVERTENCIA: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 8.0.202
-nov 13, 2025 8:33:42 PM controlador.LoginControlador initialize
+nov 13, 2025 9:45:37 PM controlador.LoginControlador initialize
 INFORMACIÓN: LoginControlador inicializado.
-nov 13, 2025 8:33:43 PM controlador.LoginControlador initialize
-INFORMACIÓN: LoginControlador inicializado.
-nov 13, 2025 8:33:46 PM javafx.fxml.FXMLLoader$ValueElement processValue
-ADVERTENCIA: Loading FXML document with JavaFX API of version 24.0.1 by JavaFX runtime of version 8.0.202
-nov 13, 2025 8:33:46 PM controlador.MostrarDatosControlador initialize
-INFORMACIÓN: MostrarDatosControlador inicializado (esperando datos de login).
-nov 13, 2025 8:33:47 PM javafx.fxml.FXMLLoader$ValueElement processValue
+nov 13, 2025 9:45:38 PM javafx.fxml.FXMLLoader$ValueElement processValue
 ADVERTENCIA: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 8.0.202
-nov 13, 2025 8:33:47 PM controlador.LoginControlador initialize
-INFORMACIÓN: LoginControlador inicializado.
-nov 13, 2025 8:33:50 PM javafx.fxml.FXMLLoader$ValueElement processValue
-ADVERTENCIA: Loading FXML document with JavaFX API of version 24.0.1 by JavaFX runtime of version 8.0.202
-nov 13, 2025 8:33:50 PM controlador.MostrarDatosControlador initialize
-INFORMACIÓN: MostrarDatosControlador inicializado (esperando datos de login).
-? Reteniendo conexión durante 5 segundos...
+nov 13, 2025 9:45:38 PM controlador.RegistroControlador initialize
+INFORMACIÓN: RegistroControlador inicializado.
 ]]></system-err>
 </testsuite>

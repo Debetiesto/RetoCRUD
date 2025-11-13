@@ -8,6 +8,8 @@ package controlador;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeoutException;
+import main.RetoCRUD;
 import modelo.Perfil;
 import modelo.Usuario;
 import org.junit.After;
@@ -16,19 +18,22 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
 /**
  *
  * @author luisv
  */
-public class MostrarDatosControladorTest extends ApplicationTest{
+public class MostrarDatosControladorTest extends ApplicationTest {
     
     public MostrarDatosControladorTest() {
     }
     
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass() throws TimeoutException {
+        FxToolkit.registerPrimaryStage();
+        FxToolkit.setupApplication(RetoCRUD.class);
     }
     
     @AfterClass
