@@ -41,7 +41,7 @@ import modelo.Usuario;
 
 /**
  *
- * @author 2dam
+ * @author Luis y Unai
  */
 public class MostrarDatosControlador implements Initializable {
 

@@ -25,7 +25,7 @@ import modelo.Perfil;
 
 /**
  *
- * @author 2dam
+ * @author Luis
  */
 public class LoginControlador implements Initializable {
 
