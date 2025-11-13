@@ -28,7 +28,7 @@ import modelo.Usuario;
 
 /**
  *
- * @author 2dam
+ * @author Luis y Unai
  */
 public class RegistroControlador implements Initializable {
 
@@ -55,7 +55,8 @@ public class RegistroControlador implements Initializable {
 
     /**
      * Método para pasar el dao inicializado al registro
-     * @param dao 
+     * @param dao parámetro que requiere este método para propagar
+     * el dao a este controlador
      */
     public void setDao(Dao dao) {
         this.dao = dao;
@@ -64,8 +65,9 @@ public class RegistroControlador implements Initializable {
     /**
      * Método que inicializa el controlador de registro
      * y deja seleccionado el primer elemento del comboBox
-     * @param location
-     * @param resources 
+     * @param location es la ubicación absoluta del archivo FXML que está 
+     * asociado con este controlador
+     * @param resources parámetro para adaptar la aplicación a diferentes idiomas
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -76,6 +78,8 @@ public class RegistroControlador implements Initializable {
 
     /**
      * Maneja el evento de registrar un nuevo usuario.
+     * @param event parámetro que necesita este método para
+     * realizar la acción de registrar un usuario
      */
     @FXML
     private void registrarUsuario(ActionEvent event) {
@@ -100,7 +104,6 @@ public class RegistroControlador implements Initializable {
 
             hiloRegistrar(nuevo);
 
-            // La transición se hace en el callback del hilo, pero mostramos éxito aquí
             mostrarMensaje(Alert.AlertType.INFORMATION, "Registro Exitoso", "Usuario registrado. Volviendo al login.");
 
         } catch (NumberFormatException e) {
@@ -113,6 +116,8 @@ public class RegistroControlador implements Initializable {
 
     /**
      * Hilo para registrar un nuevo usuario.
+     * @param nuevo parámetro que necesita este método para que 
+     * dentro del hilo se inserte un nuevo usuario
      */
     private void hiloRegistrar(Usuario nuevo) {
         HiloCrear h = new HiloCrear(dao, this, nuevo);
@@ -139,6 +144,12 @@ public class RegistroControlador implements Initializable {
 
     /**
      * Utilidad para mostrar alertas.
+     * @param type parámetro que necesita este método para definir el típo
+     * de alerta que se mostrará
+     * @param title parámetro que necesita este método para definir el título
+     * de la alerta
+     * @param content parámetro que necesita este método para definir el contenido
+     * qu tendrá la alerta
      */
     public void mostrarMensaje(Alert.AlertType type, String title, String content) {
         Alert alert = new Alert(type);
