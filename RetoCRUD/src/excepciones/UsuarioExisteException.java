@@ -13,7 +13,8 @@ public class UsuarioExisteException extends Exception {
 
     /**
      * Excepción de que un usuario ya existe en la base de datos
-     * @param mensaje 
+     * @param mensaje parámetro que necesita este método para lanzar el
+     * mensaje de la excepción
      */
     public UsuarioExisteException(String mensaje) {
         super(mensaje);
