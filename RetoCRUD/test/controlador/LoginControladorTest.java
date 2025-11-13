@@ -24,7 +24,7 @@ import static org.testfx.util.WaitForAsyncUtils.waitForFxEvents;
 
 /**
  *
- * @author luisv
+ * @author Luis
  */
 public class LoginControladorTest extends ApplicationTest {
 

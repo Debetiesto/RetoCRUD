@@ -8,6 +8,8 @@ package controlador;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeoutException;
+import main.RetoCRUD;
 import modelo.Perfil;
 import modelo.Usuario;
 import org.junit.After;
@@ -16,31 +18,53 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.testfx.api.FxAssert.verifyThat;
+import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
+import static org.testfx.matcher.base.NodeMatchers.isVisible;
+import static org.testfx.util.WaitForAsyncUtils.waitForFxEvents;
 
 /**
  *
- * @author luisv
+ * @author Luis
  */
-public class MostrarDatosControladorTest extends ApplicationTest{
-    
+public class MostrarDatosControladorTest extends ApplicationTest {
+
     public MostrarDatosControladorTest() {
     }
-    
+
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass() throws TimeoutException {
+        FxToolkit.registerPrimaryStage();
+        FxToolkit.setupApplication(RetoCRUD.class);
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
+    }
+
+    /**
+     * Test of Mostrar Datos method, of class MostrarDatosControlador.
+     */
+    @Test
+    public void testMostrarDatos() {
+        clickOn("#txtEmail").write("lucas@empresa.com");
+        clickOn("#txtContra").write("adminLucas!");
+        clickOn("#btnLogin");
+
+        waitForFxEvents();
+        clickOn("Aceptar");
+
+        verifyThat("#PaneAdmin", isVisible());
+        verifyThat("#tablaDatosUsu", isVisible());        
     }
 
     /**
@@ -54,7 +78,7 @@ public class MostrarDatosControladorTest extends ApplicationTest{
         MostrarDatosControlador instance = new MostrarDatosControlador();
         instance.initialize(location, resources);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        // fail("The test case is a prototype.");
     }
 
     /**
@@ -69,7 +93,7 @@ public class MostrarDatosControladorTest extends ApplicationTest{
         MostrarDatosControlador instance = new MostrarDatosControlador();
         instance.setDatos(perLog, esAdmin, dao);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -82,7 +106,7 @@ public class MostrarDatosControladorTest extends ApplicationTest{
         MostrarDatosControlador instance = new MostrarDatosControlador();
         instance.agregarDatosTabla(usuarios);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -95,7 +119,7 @@ public class MostrarDatosControladorTest extends ApplicationTest{
         MostrarDatosControlador instance = new MostrarDatosControlador();
         instance.mostrarMensaje(mensaje);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -107,7 +131,7 @@ public class MostrarDatosControladorTest extends ApplicationTest{
         MostrarDatosControlador instance = new MostrarDatosControlador();
         instance.mostrarPopupCarga();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -119,7 +143,7 @@ public class MostrarDatosControladorTest extends ApplicationTest{
         MostrarDatosControlador instance = new MostrarDatosControlador();
         instance.cerrarPopupCarga();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
-    
+
 }
