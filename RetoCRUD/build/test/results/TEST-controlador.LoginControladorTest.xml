@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="DESKTOP-JL24M65" name="controlador.LoginControladorTest" skipped="0" tests="2" time="5.173" timestamp="2025-11-13T19:16:14">
+<testsuite errors="0" failures="0" hostname="DESKTOP-JL24M65" name="controlador.LoginControladorTest" skipped="0" tests="3" time="8.753" timestamp="2025-11-13T19:33:42">
   <properties>
     <property name="libs.jsp-compiler.javadoc" value="" />
     <property name="netbeans.autoupdate.country" value="ES" />
@@ -70,7 +70,7 @@
     <property name="libs.j2me_common_ant.maven-pom" value="" />
     <property name="libs.spring-webmvc3.0.maven-pom" value="" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner controlador.LoginControladorTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\build\test\results\TEST-controlador.LoginControladorTest.xml crashfile=C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\build\junitvmwatcher5512254152561665296.properties propsfile=C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\build\junit9201647740804911506.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner controlador.LoginControladorTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\build\test\results\TEST-controlador.LoginControladorTest.xml crashfile=C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\build\junitvmwatcher286724043530708860.properties propsfile=C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\build\junit8252726557620808214.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="build.sysclasspath" value="ignore" />
@@ -116,7 +116,7 @@
     <property name="javac.debug" value="true" />
     <property name="javadoc.splitindex" value="true" />
     <property name="file.separator" value="\" />
-    <property name="javac.includesfile.binary" value="C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\null438399021" />
+    <property name="javac.includesfile.binary" value="C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\null709275144" />
     <property name="libs.junit_4.maven-pom" value="" />
     <property name="mkdist.disabled" value="false" />
     <property name="javac.test.processorpath" value="C:\Program Files\Java\jdk1.8.0_202\jre/lib/javaws.jar:C:\Program Files\Java\jdk1.8.0_202\jre/lib/deploy.jar:C:\Program Files\Java\jdk1.8.0_202\jre/lib/plugin.jar:src/conector/Conector/mysql-connector-java-8.0.15.jar:lib/commons-dbcp2-2.13.0/commons-dbcp2-2.13.0.jar:C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\lib\TestFXLibrary\hamcrest-junit-2.0.0.0.jar;C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\lib\TestFXLibrary\java-hamcrest-2.0.0.0.jar;C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\lib\TestFXLibrary\testfx-core-4.0.13-alpha.jar;C:\Users\luisv\Documents\Repositorio RetoCRUD\RetoCRUD\lib\TestFXLibrary\testfx-junit-4.0.13-alpha.jar:C:\Program Files\NetBeans 8.2\platform\modules\ext\junit-4.12.jar:lib/commons-pool2-2.12.1/commons-pool2-2.12.1.jar:lib/commons-logging-1.3.5/commons-logging-1.3.5.jar:build/classes:C:\Program Files\NetBeans 8.2\platform\modules\ext\junit-4.12.jar:C:\Program Files\NetBeans 8.2\platform\modules\ext\hamcrest-core-1.3.jar" />
@@ -457,22 +457,32 @@
     <property name="javafx.deploy.installpermanently" value="false" />
     <property name="libs.javaee-web-api-7.0.javadoc" value="C:\Program Files\NetBeans 8.2\enterprise\docs\javaee-doc-api.jar" />
   </properties>
-  <testcase classname="controlador.LoginControladorTest" name="testLogin" time="4.138" />
-  <testcase classname="controlador.LoginControladorTest" name="testInitialize" time="0.274" />
-  <system-out><![CDATA[Pool de conexiones inicializado.
-DEBUG hilo -> dao: controlador.DaoImplementacionMysql@601d4535 | usu: null
-initialize
+  <testcase classname="controlador.LoginControladorTest" name="testInitialize" time="0.202" />
+  <testcase classname="controlador.LoginControladorTest" name="testLoginUsuario" time="4.068" />
+  <testcase classname="controlador.LoginControladorTest" name="testLoginAdmin" time="3.718" />
+  <system-out><![CDATA[initialize
+Pool de conexiones inicializado.
+DEBUG hilo -> dao: controlador.DaoImplementacionMysql@7ea215ff | usu: Usuario{codU=1, genero=MUJER, numTarjeta=123456789}
+DEBUG hilo -> dao: controlador.DaoImplementacionMysql@468026fe | usu: null
 ]]></system-out>
-  <system-err><![CDATA[nov 13, 2025 8:16:14 PM javafx.fxml.FXMLLoader$ValueElement processValue
+  <system-err><![CDATA[nov 13, 2025 8:33:42 PM javafx.fxml.FXMLLoader$ValueElement processValue
 ADVERTENCIA: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 8.0.202
-nov 13, 2025 8:16:14 PM controlador.LoginControlador initialize
+nov 13, 2025 8:33:42 PM controlador.LoginControlador initialize
 INFORMACIÓN: LoginControlador inicializado.
-nov 13, 2025 8:16:18 PM javafx.fxml.FXMLLoader$ValueElement processValue
+nov 13, 2025 8:33:43 PM controlador.LoginControlador initialize
+INFORMACIÓN: LoginControlador inicializado.
+nov 13, 2025 8:33:46 PM javafx.fxml.FXMLLoader$ValueElement processValue
 ADVERTENCIA: Loading FXML document with JavaFX API of version 24.0.1 by JavaFX runtime of version 8.0.202
-nov 13, 2025 8:16:18 PM controlador.MostrarDatosControlador initialize
+nov 13, 2025 8:33:46 PM controlador.MostrarDatosControlador initialize
+INFORMACIÓN: MostrarDatosControlador inicializado (esperando datos de login).
+nov 13, 2025 8:33:47 PM javafx.fxml.FXMLLoader$ValueElement processValue
+ADVERTENCIA: Loading FXML document with JavaFX API of version 25 by JavaFX runtime of version 8.0.202
+nov 13, 2025 8:33:47 PM controlador.LoginControlador initialize
+INFORMACIÓN: LoginControlador inicializado.
+nov 13, 2025 8:33:50 PM javafx.fxml.FXMLLoader$ValueElement processValue
+ADVERTENCIA: Loading FXML document with JavaFX API of version 24.0.1 by JavaFX runtime of version 8.0.202
+nov 13, 2025 8:33:50 PM controlador.MostrarDatosControlador initialize
 INFORMACIÓN: MostrarDatosControlador inicializado (esperando datos de login).
 ? Reteniendo conexión durante 5 segundos...
-nov 13, 2025 8:16:19 PM controlador.LoginControlador initialize
-INFORMACIÓN: LoginControlador inicializado.
 ]]></system-err>
 </testsuite>

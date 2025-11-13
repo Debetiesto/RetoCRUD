@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeoutException;
 import main.RetoCRUD;
+import static org.hamcrest.Matchers.not;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -42,6 +43,7 @@ public class LoginControladorTest extends ApplicationTest {
 
     @Before
     public void setUp() {
+        
     }
 
     @After
@@ -74,9 +76,21 @@ public class LoginControladorTest extends ApplicationTest {
      */
     @Test
     public void testLoginUsuario() {
-        clickOn("#txtEmail").write("usuario@prueba.com");
-        clickOn("#txtContra").write("passwordUsuario!");
+        // Escribe en los campos y pulsa el botón
+        clickOn("#txtEmail").write("ana@gmail.com");
+        clickOn("#txtContra").write("passAna123");
         clickOn("#btnLogin");
+
+        // TestFX intentará hacer clic en el botón con el texto "Aceptar".
+        clickOn("Aceptar");
+
+        // Verifica que un elemento exclusivo del panel de Usuario es visible
+        verifyThat("#btnModificarDatoUsu", isVisible());
+
+        // Verifica que el panel de Admin está invisible (por si el de usuario no tiene ID específico)
+        // Usamos el ID del panel de Admin, ya que debe estar oculto.
+        //verifyThat("#PaneAdmin", not(isVisible()));
+        clickOn("#btnCerrarSesionUsuario");
     }
 
     /**
