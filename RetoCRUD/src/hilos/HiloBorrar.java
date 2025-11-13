@@ -44,9 +44,9 @@ public class HiloBorrar implements Runnable {
             eliminado = dao.borrarUsuario(usu.getCodU());
             Platform.runLater(() -> {
                 if (eliminado) {
-                    cont.mostrarMensaje("✅ Usuario actualizado correctamente");
+                    cont.mostrarMensaje("✅ Usuario eliminado correctamente");
                 } else {
-                    cont.mostrarMensaje("⚠️ No se ha podido actualizar el usuario.");
+                    cont.mostrarMensaje("⚠️ No se ha podido eliminar el usuario.");
                 }
             });
         } else {
