@@ -25,9 +25,9 @@ public class HiloCrear implements Runnable {
 
     /**
      * Constructor del hilo crear
-     * @param dao
-     * @param cont
-     * @param usu 
+     * @param dao parámetro del dao que necesita recibir este constructor
+     * @param cont parámetro del controlador de registrar que necesita recibir este constructor
+     * @param usu parámetro de un objeto de usuario que necesita recibir este constructor
      */
     public HiloCrear(Dao dao, RegistroControlador cont, Usuario usu) {
         this.dao = dao;
